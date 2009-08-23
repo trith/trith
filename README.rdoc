@@ -1,0 +1,17 @@
+= Trith
+
+Trith is an experimental programming language founded on the unholy trinity
+of Forth, Lisp and RDF triples.
+
+* http://trith.org
+
+
+== Authors
+
+* Arto Bendiken (mailto:arto.bendiken@gmail.com) - http://ar.to
+
+
+== License
+
+All source code is available under the terms of the MIT license. For more
+information, see the accompanying LICENSE file.
