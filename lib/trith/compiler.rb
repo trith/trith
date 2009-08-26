@@ -27,11 +27,18 @@ module Trith
       end
     end
 
-    def <<(instructions)
-      if instructions.respond_to?(:to_ary)
-        @instructions += instructions
+    def <<(insns)
+      if insns.respond_to?(:each)
+        until insns.empty?
+          case insn = insns.shift
+            when :":"
+              definitions[insns.shift] = insns.shift
+            else
+              instructions << insn
+          end
+        end
       else
-        @instructions << instructions
+        instructions << insns
       end
       self
     end
@@ -58,12 +65,12 @@ module Trith
           compile_number(instruction, *args)
         when String
           compile_string(instruction, *args)
+        when URI # Addressable::URI?
+          compile_reference(instruction, *args)
         when Symbol
           compile_symbol(instruction, *args)
         when Array, SXP::List
           compile_quotation(instruction, *args)
-        when URI # FIXME
-          compile_reference(instruction, *args)
       end
     end
 
@@ -87,15 +94,20 @@ module Trith
       raise NotImplementedError # this is for subclasses to implement
     end
 
-    def compile_symbol(instruction)
+    def compile_reference(instruction)
       raise NotImplementedError # this is for subclasses to implement
+    end
+
+    def compile_symbol(instruction, *args)
+      case instruction
+        when :nil    then compile_nil(nil, *args)
+        when :false  then compile_boolean(false, *args)
+        when :true   then compile_boolean(true, *args)
+        else raise NotImplementedError # this is for subclasses to implement
+      end
     end
 
     def compile_quotation(instruction)
-      raise NotImplementedError # this is for subclasses to implement
-    end
-
-    def compile_reference(instruction)
       raise NotImplementedError # this is for subclasses to implement
     end
 
