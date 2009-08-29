@@ -10,8 +10,10 @@ unless defined?(Machinery)
 end
 
 module Trith
-  autoload :Compiler,  'trith/compiler'
-  autoload :Optimizer, 'trith/optimizer'
-  autoload :Program,   'trith/program'
-  autoload :Reader,    'trith/reader'
+  autoload :Compiler,    'trith/compiler'
+  autoload :Instruction, 'trith/instruction'
+  autoload :Machine,     'trith/machine'
+  autoload :Optimizer,   'trith/optimizer'
+  autoload :Program,     'trith/program'
+  autoload :Reader,      'trith/reader'
 end
