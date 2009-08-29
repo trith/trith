@@ -3,7 +3,7 @@ require 'trith'
 include  Trith
 
 describe Optimizer do
-  describe Optimizer::LiteralCanonicalization do
+  describe Reader::LiteralCanonicalization do
     it "should canonicalize :nil instructions" do
       optimized[:nil].should == [nil]
     end
@@ -89,6 +89,16 @@ describe Optimizer do
       optimized[ 0, :abs].should == [0]
       optimized[ 1, :abs].should == [1]
       optimized[-1, :abs].should == [1]
+    end
+
+    it "should evaluate constant integer maxima and minima" do
+      optimized[ 0, 1, :max].should == [1]
+      optimized[ 1, 1, :max].should == [1]
+      optimized[-1, 1, :max].should == [1]
+
+      optimized[ 0, 1, :min].should == [0]
+      optimized[ 1, 1, :min].should == [1]
+      optimized[-1, 1, :min].should == [-1]
     end
   end
 
