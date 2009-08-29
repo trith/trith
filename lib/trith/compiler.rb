@@ -1,7 +1,6 @@
 module Trith
   class Compiler
-    attr_accessor :definitions
-    attr_accessor :instructions
+    attr_accessor :program
 
     def self.compile(files, options = {}, &block)
       require 'sxp' unless defined?(::SXP)
@@ -15,9 +14,8 @@ module Trith
     end
 
     def initialize(options = {}, &block)
-      @options      = options
-      @definitions  = {}
-      @instructions = []
+      @options = options
+      @program = Program.new
 
       if block_given?
         case block.arity
@@ -28,19 +26,12 @@ module Trith
     end
 
     def <<(insns)
-      if insns.respond_to?(:each)
-        until insns.empty?
-          case insn = insns.shift
-            when :":"
-              definitions[insns.shift] = insns.shift
-            else
-              instructions << insn
-          end
-        end
-      else
-        instructions << insns
-      end
+      program << insns
       self
+    end
+
+    def optimize!
+      Optimizer.optimize(program)
     end
 
     def compile!
@@ -111,13 +102,13 @@ module Trith
       raise NotImplementedError # this is for subclasses to implement
     end
 
-    protected
+    def inlined?(instruction, options = {})
+      !!inline_level(instruction, options)
+    end
 
-      def gensym(prefix = '_')
-        @gensym ||= 0
-        @gensym += 1
-        "#{prefix}g#{@gensym}".to_sym
-      end
+    def inline_level(instruction, options = {})
+      options[:inline]
+    end
 
   end
 end
