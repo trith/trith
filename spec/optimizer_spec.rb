@@ -29,6 +29,24 @@ describe Optimizer do
   end
 
   describe Optimizer::ConstantArithmeticFolding do
+    it "should evaluate constant integer negation" do
+      optimized[-1, :neg].should == [1]
+      optimized[ 0, :neg].should == [0]
+      optimized[ 1, :neg].should == [-1]
+    end
+
+    it "should evaluate constant integer increments" do
+      optimized[-1, :inc].should == [0]
+      optimized[ 0, :inc].should == [1]
+      optimized[ 1, :inc].should == [2]
+    end
+
+    it "should evaluate constant integer decrements" do
+      optimized[-1, :dec].should == [-2]
+      optimized[ 0, :dec].should == [-1]
+      optimized[ 1, :dec].should == [0]
+    end
+
     it "should evaluate constant integer addition" do
       optimized[1, 2, :+].should == [3]
     end
@@ -67,16 +85,32 @@ describe Optimizer do
       optimized[2, 4, :pow].should == [16]
     end
 
-    it "should evaluate constant integer negation" do
-      optimized[ 0, :neg].should == [0]
-      optimized[ 1, :neg].should == [-1]
-      optimized[-1, :neg].should == [1]
-    end
-
     it "should evaluate constant integer absolute values" do
       optimized[ 0, :abs].should == [0]
       optimized[ 1, :abs].should == [1]
       optimized[-1, :abs].should == [1]
+    end
+  end
+
+  describe Optimizer::ConstantComparisonFolding do
+    it "should evaluate constant comparison operations" do
+      optimized[-1, 0, :cmp].should == [-1]
+      optimized[ 0, 0, :cmp].should == [0]
+      optimized[ 1, 0, :cmp].should == [1]
+
+      optimized[-1, 0, :eq].should == [false]
+      optimized[ 0, 0, :eq].should == [true]
+      optimized[ 1, 0, :eq].should == [false]
+
+      optimized[-1, 0, :ne].should == [true]
+      optimized[ 0, 0, :ne].should == [false]
+      optimized[ 1, 0, :ne].should == [true]
+
+      %w(== < <= > >=).map(&:to_sym).each do |op| # FIXME
+        optimized[-1, 0, op].should == [-1.send(op, 0)]
+        optimized[ 0, 0, op].should == [ 0.send(op, 0)]
+        optimized[ 1, 0, op].should == [ 1.send(op, 0)]
+      end
     end
   end
 
