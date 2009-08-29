@@ -92,6 +92,10 @@ describe Optimizer do
     end
   end
 
+  describe Optimizer::ConstantBitwiseFolding do
+    it "should evaluate constant bitwise operations"
+  end
+
   describe Optimizer::ConstantComparisonFolding do
     it "should evaluate constant comparison operations" do
       optimized[-1, 0, :cmp].should == [-1]
@@ -112,6 +116,10 @@ describe Optimizer do
         optimized[ 1, 0, op].should == [ 1.send(op, 0)]
       end
     end
+  end
+
+  describe Optimizer::ConstantBranchFolding do
+    it "should evaluate constant branch operations"
   end
 
   def optimized
