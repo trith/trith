@@ -16,6 +16,8 @@ module Trith
       ConstantBitwiseFolding.transform(program)
       ConstantComparisonFolding.transform(program)
       ConstantBranchFolding.transform(program)
+      AlgebraicSimplification.transform(program)
+      StrengthReduction.transform(program)
       program
     end
 
@@ -169,6 +171,62 @@ module Trith
     class ConstantBranchFolding < Optimizer::Peephole
       def match_instructions(instructions)
         super(instructions) # TODO
+      end
+    end
+
+    ##
+    # Simplifies arithmetic operations using algebraic identities.
+    #
+    # @see http://en.wikipedia.org/wiki/Peephole_optimization
+    class AlgebraicSimplification < Optimizer::Peephole
+      def match_instructions(instructions)
+        case instructions
+          when match(var, 0, :+)     then var
+          when match(0, var, :+)     then var
+
+          when match(var, 0, :-)     then var
+          when match(var, var, :-)   then 0
+
+          when match(var, 0, :*)     then 0
+          when match(0, var, :*)     then 0
+          when match(var, 1, :*)     then var
+          when match(1, var, :*)     then var
+
+          when match(var, 1, :'/')   then var
+          when match(var, var, :'/') then 1
+
+          when match(var, 0, :pow)   then 1
+          when match(var, 1, :pow)   then var
+
+          else super
+        end
+      end
+    end
+
+    ##
+    # Replaces operations with equivalent but less costly operations.
+    #
+    # @see http://en.wikipedia.org/wiki/Strength_reduction
+    class StrengthReduction < Optimizer::Peephole
+      def match_instructions(instructions)
+        case instructions
+          when match(var, 1, :+)     then [var, :inc]
+          when match(1, var, :+)     then [var, :inc]
+
+          when match(var, 1, :-)     then [var, :dec]
+          when match(0, var, :-)     then [var, :neg]
+          when match(1, var, :-)     then [var, :neg, :inc]
+          when match(var, var, :-)   then [var, :drop, 0]
+
+          when match(var, 2, :*)     then [var, :dup, :+]
+
+          when match(var, var, :'/') then [var, :drop, 1]
+
+          when match(var, 2, :pow)   then [var, :dup, :*]
+          when match(var, 3, :pow)   then [var, :dup, :dup, :*, :*]
+
+          else super
+        end
       end
     end
 

@@ -122,6 +122,62 @@ describe Optimizer do
     it "should evaluate constant branch operations"
   end
 
+  describe Optimizer::AlgebraicSimplification do
+    it "should simplify constant integer addition" do
+      optimized[:x, 0, :+].should == [:x]
+      optimized[0, :x, :+].should == [:x]
+    end
+
+    it "should simplify constant integer subtraction" do
+      optimized[:x, 0, :-].should  == [:x]
+      optimized[:x, :x, :-].should == [0]
+    end
+
+    it "should simplify constant integer multiplication" do
+      optimized[:x, 0, :*].should == [0]
+      optimized[0, :x, :*].should == [0]
+      optimized[:x, 1, :*].should == [:x]
+      optimized[1, :x, :*].should == [:x]
+    end
+
+    it "should simplify constant integer division" do
+      optimized[:x, 1, :'/'].should  == [:x]
+      optimized[:x, :x, :'/'].should == [1]
+    end
+
+    it "should simplify constant integer exponentiation" do
+      optimized[:x, 0, :pow].should == [1]
+      optimized[:x, 1, :pow].should == [:x]
+    end
+  end
+
+  describe Optimizer::StrengthReduction do
+    it "should reduce constant integer addition" do
+      optimized[:x, 1, :+].should == [:x, :inc]
+      optimized[1, :x, :+].should == [:x, :inc]
+    end
+
+    it "should reduce constant integer subtraction" do
+      optimized[:x, 1, :-].should  == [:x, :dec]
+      optimized[:x, :x, :-].should == [:x, :drop, 0]
+      optimized[0, :x, :-].should  == [:x, :neg]
+      optimized[1, :x, :-].should  == [:x, :neg, :inc]
+    end
+
+    it "should reduce constant integer multiplication" do
+      optimized[:x, 2, :*].should == [:x, :dup, :+]
+    end
+
+    it "should reduce constant integer division" do
+      optimized[:x, :x, :'/'].should == [:x, :drop, 1]
+    end
+
+    it "should reduce constant integer exponentiation" do
+      optimized[:x, 2, :pow].should == [:x, :dup, :*]
+      optimized[:x, 3, :pow].should == [:x, :dup, :dup, :*, :*]
+    end
+  end
+
   def optimized
     proxy = OpenStruct.new(:example => self)
     class << proxy
