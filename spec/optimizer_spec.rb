@@ -28,6 +28,58 @@ describe Optimizer do
     end
   end
 
+  describe Optimizer::ConstantArithmeticFolding do
+    it "should evaluate constant integer addition" do
+      optimized[1, 2, :+].should == [3]
+    end
+
+    it "should evaluate constant integer subtraction" do
+      optimized[4, 5, :-].should == [-1]
+    end
+
+    it "should evaluate constant integer multiplication" do
+      optimized[6, 7, :*].should == [42]
+    end
+
+    it "should evaluate constant integer division when the remainder is zero" do
+      optimized[8, 1, :'/'].should == [8]
+      optimized[8, 4, :'/'].should == [2]
+    end
+
+    it "should not evaluate constant integer division when the remainder is not zero" do
+      optimized[8, 3, :'/'].should == [8, 3, :'/']
+    end
+
+    it "should evaluate constant integer modulo and remainder operations" do
+      optimized[ 13,  4, :mod].should == [1]
+      optimized[ 13,  4, :rem].should == [1]
+      optimized[ 13, -4, :mod].should == [-3]
+      optimized[ 13, -4, :rem].should == [1]
+      optimized[-13,  4, :mod].should == [3]
+      optimized[-13,  4, :rem].should == [-1]
+      optimized[-13, -4, :mod].should == [-1]
+      optimized[-13, -4, :rem].should == [-1]
+    end
+
+    it "should evaluate constant integer exponentiation" do
+      optimized[2, 0, :pow].should == [1]
+      optimized[2, 1, :pow].should == [2]
+      optimized[2, 4, :pow].should == [16]
+    end
+
+    it "should evaluate constant integer negation" do
+      optimized[ 0, :neg].should == [0]
+      optimized[ 1, :neg].should == [-1]
+      optimized[-1, :neg].should == [1]
+    end
+
+    it "should evaluate constant integer absolute values" do
+      optimized[ 0, :abs].should == [0]
+      optimized[ 1, :abs].should == [1]
+      optimized[-1, :abs].should == [1]
+    end
+  end
+
   def optimized
     proxy = OpenStruct.new(:example => self)
     class << proxy
