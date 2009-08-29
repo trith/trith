@@ -1,21 +1,15 @@
 module Trith
   class Compiler
-    attr_accessor :program
+    def self.compile_files(files, options = {}, &block)
+      self.compile(Reader.read_files(files), options, &block)
+    end
 
-    def self.compile(files, options = {}, &block)
-      require 'sxp' unless defined?(::SXP)
-
-      compiler = self.new(options)
-      [files].flatten.each do |file|
-        compiler << SXP.read_file(file)
-      end
-
-      compiler.compile!
+    def self.compile(program, options = {}, &block)
+      self.new(options, &block).compile(program)
     end
 
     def initialize(options = {}, &block)
       @options = options
-      @program = Program.new
 
       if block_given?
         case block.arity
@@ -25,16 +19,11 @@ module Trith
       end
     end
 
-    def <<(insns)
-      program << insns
-      self
-    end
-
-    def optimize!
+    def optimize(program)
       Optimizer.optimize(program)
     end
 
-    def compile!
+    def compile(program)
       raise NotImplementedError # this is for subclasses to implement
     end
 

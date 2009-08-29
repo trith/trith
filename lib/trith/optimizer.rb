@@ -9,7 +9,6 @@ module Trith
     end
 
     def self.optimize_pass(program, options = {})
-      LiteralCanonicalization.transform(program)
       EmptyQuotationElimination.transform(program)
       QuotationFactoring.transform(program)
       ConstantArithmeticFolding.transform(program)
@@ -19,19 +18,6 @@ module Trith
       AlgebraicSimplification.transform(program)
       StrengthReduction.transform(program)
       program
-    end
-
-    ##
-    # Canonicalizes :nil, :true and :false instructions.
-    class LiteralCanonicalization < Optimizer
-      def transform_instruction(instruction)
-        case instruction
-          when :nil   then nil
-          when :false then false
-          when :true  then true
-          else super
-        end
-      end
     end
 
     ##

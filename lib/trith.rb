@@ -13,4 +13,5 @@ module Trith
   autoload :Compiler,  'trith/compiler'
   autoload :Optimizer, 'trith/optimizer'
   autoload :Program,   'trith/program'
+  autoload :Reader,    'trith/reader'
 end

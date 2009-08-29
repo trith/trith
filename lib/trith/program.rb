@@ -6,13 +6,21 @@ module Trith
     attr_accessor :quotations
     attr_accessor :instructions
 
+    def self.open(file, &block)
+      program = Reader.read_file(file)
+      block.call(program) if block_given?
+    end
+
     def initialize(definitions = {}, &block)
       @definitions  = definitions
       @quotations   = {}
       @instructions = []
 
       if block_given?
-        block.call(self)
+        case block.arity
+          when 1 then block.call(self)
+          else instance_eval(&block)
+        end
       end
     end
 
@@ -48,16 +56,7 @@ module Trith
 
     def <<(insns)
       if insns.respond_to?(:each)
-        until insns.empty?
-          case insn = insns.shift
-            when :":"
-              define(insns.shift, insns.shift)
-            when :branch
-              instructions << insn
-            else
-              instructions << insn
-          end
-        end
+        instructions.push(*insns)
       else
         instructions << insns
       end
