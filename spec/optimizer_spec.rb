@@ -28,6 +28,12 @@ describe Optimizer do
     end
   end
 
+  describe Optimizer::TailRecursionAnalysis do
+    it "should replace tail recursion with the :recur pseudo-instruction" do
+      optimized[1, :+, :input].should == [1, :+, :recur]
+    end
+  end
+
   describe Optimizer::ConstantArithmeticFolding do
     it "should evaluate constant integer negation" do
       optimized[-1, :neg].should == [1]

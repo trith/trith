@@ -11,6 +11,7 @@ module Trith
     def self.optimize_pass(program, options = {})
       EmptyQuotationElimination.transform(program)
       QuotationFactoring.transform(program)
+      TailRecursionAnalysis.transform(program)
       ConstantArithmeticFolding.transform(program)
       ConstantBitwiseFolding.transform(program)
       ConstantComparisonFolding.transform(program)
@@ -43,6 +44,25 @@ module Trith
             else
               program.define(nil, quotation)
             end
+          else super
+        end
+      end
+    end
+
+    ##
+    # Replaces tail recursion with the :recur pseudo-instruction.
+    #
+    # @see http://en.wikipedia.org/wiki/Tail_recursion
+    # @see http://en.wikipedia.org/wiki/Tail_call
+    class TailRecursionAnalysis < Optimizer
+      def transform_definition(name, instructions)
+        @name = name
+        super(name, instructions)
+      end
+
+      def transform_instruction(instruction)
+        case instruction
+          when @name then :recur
           else super
         end
       end
