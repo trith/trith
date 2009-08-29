@@ -17,6 +17,7 @@ module Trith
       ConstantBranchFolding.transform(program)
       AlgebraicSimplification.transform(program)
       StrengthReduction.transform(program)
+      RedundantCodeElimination.transform(program)
       program
     end
 
@@ -199,6 +200,23 @@ module Trith
           when match(var, 2, :pow)   then [var, :dup, :*]
           when match(var, 3, :pow)   then [var, :dup, :dup, :*, :*]
 
+          else super
+        end
+      end
+    end
+
+    ##
+    # Eliminates operations having no effect on the output of the program.
+    #
+    # @see http://en.wikipedia.org/wiki/Redundant_code
+    class RedundantCodeElimination < Optimizer::Peephole
+      def match_instructions(instructions)
+        case instructions
+          when match(:dup3, :drop3)           then []
+          when match(:dup2, :drop2)           then []
+          when match(:dup2, :drop, :drop)     then []
+          when match(:dup, :drop)             then []
+          when match(:dup, var, :swap, :drop) then [var]
           else super
         end
       end

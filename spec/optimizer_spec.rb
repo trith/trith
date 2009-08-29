@@ -195,6 +195,16 @@ describe Optimizer do
     end
   end
 
+  describe Optimizer::RedundantCodeElimination do
+    it "should eliminate redundant :dup/:drop instruction sequences" do
+      optimized[:dup3, :drop3].should            == []
+      optimized[:dup2, :drop2].should            == []
+      optimized[:dup2, :drop, :drop].should      == []
+      optimized[:dup, :drop].should              == []
+      optimized[1, :dup, 2, :swap, :drop].should == [1, 2]
+    end
+  end
+
   def optimized
     proxy = OpenStruct.new(:example => self)
     class << proxy
