@@ -129,7 +129,14 @@ describe Optimizer do
   end
 
   describe Optimizer::ConstantBranchFolding do
-    it "should evaluate constant branch operations"
+    it "should evaluate constant branch operations" do
+      optimized[true,   :a, :b, :branch].should == [:a]
+      optimized[:true,  :a, :b, :branch].should == [:a]
+      optimized[false,  :a, :b, :branch].should == [:b]
+      optimized[:false, :a, :b, :branch].should == [:b]
+
+      optimized[:a, :b, :c, :branch].should == [:a, :b, :c, :branch]
+    end
   end
 
   describe Optimizer::AlgebraicSimplification do

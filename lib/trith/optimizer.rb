@@ -130,7 +130,21 @@ module Trith
     # @see http://en.wikipedia.org/wiki/Constant_folding
     class ConstantBranchFolding < Optimizer::Peephole
       def match_instructions(instructions)
-        super(instructions) # TODO
+        case instructions
+          when match([TrueClass, FalseClass], var(1), var(2), :branch)
+            transform_branch(*instructions.slice(-4, 4))
+          when match([:true, :false], var(1), var(2), :branch)
+            transform_branch(*instructions.slice(-4, 4))
+          else super
+        end
+      end
+
+      def transform_branch(ifcond, ifthen, ifelse, branch = nil)
+        case ifcond
+          when TrueClass,  :true  then ifthen
+          when FalseClass, :false then ifelse
+          else fail_match
+        end
       end
     end
 
