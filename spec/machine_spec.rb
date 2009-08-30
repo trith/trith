@@ -31,24 +31,29 @@ describe Machine do
   end
 
   context "Stack operators" do
+    it "should support the :reset instruction" do
+      Machine.new.should respond_to(:reset)
+      Machine.new([6, 7]).execute { reset }.stack.should == []
+    end
+
     it "should support the :drop instruction" do
       Machine.new.should respond_to(:drop)
-      Machine.execute { push(6).push(7).drop }.should == 6
+      Machine.new([6, 7]).execute { drop }.stack.should == [6]
     end
 
     it "should support the :dup instruction" do
       Machine.new.should respond_to(:dup)
-      # TODO
+      Machine.new([6, 7]).execute { dup }.stack.should == [6, 7, 7]
     end
 
     it "should support the :swap instruction" do
       Machine.new.should respond_to(:swap)
-      Machine.execute { push(6).push(7).swap }.should == 6
+      Machine.new([6, 7]).execute { swap }.stack.should == [7, 6]
     end
 
     it "should support the :dip instruction" do
       Machine.new.should respond_to(:dip)
-      # TODO
+      Machine.new([6, 7, 1, [:mul]]).execute { dip }.stack.should == [42, 1]
     end
   end
 

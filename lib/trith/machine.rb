@@ -1,10 +1,10 @@
 module Trith
   class Machine
-    attr_accessor :stack
-    attr_accessor :queue
+    attr_reader :stack
+    attr_reader :queue
 
     def self.execute(code = [], &block)
-      self.new([], code).execute(&block)
+      self.new([], code).execute(&block).peek
     end
 
     def initialize(stack = [], queue = [], env = {}, &block)
@@ -63,7 +63,7 @@ module Trith
         end
       end
 
-      peek
+      self
     end
 
     def respond_to?(operator)

@@ -79,19 +79,43 @@ module Trith
 
     # Stack operators
 
+    class RESET < Instruction
+      title "Clear stack"
+
+      execute do stack.clear end
+    end
+
     class DROP < Instruction
       title "Drop operand"
       stack [:a] => []
+
+      execute do pop end
     end
 
     class DUP < Instruction
       title "Duplicate operand"
       stack [:a] => [:a, :a]
+
+      execute do push(peek) end
     end
 
     class SWAP < Instruction
       title "Swap operands"
       stack [:a, :b] => [:b, :a]
+
+      execute do push(*pop(2).reverse) end
+    end
+
+    # Stack combinators
+
+    class DIP < Instruction
+      title "Dip into stack to execute quotation"
+
+      execute do
+        tmp, quot = pop(2)
+        execute(quot)
+        push(tmp)
+      end
     end
 
     # Arithmetic operators
