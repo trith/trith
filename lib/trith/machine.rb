@@ -66,19 +66,15 @@ module Trith
       peek
     end
 
-    protected
+    def respond_to?(operator)
+      super || (!!load_instruction(operator))
+    end
 
-      undef_method(*(instance_methods - instance_methods(false) -
-        %w(__id__ __send__ class instance_eval inspect)))
-      undef_method(:sub)
+    protected
 
       def operator?(op) op.is_a?(Symbol) end
       def operand?(op)  !self.operator?(op) end
       def quotation(op) op.is_a?(Array) end
-
-      def respond_to?(operator)
-        super || (!!load_instruction(operator))
-      end
 
       def method_missing(operator, *operands, &block)
         if link_instruction!(operator)
@@ -103,8 +99,16 @@ module Trith
       # a given operator.
       def load_instruction(operator)
         # Each instruction is implemented as a subclass of Instruction:
-        Instruction.const_get(operator.to_s.upcase)
+        begin
+          Instruction.const_get(operator.to_s.upcase)
+        rescue NameError => e
+          raise NameError, "invalid instruction :#{operator}"
+        end
       end
+
+      undef_method(*(instance_methods - instance_methods(false) -
+        %w(__id__ __send__ class instance_eval inspect should should_not)))
+      undef_method(:sub)
 
     ###
     # Stack underflow

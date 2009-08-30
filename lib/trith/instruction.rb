@@ -13,22 +13,30 @@ module Trith
 
     def self.execute(&block)
       if block_given?
-        this = class << self; self; end
         case
           when block.arity == 0 || block.arity == -1
             # The instruction will use peek/pop/push manually:
-            this.send(:define_method, :evaluator) { block }
+            self.evaluator = lambda do
+              instance_eval(&block)
+              self
+            end
 
           when block.arity > 0
             # The instruction needs its arguments and result marshalled from
             # and to the virtual machine stack:
-            this.send(:define_method, :evaluator) do
-              lambda { push(block.call(*pop(block.arity))) }
+            self.evaluator = lambda do
+              push(block.call(*pop(block.arity)))
+              self
             end
         end
       else
         raise NotImplementedError
       end
+    end
+
+    def self.evaluator=(proc)
+      this = class << self; self; end
+      this.send(:define_method, :evaluator) { proc }
     end
 
     # Queue operators
