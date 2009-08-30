@@ -85,7 +85,7 @@ module Trith
       execute do stack.clear end
     end
 
-    class DROP < Instruction
+    class POP < Instruction
       title "Drop operand"
       stack [:a] => []
 

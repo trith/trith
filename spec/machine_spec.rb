@@ -36,9 +36,9 @@ describe Machine do
       Machine.new([6, 7]).execute { reset }.stack.should == []
     end
 
-    it "should support the :drop instruction" do
-      Machine.new.should respond_to(:drop)
-      Machine.new([6, 7]).execute { drop }.stack.should == [6]
+    it "should support the :pop instruction" do
+      Machine.new.should respond_to(:pop)
+      Machine.new([6, 7]).execute { pop }.stack.should == [6]
     end
 
     it "should support the :dup instruction" do

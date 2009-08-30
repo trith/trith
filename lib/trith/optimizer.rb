@@ -211,11 +211,11 @@ module Trith
           when match(var, 1, :-)     then [var, :dec]
           when match(0, var, :-)     then [var, :neg]
           when match(1, var, :-)     then [var, :neg, :inc]
-          when match(var, var, :-)   then [var, :drop, 0]
+          when match(var, var, :-)   then [var, :pop, 0]
 
           when match(var, 2, :*)     then [var, :dup, :+]
 
-          when match(var, var, :'/') then [var, :drop, 1]
+          when match(var, var, :'/') then [var, :pop, 1]
 
           when match(var, 2, :pow)   then [var, :dup, :*]
           when match(var, 3, :pow)   then [var, :dup, :dup, :*, :*]
@@ -232,11 +232,11 @@ module Trith
     class RedundantCodeElimination < Optimizer::Peephole
       def match_instructions(instructions)
         case instructions
-          when match(:dup3, :drop3)           then []
-          when match(:dup2, :drop2)           then []
-          when match(:dup2, :drop, :drop)     then []
-          when match(:dup, :drop)             then []
-          when match(:dup, var, :swap, :drop) then [var]
+          when match(:dup3, :pop3)           then []
+          when match(:dup2, :pop2)           then []
+          when match(:dup2, :pop, :pop)      then []
+          when match(:dup, :pop)             then []
+          when match(:dup, var, :swap, :pop) then [var]
           else super
         end
       end
