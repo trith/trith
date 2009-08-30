@@ -51,7 +51,7 @@ module Trith
 
       until (op = shift) == :halt
         case
-          when operator?(op) then send(op)
+          when operator?(op) then __send__(op)
           when operand?(op)  then push(op)
         end
       end
@@ -68,22 +68,42 @@ module Trith
 
     protected
 
+      undef_method(*(instance_methods - instance_methods(false) -
+        %w(__id__ __send__ class instance_eval inspect)))
+      undef_method(:sub)
+
       def operator?(op) op.is_a?(Symbol) end
       def operand?(op)  !self.operator?(op) end
       def quotation(op) op.is_a?(Array) end
 
-      undef_method :sub
+      def respond_to?(operator)
+        super || (!!load_instruction(operator))
+      end
 
       def method_missing(operator, *operands, &block)
-        if instruction = Instruction.const_get(operator.to_s.upcase)
-          if (arity = instruction.method(:execute).arity) > 0
-            push(instruction.execute(*pop(arity)))
-          else
-            instruction.execute
-          end
+        if link_instruction!(operator)
+          __send__(operator, *operands, &block)
         else
           super
         end
+      end
+
+      ##
+      # Attempts to dynamically link in any missing operator by loading its
+      # implementation and monkey-patching a new method definition into the
+      # virtual machine instance.
+      def link_instruction!(operator)
+        if instruction = load_instruction(operator)
+          self.class.send(:define_method, operator, &instruction.evaluator)
+        end
+      end
+
+      ##
+      # Attempts to locate and load the instruction class implementation for
+      # a given operator.
+      def load_instruction(operator)
+        # Each instruction is implemented as a subclass of Instruction:
+        Instruction.const_get(operator.to_s.upcase)
       end
 
     ###
