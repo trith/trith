@@ -16,6 +16,19 @@ module Trith
       (stack + queue).to_a
     end
 
+    def import(mod)
+      this = class << self; self; end
+      this.send(:include, mod)
+      mod.public_instance_methods(true).map(&:to_sym).each do |method|
+        if (op = mod.instance_method(method)).arity > 0
+          op = op.bind(self)
+          this.send(:define_method, method) do
+            push(op.call(*pop(op.arity)))
+          end
+        end
+      end
+    end
+
     # Stack operations
 
     def peek
