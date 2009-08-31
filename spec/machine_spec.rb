@@ -50,10 +50,32 @@ describe Machine do
       Machine.new.should respond_to(:swap)
       Machine.new([6, 7]).execute { swap }.stack.should == [7, 6]
     end
+  end
 
+  context "Stack combinators" do
     it "should support the :dip instruction" do
       Machine.new.should respond_to(:dip)
       Machine.new([6, 7, 1, [:mul]]).execute { dip }.stack.should == [42, 1]
+    end
+  end
+
+  context "List combinators" do
+    it "should support the :map instruction" do
+      Machine.new.should respond_to(:map)
+      Machine.new([[1, 2, 3, 4, 5], [:dup, :mul]]).execute { map }.stack.should == [[1, 4, 9, 16, 25]]
+    end
+
+    it "should support the :filter instruction" do
+      Machine.new.should respond_to(:filter)
+      Machine.new([[1, 2, 3, 4, 5], [2, :mod, 0, :eq]]).execute { filter }.stack.should == [[2, 4]]
+    end
+
+    it "should support the :fold instruction" do
+      Machine.new.should respond_to(:fold)
+      Machine.new([[1, 2, 3, 4, 5], 0, [:add]]).execute { fold }.stack.should == [15]
+      Machine.new([[], -1, [:add]]).execute { fold }.stack.should == [-1]
+      Machine.new([[2, 5, 3], 0, [:add]]).execute { fold }.stack.should == [10]
+      Machine.new([[2, 5, 3], 0, [:dup, :mul, :add]]).execute { fold }.stack.should == [38]
     end
   end
 

@@ -118,6 +118,49 @@ module Trith
       end
     end
 
+    # List combinators
+
+    class MAP < Instruction
+      title "Maps a function over the elements of a sequence"
+
+      execute do
+        seq, quot = pop(2)
+        seq.map! do |element|
+          push(element)
+          execute(quot)
+          pop
+        end
+        push(seq)
+      end
+    end
+
+    class FILTER < Instruction
+      title "Filters the elements of a sequence"
+
+      execute do
+        seq, quot = pop(2)
+        seq = seq.find_all do |element|
+          push(element)
+          execute(quot)
+          pop
+        end
+        push(seq)
+      end
+    end
+
+    class FOLD < Instruction
+      title "..."
+
+      execute do
+        seq, init, quot = pop(3)
+        push(init)
+        seq.each do |element|
+          push(element)
+          execute(quot)
+        end
+      end
+    end
+
     # Arithmetic operators
 
     class NEG < Instruction
