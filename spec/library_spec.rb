@@ -67,4 +67,25 @@ describe System::POSIX do
     it "should support the :pclose operation"
   end
 end
-  
+
+require 'trith/lib/openssl'
+describe Library::OpenSSL do
+  before(:each) do
+    @machine = Machine.new { import Trith::Library::OpenSSL }
+  end
+
+  context "Random number generator" do
+    it "should support the :rand_bytes operation"
+  end
+
+  context "Message digest algorithms" do
+    it "should support the :md4 operation"
+    it "should support the :md5 operation"
+    it "should support the :ripemd160 operation"
+    it "should support the :sha1 operation"
+    it "should support the :sha224 operation"
+    it "should support the :sha256 operation"
+    it "should support the :sha384 operation"
+    it "should support the :sha512 operation"
+  end
+end
