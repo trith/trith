@@ -9,21 +9,6 @@ module Trith
       self.compile(Reader.read_files(files), options, &block)
     end
 
-    def self.compile(program, options = {}, &block)
-      self.new(options, &block).compile(program)
-    end
-
-    def initialize(options = {}, &block)
-      @options = options
-
-      if block_given?
-        case block.arity
-          when 1 then block.call(self)
-          else instance_eval(&block)
-        end
-      end
-    end
-
     def optimize(program)
       Optimizer.optimize(program)
     end
@@ -95,14 +80,5 @@ module Trith
     def compile_quotation(instruction)
       raise NotImplementedError # this is for subclasses to implement
     end
-
-    def inlined?(instruction, options = {})
-      !!inline_level(instruction, options)
-    end
-
-    def inline_level(instruction, options = {})
-      options[:inline]
-    end
-
   end
 end
