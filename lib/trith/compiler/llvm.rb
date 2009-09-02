@@ -1,8 +1,8 @@
-require 'machinery/target/python'
-require 'machinery/format/pyc'
+require 'machinery/target/llvm'
+require 'machinery/format/bc'
 
 module Trith class Compiler
-  class PyVM < Compiler
+  class LLVM < Compiler
 
     def compile(program)
       # TODO

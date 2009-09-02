@@ -1,5 +1,10 @@
 module Trith
-  class Compiler
+  class Compiler < Machinery::Compiler
+    autoload :PyVM, 'trith/compiler/pyvm'
+    autoload :JVM,  'trith/compiler/jvm'
+    autoload :MLVM, 'trith/compiler/mlvm'
+    autoload :LLVM, 'trith/compiler/llvm'
+
     def self.compile_files(files, options = {}, &block)
       self.compile(Reader.read_files(files), options, &block)
     end
