@@ -3,6 +3,7 @@ require 'machinery/format/jar'
 
 module Trith class Compiler
   class JVM < Compiler
+    BiteScript.bytecode_version = BiteScript::JAVA1_5
 
     def compile(program)
       # TODO
