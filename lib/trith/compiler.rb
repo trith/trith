@@ -5,6 +5,17 @@ module Trith
     autoload :MLVM, 'trith/compiler/mlvm'
     autoload :LLVM, 'trith/compiler/llvm'
 
+    def self.for(target = nil, &block)
+      target = block.call if block_given?
+      case target.to_sym
+        when :pyvm then PyVM
+        when :jvm  then JVM
+        when :mlvm then MLVM
+        when :llvm then LLVM
+        else super(target)
+      end
+    end
+
     def self.compile_files(files, options = {}, &block)
       self.compile(Reader.read_files(files), options, &block)
     end
