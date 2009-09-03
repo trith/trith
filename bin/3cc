@@ -1,3 +1,30 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env jruby -rubygems
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'trith'
+require 'optparse'
+
+options = {:output => $stdout}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename($0)} [options] [files...]"
+
+  opts.on("-t", "--target <arch>", "Compile for a target architecture of: pyvm jvm mlvm llvm.") do |arch|
+    options[:target] = arch.to_s.to_sym
+  end
+
+  opts.on("-o", "--output <file>", "Write the compiler output into <file> (default: standard input).") do |file|
+    options[:output] = case file
+      when '-'
+        $stdout
+      when String
+        options[:target] ||= case File.extname(file)[1..-1]
+          when 'pyc' then :pyvm
+          when 'jar', 'class' then :jvm
+          when 'bc' then :llvm
+        end
+        file
+    end
+  end
+end.parse!
+
+abort "No target architecture specified; see --help." unless options[:target]
+Trith::Compiler.for(options[:target]).compile_files(ARGV.empty? ? [$stdin] : ARGV, options)
