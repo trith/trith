@@ -19,7 +19,7 @@ public class ParallelMachine extends AbstractMachine {
     super(Executors.newFixedThreadPool(threads));
   }
 
-  public Future peek() {
+  public <T> Future<T> peek() {
     try {
       return stack.peek();
     }
@@ -28,7 +28,7 @@ public class ParallelMachine extends AbstractMachine {
     }
   }
 
-  public Future pop() {
+  public <T> Future<T> pop() {
     try {
       return stack.pop();
     }
@@ -37,7 +37,7 @@ public class ParallelMachine extends AbstractMachine {
     }
   }
 
-  public void push(Future value) {
+  public void push(Future<?> value) {
     stack.push(value);
   }
 }

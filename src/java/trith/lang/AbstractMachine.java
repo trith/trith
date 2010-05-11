@@ -32,9 +32,9 @@ public abstract class AbstractMachine implements Machine {
     getExecutor().shutdown();
   }
 
-  public Object get() {
+  public <T> T get() {
     try {
-      return pop().get();
+      return this.<T>pop().get();
     }
     catch (InterruptedException e) {
       e.printStackTrace(); // FIXME
@@ -45,9 +45,9 @@ public abstract class AbstractMachine implements Machine {
     return null;
   }
 
-  public abstract Future peek();
-  public abstract Future pop();
-  public abstract void push(Future value);
+  public abstract <T> Future<T> peek();
+  public abstract <T> Future<T> pop();
+  public abstract void push(Future<?> value);
 
   public void push(Callable<?> callable) {
     push(submit(callable));

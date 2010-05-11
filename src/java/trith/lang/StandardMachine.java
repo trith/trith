@@ -24,15 +24,15 @@ public class StandardMachine extends AbstractMachine {
     this.machine = machine;
   }
 
-  public Future peek() {
+  public <T> Future<T> peek() {
     return machine.peek();
   }
 
-  public Future pop() {
+  public <T> Future<T> pop() {
     return machine.pop();
   }
 
-  public void push(Future value) {
+  public void push(Future<?> value) {
     machine.push(value);
   }
 

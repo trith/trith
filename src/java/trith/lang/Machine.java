@@ -10,9 +10,9 @@ public interface Machine {
   public Future<?> submit(Callable<?> callable);
   public void halt();
 
-  public Object get();
-  public Future peek();
-  public Future pop();
-  public void push(Future value);
+  public <T> T get();
+  public <T> Future<T> peek();
+  public <T> Future<T> pop();
+  public void push(Future<?> value);
   public void push(Callable<?> callable);
 }
