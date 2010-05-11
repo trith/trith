@@ -50,6 +50,13 @@ public class StandardMachine extends AbstractMachine {
     execute(new trith.core.numberp());
   }
 
+  /**
+   * @see trith.core.zerop
+   */
+  public void zerop() {
+    execute(new trith.core.zerop());
+  }
+
   /*
    * @see trith.math.neg
    */
