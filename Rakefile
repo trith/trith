@@ -10,7 +10,12 @@ end
 
 CLASSPATH = ['.', 'src/java', ENV['CLASSPATH']].compact.join(':')
 
-desc "Build all Java class files"
+desc "Delete all Java class files"
+task :clean do
+  sh "find src/java -name '*.class' | xargs rm"
+end
+
+desc "Compile all Java source files"
 task :build do
   sh "javac -cp #{CLASSPATH} #{Dir.glob('src/java/**/*.java').join(' ')}"
 end
