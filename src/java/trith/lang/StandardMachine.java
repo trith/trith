@@ -58,6 +58,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.dec
+   */
+  public void dec() {
+    execute(new trith.math.dec());
+  }
+
+  /*
    * @see trith.math.add
    */
   public void add() {
