@@ -3,10 +3,14 @@ import  trith.lang.*;
 import  trith.lang.Number;
 import  java.math.BigDecimal;
 
-public class inc extends Operator {
-  public static void execute(Machine vm) {
-    vm.push(
-      ((BigDecimal)vm.pop()).add(Number.ONE)
-    );
+/**
+ * @author Arto Bendiken
+ * @see    http://trith.org/math/inc
+ */
+public class inc extends UnaryOperator<BigDecimal> {
+  public static final String URL = "http://trith.org/math/inc";
+
+  public BigDecimal execute(BigDecimal n) {
+    return n.add(Number.ONE);
   }
 }

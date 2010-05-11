@@ -51,6 +51,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.inc
+   */
+  public void inc() {
+    execute(new trith.math.inc());
+  }
+
+  /*
    * @see trith.math.add
    */
   public void add() {
