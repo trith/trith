@@ -63,4 +63,11 @@ public class StandardMachine extends AbstractMachine {
   public void mul() {
     execute(new trith.math.mul());
   }
+
+  /*
+   * @see trith.math.div
+   */
+  public void div() {
+    execute(new trith.math.div());
+  }
 }
