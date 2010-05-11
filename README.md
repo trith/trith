@@ -3,15 +3,21 @@ trinity of [Forth][], [Lisp][] and [RDF][] triples.
 
 * <http://trith.org/>
 
-Authors
--------
-
-* [Arto Bendiken](mailto:arto.bendiken@gmail.com) - <http://ar.to/>
-
 Dependencies
 ------------
 
-* [JRuby](http://jruby.org/) (>= 1.4.0)
+* [Ruby](http://ruby-lang.org/) (>= 1.9.1) or
+  [JRuby](http://jruby.org/) (>= 1.4.0)
+* [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.1.9)
+
+Installation
+------------
+
+The recommended installation method is via [RubyGems](http://rubygems.org/).
+To install the latest official release of the `trith` gem, do:
+
+    $ [sudo] gem install trith                  # Ruby 1.9.1+
+    $ [sudo] jruby --1.9 -S gem install trith   # JRuby 1.4.0+
 
 Download
 --------
@@ -24,6 +30,11 @@ Alternatively, you can download the latest development version as a tarball
 as follows:
 
     $ wget http://github.com/trith/trith/tarball/master
+
+Authors
+-------
+
+* [Arto Bendiken](mailto:arto.bendiken@gmail.com) - <http://ar.to/>
 
 License
 -------
