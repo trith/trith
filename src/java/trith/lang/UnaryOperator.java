@@ -6,14 +6,14 @@ import  java.util.concurrent.ExecutionException;
 /**
  * @author Arto Bendiken
  */
-public abstract class UnaryOperator<T> implements Operator {
+public abstract class UnaryOperator<T, A> implements Operator {
   public void execute(Machine machine) {
-    final Future<T> x = machine.pop();
+    final Future<A> a = machine.pop();
 
     machine.push(new Callable<T>() {
       public T call() {
         try {
-          return execute(x.get());
+          return execute(a.get());
         }
         catch (InterruptedException e) {
           e.printStackTrace(); // FIXME
@@ -26,5 +26,5 @@ public abstract class UnaryOperator<T> implements Operator {
     });
   }
 
-  public abstract T execute(T x);
+  public abstract T execute(A a);
 }
