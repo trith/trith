@@ -170,6 +170,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.stream.emptyp
+   */
+  public void emptyp() {
+    execute(new trith.stream.emptyp());
+  }
+
+  /*
    * @see trith.stream.length
    */
   public void length() {
