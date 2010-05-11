@@ -62,7 +62,7 @@ public abstract class AbstractMachine implements Machine {
   }
 
   public void push(char value) {
-    push(String.valueOf(value));
+    push(Character.valueOf(value));
   }
 
   public void push(byte value) {
