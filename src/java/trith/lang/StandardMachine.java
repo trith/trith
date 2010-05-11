@@ -44,6 +44,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /**
+   * @see trith.core.truep
+   */
+  public void truep() {
+    execute(new trith.core.truep());
+  }
+
+  /**
    * @see trith.core.numberp
    */
   public void numberp() {
