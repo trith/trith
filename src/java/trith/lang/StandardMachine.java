@@ -49,4 +49,11 @@ public class StandardMachine extends AbstractMachine {
   public void add() {
     execute(new trith.math.add());
   }
+
+  /*
+   * @see trith.math.sub
+   */
+  public void sub() {
+    execute(new trith.math.sub());
+  }
 }
