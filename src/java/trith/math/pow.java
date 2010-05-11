@@ -6,7 +6,7 @@ import  java.math.BigDecimal;
  * @author Arto Bendiken
  * @see    http://trith.org/math/pow
  */
-public class pow extends BinaryOperator<BigDecimal> {
+public class pow extends BinaryOperator<BigDecimal, BigDecimal, BigDecimal> {
   public static final String URL = "http://trith.org/math/pow";
 
   public BigDecimal execute(BigDecimal a, BigDecimal b) {

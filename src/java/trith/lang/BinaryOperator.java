@@ -6,10 +6,10 @@ import  java.util.concurrent.ExecutionException;
 /**
  * @author Arto Bendiken
  */
-public abstract class BinaryOperator<T> implements Operator {
+public abstract class BinaryOperator<T, A, B> implements Operator {
   public void execute(Machine machine) {
-    final Future<T> b = machine.pop();
-    final Future<T> a = machine.pop();
+    final Future<B> b = machine.pop();
+    final Future<A> a = machine.pop();
 
     machine.push(new Callable<T>() {
       public T call() {
@@ -27,5 +27,5 @@ public abstract class BinaryOperator<T> implements Operator {
     });
   }
 
-  public abstract T execute(T a, T b);
+  public abstract T execute(A a, B b);
 }
