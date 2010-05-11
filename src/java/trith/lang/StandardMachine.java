@@ -168,4 +168,11 @@ public class StandardMachine extends AbstractMachine {
   public void pow() {
     execute(new trith.math.pow());
   }
+
+  /*
+   * @see trith.stream.length
+   */
+  public void length() {
+    execute(new trith.stream.length());
+  }
 }
