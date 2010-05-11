@@ -42,4 +42,11 @@ public class StandardMachine extends AbstractMachine {
   public void dup() {
     execute(new trith.core.dup());
   }
+
+  /*
+   * @see trith.math.add
+   */
+  public void add() {
+    execute(new trith.math.add());
+  }
 }
