@@ -79,6 +79,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.abs
+   */
+  public void abs() {
+    execute(new trith.math.abs());
+  }
+
+  /*
    * @see trith.math.neg
    */
   public void neg() {
