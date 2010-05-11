@@ -1,70 +1,18 @@
 package trith.lang;
-import  java.util.Stack;
-import  java.util.EmptyStackException;
+import  java.util.concurrent.Future;
+import  java.util.concurrent.Callable;
 
-public class Machine {
-  public final Stack stack = new Stack();
-  public final Stack queue = new Stack();
+/**
+ * @author Arto Bendiken
+ */
+public interface Machine {
+  public void execute(Operator operator);
+  public Future<?> submit(Callable<?> callable);
+  public void halt();
 
-  public Object peek() {
-    try {
-      return stack.peek();
-    }
-    catch (EmptyStackException e) {
-      return null;
-    }
-  }
-
-  public Object pop() {
-    try {
-      return stack.pop();
-    }
-    catch (EmptyStackException e) {
-      throw new StackUnderflowError();
-    }
-  }
-
-  public void push(Object value) {
-    stack.push(value);
-  }
-
-  public void push(boolean value) {
-    stack.push(Boolean.valueOf(value));
-  }
-
-  public void push(char value) {
-    stack.push(String.valueOf(value));
-  }
-
-  public void push(byte value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void push(short value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void push(int value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void push(long value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void push(float value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void push(double value) {
-    stack.push(Number.valueOf(value));
-  }
-
-  public void execute(Operator op) {
-    op.execute(this);
-  }
-
-  public void execute(String op) {
-    // TODO
-  }
+  public Object get();
+  public Future peek();
+  public Future pop();
+  public void push(Future value);
+  public void push(Callable<?> callable);
 }
