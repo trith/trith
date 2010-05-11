@@ -44,6 +44,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /**
+   * @see trith.core.falsep
+   */
+  public void falsep() {
+    execute(new trith.core.falsep());
+  }
+
+  /**
    * @see trith.core.truep
    */
   public void truep() {
