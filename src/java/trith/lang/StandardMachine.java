@@ -86,6 +86,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.max
+   */
+  public void max() {
+    execute(new trith.math.max());
+  }
+
+  /*
    * @see trith.math.neg
    */
   public void neg() {
