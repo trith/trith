@@ -44,6 +44,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.neg
+   */
+  public void neg() {
+    execute(new trith.math.neg());
+  }
+
+  /*
    * @see trith.math.add
    */
   public void add() {

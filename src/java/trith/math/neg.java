@@ -2,10 +2,14 @@ package trith.math;
 import  trith.lang.*;
 import  java.math.BigDecimal;
 
-public class neg extends Operator {
-  public static void execute(Machine vm) {
-    vm.push(
-      ((BigDecimal)vm.pop()).negate()
-    );
+/**
+ * @author Arto Bendiken
+ * @see    http://trith.org/math/neg
+ */
+public class neg extends UnaryOperator<BigDecimal> {
+  public static final String URL = "http://trith.org/math/neg";
+
+  public BigDecimal execute(BigDecimal n) {
+    return n.negate();
   }
 }
