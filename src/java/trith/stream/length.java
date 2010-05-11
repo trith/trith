@@ -8,21 +8,8 @@ import  java.util.Iterator;
  * @author Arto Bendiken
  * @see    http://trith.org/stream/length
  */
-public class length extends UnaryOperator<BigDecimal, Object> {
+public class length extends UnaryStreamOperator<BigDecimal, Object> {
   public static final String URL = "http://trith.org/stream/length";
-
-  public BigDecimal execute(Object obj) {
-    if (obj instanceof Iterator) {
-      return execute((Iterator)obj);
-    }
-    if (obj instanceof Iterable) {
-      return execute(((Iterable)obj).iterator());
-    }
-    if (obj instanceof String) {
-      return execute((String)obj);
-    }
-    return null; // FIXME
-  }
 
   public BigDecimal execute(Iterator iter) {
     long length = 0;
