@@ -35,4 +35,11 @@ public class StandardMachine extends AbstractMachine {
   public void push(Future value) {
     machine.push(value);
   }
+
+  /**
+   * @see trith.core.dup
+   */
+  public void dup() {
+    execute(new trith.core.dup());
+  }
 }
