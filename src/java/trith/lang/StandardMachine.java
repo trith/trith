@@ -72,6 +72,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.math.rem
+   */
+  public void rem() {
+    execute(new trith.math.rem());
+  }
+
+  /*
    * @see trith.math.mod
    */
   public void mod() {

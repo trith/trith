@@ -2,11 +2,14 @@ package trith.math;
 import  trith.lang.*;
 import  java.math.BigDecimal;
 
-public class rem extends Operator {
-  public static void execute(Machine vm) {
-    BigDecimal operand = (BigDecimal)vm.pop();
-    vm.push(
-      ((BigDecimal)vm.pop()).remainder(operand)
-    );
+/**
+ * @author Arto Bendiken
+ * @see    http://trith.org/math/rem
+ */
+public class rem extends BinaryOperator<BigDecimal> {
+  public static final String URL = "http://trith.org/math/rem";
+
+  public BigDecimal execute(BigDecimal a, BigDecimal b) {
+    return a.remainder(b);
   }
 }
