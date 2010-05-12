@@ -36,4 +36,8 @@ public class SequentialMachine extends AbstractMachine {
   public void push(Future<?> value) {
     stack.push(value);
   }
+
+  public void unshift(Operator op) {
+    queue.push(new Value(op));
+  }
 }

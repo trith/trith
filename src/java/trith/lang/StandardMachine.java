@@ -36,6 +36,10 @@ public class StandardMachine extends AbstractMachine {
     machine.push(value);
   }
 
+  public void unshift(Operator op) {
+    machine.unshift(op);
+  }
+
   /**
    * @see trith.core.dup
    */
@@ -205,17 +209,17 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
-   * @see trith.stream.first
-   */
-  public void first() {
-    execute(new trith.stream.first());
-  }
-
-  /*
    * @see trith.stream.rest
    */
   public void rest() {
     execute(new trith.stream.rest());
+  }
+
+  /*
+   * @see trith.stream.first
+   */
+  public void first() {
+    execute(new trith.stream.first());
   }
 
   /*
