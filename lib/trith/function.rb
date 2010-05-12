@@ -31,6 +31,19 @@ module Trith
     end
 
     ##
+    # Returns `true` if this is a primitive function.
+    #
+    # Primitive functions are implemented directly in the Trith interpreter
+    # or compiler using native code.
+    #
+    # @return [Boolean]
+    def is_primitive?
+      false # TODO
+    end
+
+    alias_method :is_native?, :is_primitive?
+
+    ##
     # Returns a developer-friendly representation of this function.
     #
     # @return [String]
