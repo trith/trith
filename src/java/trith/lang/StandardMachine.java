@@ -58,6 +58,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /**
+   * @see trith.core.booleanp
+   */
+  public void booleanp() {
+    execute(new trith.core.booleanp());
+  }
+
+  /**
    * @see trith.core.falsep
    */
   public void falsep() {
