@@ -8,16 +8,17 @@ begin
 rescue LoadError => e
 end
 
-CLASSPATH = ['.', 'src/java', ENV['CLASSPATH']].compact.join(':')
+CLASSPATH = ['.', 'pkg/classes', ENV['CLASSPATH']].compact.join(':')
 
 desc "Delete all Java class files"
 task :clean do
-  sh "find src/java -name '*.class' | xargs rm"
+  sh "find pkg/classes -name '*.class' | xargs rm"
 end
 
 desc "Compile all Java source files"
 task :build do
-  sh "javac -cp #{CLASSPATH} #{Dir.glob('src/java/**/*.java').join(' ')}"
+  sh "mkdir -p pkg/classes"
+  sh "javac -cp #{CLASSPATH} -d pkg/classes #{Dir.glob('src/java/**/*.java').join(' ')}"
 end
 
 task :default => :build
