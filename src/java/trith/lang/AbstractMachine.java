@@ -74,6 +74,10 @@ public abstract class AbstractMachine implements Machine {
     queue.push(new Value(op));
   }
 
+  public boolean empty() {
+    return stack.empty();
+  }
+
   public <T> T get() {
     try {
       return this.<T>pop().get();

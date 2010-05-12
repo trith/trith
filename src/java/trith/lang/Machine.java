@@ -14,6 +14,7 @@ public interface Machine {
   public Object shift();
   public void unshift(Operator op);
 
+  public boolean empty();
   public <T> T get();
   public <T> Future<T> peek();
   public <T> Future<T> pop();
