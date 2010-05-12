@@ -11,11 +11,17 @@ describe Trith::Cache do
 
   it "should know whether a given function is cached" do
     @cache.should respond_to(:has_function?)
-    @cache.has_function?(RDF::URI("http://trith.org/core/dup")).should be_true
-    @cache.has_function?(RDF::URI("http://example.org/myfunction")).should be_false
-    @cache.has_function?(RDF::Node.new).should be_false
-    @cache.has_function?(Trith::Function.new("http://trith.org/core/dup")).should be_true
-    @cache.has_function?(Trith::Function.new).should be_false
+    @cache.should have_function(Trith::Function.new("http://trith.org/core/dup"))
+    @cache.should have_function(RDF::URI("http://trith.org/core/dup"))
+    @cache.should_not have_function(Trith::Function.new)
+    @cache.should_not have_function(RDF::URI("http://example.org/myfunction"))
+    @cache.should_not have_function(RDF::Node.new)
+  end
+
+  it "should know whether a function with a given label is cached" do
+    @cache.should respond_to(:has_label?)
+    @cache.should have_label(:boolean?)
+    @cache.should_not have_label(:foobar)
   end
 
   it "should enumerate the cached functions" do

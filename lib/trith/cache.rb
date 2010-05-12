@@ -36,6 +36,17 @@ module Trith
     end
 
     ##
+    # Returns `true` if a function with the given `label` is cached.
+    #
+    # @param  [Symbol, #to_s]         label
+    # @param  [Hash{Symbol => Object} options
+    # @option options [Symbol, #to_s] :language (nil)
+    # @return [Boolean]
+    def has_label?(label, options = {})
+      !query(:predicate => RDF::RDFS.label, :object => RDF::Literal.new(label.to_s, options)).empty?
+    end
+
+    ##
     # Enumerates each function in the cache.
     #
     # @return [Enumerator<Trith::Function>]
