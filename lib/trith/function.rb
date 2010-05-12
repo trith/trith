@@ -15,7 +15,7 @@ module Trith
 
     ##
     # @param  [RDF::Resource] id
-    def initialize(id = nil, &block)
+    def initialize(id = nil, options = {}, &block)
       @id = case id
         when nil then RDF::Node.new
         when RDF::Resource then id

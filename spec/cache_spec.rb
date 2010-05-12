@@ -9,11 +9,20 @@ describe Trith::Cache do
     @cache.should be_an(RDF::Repository)
   end
 
-  it "should enumerate available functions" do
+  it "should enumerate the cached functions" do
     @cache.should respond_to(:each_function)
     @cache.each_function do |function|
       function.should be_a(Trith::Function)
     end
     @cache.each_function.should be_a(RDF::Enumerator)
+  end
+
+  it "should find functions by their labels" do
+    @cache.should respond_to(:find_functions)
+    @cache.find_functions do |function|
+      function.should be_a(Trith::Function)
+    end
+    @cache.find_functions.should be_a(RDF::Enumerator)
+    @cache.find_functions(:label => :boolean?).to_a.size.should == 1
   end
 end

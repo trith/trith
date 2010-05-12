@@ -31,7 +31,33 @@ module Trith
         Enumerator.new(self, :each_function)
       else
         query(:predicate => RDF.type, :object => Trith::Function::URI) do |statement|
-          block.call(Trith::Function.new(statement.subject))
+          block.call(Trith::Function.new(statement.subject, :data => self))
+        end
+      end
+    end
+
+    ##
+    # Finds functions fulfilling the given criteria.
+    #
+    # @param  [Hash{Symbol => Object}] options
+    # @option options [Symbol, #to_s]  :label
+    # @return [Enumerator<Trith::Function>]
+    def find_functions(options = {}, &block)
+      unless block_given?
+        Enumerator.new(self, :find_functions, options)
+      else
+        # FIXME: would really need BGP query support in RDF.rb...
+        each_function do |function|
+          if options.empty?
+            block.call(function)
+          else
+            pattern = case
+              when options[:label]
+                {:predicate => RDF::RDFS.label, :object => options[:label].to_s}
+              else {}
+            end
+            block.call(function) unless query({:subject => function.id}.merge(pattern)).empty?
+          end
         end
       end
     end
