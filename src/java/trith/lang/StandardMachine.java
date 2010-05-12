@@ -196,4 +196,11 @@ public class StandardMachine extends AbstractMachine {
   public void rest() {
     execute(new trith.stream.rest());
   }
+
+  /*
+   * @see trith.stream.cons
+   */
+  public void cons() {
+    execute(new trith.stream.cons());
+  }
 }
