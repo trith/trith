@@ -5,6 +5,7 @@ import  java.util.concurrent.ExecutionException;
 
 /**
  * @author Arto Bendiken
+ * @see    http://en.wikipedia.org/wiki/Binary_operation
  */
 public abstract class BinaryOperator<T, A, B> implements Operator {
   public void execute(Machine machine) {

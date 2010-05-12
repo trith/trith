@@ -5,6 +5,7 @@ import  java.util.concurrent.ExecutionException;
 
 /**
  * @author Arto Bendiken
+ * @see    http://en.wikipedia.org/wiki/Unary_operation
  */
 public abstract class UnaryOperator<T, A> implements Operator {
   public void execute(Machine machine) {
