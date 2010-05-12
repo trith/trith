@@ -227,6 +227,13 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /*
+   * @see trith.stream.nth
+   */
+  public void nth() {
+    execute(new trith.stream.nth());
+  }
+
+  /*
    * @see trith.stream.last
    */
   public void last() {
