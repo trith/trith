@@ -15,6 +15,19 @@ public class SequentialMachine extends AbstractMachine {
     super(Executors.newSingleThreadExecutor());
   }
 
+  public Object shift() {
+    if (!queue.empty()) {
+      return queue.pop();
+    }
+    else {
+      return null;
+    }
+  }
+
+  public void unshift(Operator op) {
+    queue.push(new Value(op));
+  }
+
   public <T> Future<T> peek() {
     try {
       return stack.peek();
@@ -35,9 +48,5 @@ public class SequentialMachine extends AbstractMachine {
 
   public void push(Future<?> value) {
     stack.push(value);
-  }
-
-  public void unshift(Operator op) {
-    queue.push(new Value(op));
   }
 }

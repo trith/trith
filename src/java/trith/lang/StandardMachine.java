@@ -24,6 +24,14 @@ public class StandardMachine extends AbstractMachine {
     this.machine = machine;
   }
 
+  public Object shift() {
+    return machine.shift();
+  }
+
+  public void unshift(Operator op) {
+    machine.unshift(op);
+  }
+
   public <T> Future<T> peek() {
     return machine.peek();
   }
@@ -34,10 +42,6 @@ public class StandardMachine extends AbstractMachine {
 
   public void push(Future<?> value) {
     machine.push(value);
-  }
-
-  public void unshift(Operator op) {
-    machine.unshift(op);
   }
 
   /**

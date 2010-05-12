@@ -20,8 +20,32 @@ public abstract class AbstractMachine implements Machine {
     this.executor = executor;
   }
 
+  public void execute() {
+    Object op;
+    while ((op = shift()) != null) {
+      if (op instanceof Future) {
+        try {
+          op = ((Future)op).get();
+        }
+        catch (InterruptedException e) {
+          e.printStackTrace(); // FIXME
+        }
+        catch (ExecutionException e) {
+          e.printStackTrace(); // FIXME
+        }
+      }
+      if (op instanceof Operator) {
+        ((Operator)op).execute(this);
+      }
+      else {
+        push(op);
+      }
+    }
+  }
+
   public void execute(Operator operator) {
-    operator.execute(this);
+    unshift(operator);
+    execute();
   }
 
   public Future<?> submit(Callable<?> callable) {
