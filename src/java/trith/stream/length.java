@@ -3,6 +3,7 @@ import  trith.lang.*;
 import  trith.lang.Number;
 import  java.math.BigDecimal;
 import  java.util.Iterator;
+import  java.util.Collection;
 
 /**
  * @author Arto Bendiken
@@ -11,6 +12,14 @@ import  java.util.Iterator;
 public class length extends UnaryStreamOperator<BigDecimal, Object> {
   public static final String URL = "http://trith.org/stream/length";
 
+  public BigDecimal execute(String str) {
+    return Number.valueOf(str.length());
+  }
+
+  public BigDecimal execute(Collection coll) {
+    return Number.valueOf(coll.size());
+  }
+
   public BigDecimal execute(Iterator iter) {
     long length = 0;
     while (iter.hasNext()) {
@@ -18,9 +27,5 @@ public class length extends UnaryStreamOperator<BigDecimal, Object> {
       iter.next();
     }
     return Number.valueOf(length);
-  }
-
-  public BigDecimal execute(String str) {
-    return Number.valueOf(str.length());
   }
 }

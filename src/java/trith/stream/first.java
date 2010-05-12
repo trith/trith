@@ -1,6 +1,7 @@
 package trith.stream;
 import  trith.lang.*;
 import  java.util.Iterator;
+import  java.util.List;
 
 /**
  * @author Arto Bendiken
@@ -9,14 +10,30 @@ import  java.util.Iterator;
 public class first extends UnaryStreamOperator<Object, Object> {
   public static final String URL = "http://trith.org/stream/first";
 
-  public Object execute(Iterator iter) {
-    if (iter.hasNext()) {
-      return iter.next();
+  public Object execute(String str) {
+    if (str.isEmpty()) {
+      return null;
     }
-    return null; // FIXME
+    else {
+      return Character.valueOf(str.charAt(0));
+    }
   }
 
-  public Object execute(String str) {
-    return Character.valueOf(str.charAt(0));
+  public Object execute(List list) {
+    if (list.isEmpty()) {
+      return null;
+    }
+    else {
+      return list.get(0);
+    }
+  }
+
+  public Object execute(Iterator iter) {
+    if (!iter.hasNext()) {
+      return null;
+    }
+    else {
+      return iter.next();
+    }
   }
 }
