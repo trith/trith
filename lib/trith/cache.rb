@@ -21,5 +21,19 @@ module Trith
       @data = []
       super(options, &block)
     end
+
+    ##
+    # Enumerates each function in the cache.
+    #
+    # @return [Enumerator<Trith::Function>]
+    def each_function(&block)
+      unless block_given?
+        Enumerator.new(self, :each_function)
+      else
+        query(:predicate => RDF.type, :object => Trith::Function::URI) do |statement|
+          block.call(Trith::Function.new(statement.subject))
+        end
+      end
+    end
   end
 end
