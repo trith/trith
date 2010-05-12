@@ -23,6 +23,19 @@ module Trith
     end
 
     ##
+    # Returns `true` if the given `function` is cached.
+    #
+    # @param  [Trith::Function, RDF::Resource] function
+    # @return [Boolean]
+    def has_function?(function)
+      id = case function
+        when Trith::Function then function.id
+        else Trith::Function.new(function).id
+      end
+      !query(:subject => id, :predicate => RDF.type, :object => Trith::Function::URI).empty?
+    end
+
+    ##
     # Enumerates each function in the cache.
     #
     # @return [Enumerator<Trith::Function>]
