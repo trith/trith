@@ -205,6 +205,20 @@ module Trith
       op.is_a?(Array)
     end
 
+    ##
+    # @private
+    def method_missing(operator, *operands, &block)
+      begin
+        super
+      rescue NoMethodError => e
+        raise InvalidOperatorError.new("invalid operator `#{operator}'")
+      end
+    end
+
+    ###
+    # Invalid operator
+    class InvalidOperatorError < NoMethodError; end
+
     ###
     # Stack underflow
     class StackUnderflowError < RuntimeError; end

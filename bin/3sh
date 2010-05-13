@@ -17,7 +17,11 @@ begin
           end
         else
           Trith::Shell::History.push(line)
-          $machine.execute(Trith::Reader.read_all(line))
+          begin
+            $machine.execute(Trith::Reader.read_all(line))
+          rescue Trith::Machine::InvalidOperatorError => e
+            $stderr.puts Trith::Shell.format_error(e)
+          end
           $stdout.puts "=> #{Trith::Shell.inspect($machine.to_a)}"
       end
     end
