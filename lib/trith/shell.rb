@@ -3,6 +3,15 @@ module Trith
   # Supporting code for `3sh`.
   module Shell
     ##
+    # Reads and returns a line of input from the terminal.
+    #
+    # @param  [String] prompt
+    # @return [String]
+    def self.readline(prompt)
+      Readline.readline(prompt)
+    end
+
+    ##
     # Returns an input completion proc for use with Readline.
     #
     # @param  [Trith::Cache] cache
