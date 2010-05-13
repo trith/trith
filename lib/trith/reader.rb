@@ -9,7 +9,7 @@ module Trith
     # @param  [Hash{Symbol => Object}] options
     # @return [Enumerable<Object>]
     def self.read_url(url, options = {})
-      SXP.read_uri(url.to_s)
+      SXP.read_url(url, options)
     end
 
     ##
@@ -17,8 +17,7 @@ module Trith
     # @param  [Hash{Symbol => Object}] options
     # @return [Enumerable<Object>]
     def self.read_files(*filenames)
-      options = filenames.last.is_a?(Hash) ? filenames.pop : {}
-      SXP.read_files(*filenames) # FIXME
+      SXP.read_files(*filenames)
     end
 
     ##
@@ -26,7 +25,7 @@ module Trith
     # @param  [Hash{Symbol => Object}] options
     # @return [Enumerable<Object>]
     def self.read_file(filename, options = {})
-      SXP.read_file(filename.to_s)
+      SXP.read_file(filename, options)
     end
 
     ##
@@ -34,7 +33,7 @@ module Trith
     # @param  [Hash{Symbol => Object}] options
     # @return [Enumerable<Object>]
     def self.read_all(input, options = {})
-      SXP.read_all(input)
+      SXP.read_all(input, options)
     end
 
     ##
@@ -42,7 +41,7 @@ module Trith
     # @param  [Hash{Symbol => Object}] options
     # @return [Object]
     def self.read(input, options = {})
-      SXP.read(input)
+      SXP.read(input, options)
     end
 
     # Prevent the instantiation of this class:
