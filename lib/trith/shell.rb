@@ -3,6 +3,7 @@ module Trith
   # Supporting code for the `3sh` shell.
   module Shell
     autoload :History, 'trith/shell/history'
+    autoload :Inspect, 'trith/shell/inspect'
 
     ##
     # Initializes shell functionality and the Readline library.
@@ -12,6 +13,15 @@ module Trith
     def self.setup!(cache)
       require 'readline' unless defined?(Readline)
       Readline.completion_proc = completion_proc(cache)
+    end
+
+    ##
+    # Returns a developer-friendly representation of `value`.
+    #
+    # @param  [Object] value
+    # @return [String]
+    def self.inspect(value)
+      Inspect.inspect(value)
     end
 
     ##

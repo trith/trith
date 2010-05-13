@@ -17,7 +17,7 @@ begin
         else
           Trith::Shell::History.push(line)
           tokens = Trith::Reader.read_all(line)
-          $stdout.puts "=> #{tokens.inspect}" # TODO
+          $stdout.puts "=> #{Trith::Shell.inspect(tokens)}" # TODO
       end
     end
   end
