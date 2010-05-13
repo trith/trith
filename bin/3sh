@@ -1,3 +1,30 @@
-#!/usr/bin/env jruby -rubygems
+#!/usr/bin/env ruby1.9 -rubygems
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'trith'
+
+begin
+  $cache = Trith::Cache.load_core
+  Trith::Shell.setup!($cache)
+  Trith::Shell::History.load!
+
+  while line = Trith::Shell.readline('>> ')
+    unless (line = line.strip).empty?
+      case line
+        when '?', 'help'
+          $cache.each_function do |function|
+            puts "%-24s%s" % [function.label, function.comment]
+          end
+        else
+          Trith::Shell::History.push(line)
+          tokens = line.split(/\s+/)
+          $stdout.puts "=> #{tokens.inspect}" # TODO
+      end
+    end
+  end
+
+  Trith::Shell::History.dump!
+rescue Interrupt
+  # abort due to ^C (SIGINT)
+end
+
+$stdout.puts
