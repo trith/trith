@@ -1,6 +1,33 @@
 module Trith; module Shell
   ##
+  # Supporting code for the `3sh` shell's input line history.
   module History
+    FILE = File.join(ENV['TRITH_HOME'] || '~', '.trith', '3sh.log').freeze unless const_defined?(:FILE)
+    MODE = 0640
+
+    ##
+    # Loads the shell history from the `~/.trith/3sh.log` file.
+    #
+    # @return [void]
+    def self.load!
+      unless (lines = File.readlines(File.expand_path(FILE)) rescue []).empty?
+        Readline::HISTORY.push(*lines.map { |line| line.chomp.strip })
+        @load_count = Readline::HISTORY.size
+      end
+    end
+
+    ##
+    # Dumps the shell history to the `~/.trith/3sh.log` file.
+    #
+    # @return [void]
+    def self.dump!
+      File.open(File.expand_path(FILE), 'a', MODE) do |file|
+        lines = Readline::HISTORY.to_a
+        lines.slice!(0, @load_count) if @load_count
+        file.puts(lines)
+      end
+    end
+
     ##
     # Returns `true` if the shell history is empty.
     #
@@ -21,13 +48,13 @@ module Trith; module Shell
     ##
     # Appends `line` to the shell history.
     #
-    # Does not append empty lines or duplicates, and works around libedit
-    # issues where needed.
+    # Does not append empty lines or consecutive duplicates, and works
+    # around implementation-specific issues where needed.
     #
     # @param  [String] line
     # @return [void]
     def self.push(line)
-      unless line =~ /^\s$/ || Readline::HISTORY.include?(line)
+      unless line =~ /^\s$/
         Readline::HISTORY.push(line)
 
         # This is a workaround for a libedit-related bug encountered with
