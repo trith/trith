@@ -37,6 +37,14 @@ module Trith; module Shell
     end
 
     ##
+    # Returns the number of lines in the shell history.
+    #
+    # @return [Integer]
+    def self.size
+      Readline::HISTORY.size
+    end
+
+    ##
     # Returns `true` if the shell history includes `line`.
     #
     # @param  [String] line
