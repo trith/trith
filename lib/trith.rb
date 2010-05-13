@@ -2,6 +2,7 @@ require 'digest/sha1'
 require 'rdf'
 require 'rdf/ntriples'
 require 'rdf/nquads'
+require 'sxp'
 
 module Trith
   autoload :Cache,    'trith/cache'
