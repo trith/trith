@@ -26,6 +26,16 @@ module Trith
     end
 
     ##
+    # Returns a colorized error message string.
+    #
+    # @param  [Exception]              error
+    # @param  [Hash{Symbol => Object}] options
+    # @return [String]
+    def self.format_error(error, options = {})
+      Inspect.colorize(error.to_s, has_color? ? :red : nil)
+    end
+
+    ##
     # Reads and returns a line of input from the terminal.
     #
     # @param  [String] prompt
