@@ -30,18 +30,27 @@ module Trith; module Shell
     end
 
     ##
-    # @param  [Object] value
+    # @param  [String, #to_s] text
+    # @param  [Symbol, #to_s] color
     # @return [String]
-    def self.inspect(value)
+    def self.colorize(text, color)
+      !color ? text.to_s : [(Color.const_get(color.to_s.upcase) rescue nil), text.to_s, Color::NOTHING].join('')
+    end
+
+    ##
+    # @param  [Object]                 value
+    # @param  [Hash{Symbol => Object}] options
+    # @return [String]
+    def self.inspect(value, options = {})
       case value
-        when Array      then colorize_array(value)
-        when NilClass   then colorize(:nil, :green)
-        when FalseClass then colorize(false, :green)
-        when TrueClass  then colorize(true, :green)
-        when Symbol     then colorize(value.to_s, :yellow)
-        when Numeric    then colorize(value.inspect, :cyan)
-        when String     then colorize_string(value)
-        when RDF::URI   then colorize_reference(value)
+        when NilClass   then colorize(:nil, options[:color] ? :green : nil)
+        when FalseClass then colorize(false, options[:color] ? :green : nil)
+        when TrueClass  then colorize(true, options[:color] ? :green : nil)
+        when Symbol     then colorize(value.to_s, options[:color] ? :yellow : nil)
+        when Numeric    then colorize(value.inspect, options[:color] ? :cyan : nil)
+        when String     then inspect_string(value, options)
+        when Array      then inspect_array(value, options)
+        when RDF::URI   then inspect_reference(value, options)
         else value.inspect
       end
     end
@@ -49,36 +58,28 @@ module Trith; module Shell
     ##
     # @param  [Array, #to_ary] array
     # @return [String]
-    def self.colorize_array(array)
-      colorize('[', :green) <<
-      array.to_ary.map { |element| inspect(element) }.join(' ') <<
-      colorize(']', :green)
+    def self.inspect_array(array, options = {})
+      colorize('[', options[:color] ? :green : nil) <<
+      array.to_ary.map { |element| inspect(element, options) }.join(' ') <<
+      colorize(']', options[:color] ? :green : nil)
     end
 
     ##
     # @param  [String, #to_str] string
     # @return [String]
-    def self.colorize_string(string)
-      colorize('"', :red) <<
-      colorize(string.to_str.inspect[1...-1], :cyan) <<
-      colorize('"', :red)
+    def self.inspect_string(string, options = {})
+      colorize('"', options[:color] ? :red : nil) <<
+      colorize(string.to_str.inspect[1...-1], options[:color] ? :cyan : nil) <<
+      colorize('"', options[:color] ? :red : nil)
     end
 
     ##
     # @param  [RDF::URI, #to_uri] uri
     # @return [String]
-    def self.colorize_reference(uri)
-      colorize('<', :red) <<
-      colorize(uri.to_uri.to_s, :cyan) <<
-      colorize('>', :red)
-    end
-
-    ##
-    # @param  [String, #to_s] text
-    # @param  [Symbol, #to_s] color
-    # @return [String]
-    def self.colorize(text, color)
-      [(Color.const_get(color.to_s.upcase) rescue nil), text.to_s, Color::NOTHING].join('')
+    def self.inspect_reference(uri, options = {})
+      colorize('<', options[:color] ? :red : nil) <<
+      colorize(uri.to_uri.to_s, options[:color] ? :cyan : nil) <<
+      colorize('>', options[:color] ? :red : nil)
     end
   end # module Color
 end; end # module Trith::Shell

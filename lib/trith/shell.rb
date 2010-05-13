@@ -18,10 +18,11 @@ module Trith
     ##
     # Returns a developer-friendly representation of `value`.
     #
-    # @param  [Object] value
+    # @param  [Object]                 value
+    # @param  [Hash{Symbol => Object}] options
     # @return [String]
-    def self.inspect(value)
-      Inspect.inspect(value)
+    def self.inspect(value, options = {})
+      Inspect.inspect(value, {:color => has_color?}.merge(options))
     end
 
     ##
@@ -96,7 +97,7 @@ module Trith
             # @see http://rubygems.org/gems/ruby-terminfo
             require 'terminfo' unless defined?(TermInfo)
             TermInfo.default_object.tigetnum('colors').to_i > 1
-          rescue LoadError
+          rescue
             false # the only safe default
           end
       end
