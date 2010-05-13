@@ -1,0 +1,44 @@
+@base          <http://trith.org/core/> .
+@prefix trith: <http://trith.org/lang/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dc:    <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
+
+<booleanp> a trith:Function ;
+  rdfs:label         "booleanp", "boolean?" ;
+  rdfs:comment       "" .
+
+<dup> a trith:Function ;
+  rdfs:label         "dup" ;
+  rdfs:comment       "" .
+
+<falsep> a trith:Function ;
+  rdfs:label         "falsep", "false?" ;
+  rdfs:comment       "" .
+
+<nil> a trith:Function ;
+  rdfs:label         "nil" ;
+  rdfs:comment       "" .
+
+<nilp> a trith:Function ;
+  rdfs:label         "nilp", "nil?" ;
+  rdfs:comment       "" .
+
+<numberp> a trith:Function ;
+  rdfs:label         "numberp", "number?" ;
+  rdfs:comment       "" .
+
+<stringp> a trith:Function ;
+  rdfs:label         "stringp", "string?" ;
+  rdfs:comment       "" .
+
+<truep> a trith:Function ;
+  rdfs:label         "truep", "true?" ;
+  rdfs:comment       "" .
+
+<zerop> a trith:Function ;
+  rdfs:label         "zerop", "zero?" ;
+  rdfs:comment       "" .
