@@ -21,10 +21,16 @@ module Trith; module Shell
     #
     # @return [void]
     def self.dump!
-      File.open(File.expand_path(FILE), 'a', MODE) do |file|
-        lines = Readline::HISTORY.to_a
-        lines.slice!(0, @load_count) if @load_count
-        file.puts(lines)
+      begin
+        require 'fileutils' unless defined?(FileUtils)
+        FileUtils.mkdir_p(File.expand_path(File.dirname(FILE)), :mode => 0750)
+        File.open(File.expand_path(FILE), 'a+', MODE) do |file|
+          lines = Readline::HISTORY.to_a
+          lines.slice!(0, @load_count) if @load_count
+          file.puts(lines)
+        end
+      rescue Errno::ENOENT # ignore 'No such file or directory' errors
+      rescue Errno::EACCES # ignore 'Permission denied' errors
       end
     end
 
