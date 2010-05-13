@@ -54,7 +54,7 @@ module Trith; module Shell
     # @param  [String] line
     # @return [void]
     def self.push(line)
-      unless line =~ /^\s$/
+      unless line =~ /^\s$/ || line == peek
         Readline::HISTORY.push(line)
 
         # This is a workaround for a libedit-related bug encountered with
@@ -63,6 +63,21 @@ module Trith; module Shell
         unless Readline::HISTORY.include?(line)
           Readline::HISTORY.push(line)
         end
+      end
+    end
+
+    ##
+    # Returns the most recent line from the shell history.
+    #
+    # @return [String]
+    def self.peek
+      case
+        when Readline::HISTORY.respond_to?(:peek)
+          Readline::HISTORY.peek
+        when Readline::HISTORY.respond_to?(:last)
+          Readline::HISTORY.last
+        else
+          Readline::HISTORY.to_a.last
       end
     end
 
