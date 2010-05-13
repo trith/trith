@@ -25,6 +25,32 @@ module Trith
     end
 
     ##
+    # Returns a symbol indicating which Readline library this Ruby
+    # implementation uses.
+    #
+    # The possible return values are `:readline`, `:libedit` and `:jruby`.
+    #
+    # The default Ruby versions shipped with Mac OS X use `:libedit` as
+    # their Readline library and have buggy functionality that needs to be
+    # worked around.
+    #
+    # @return [Symbol]
+    # @see    http://bogojoker.com/readline/#libedit_detection
+    def self.readline_library
+      case RUBY_PLATFORM.to_sym
+        when :java
+          RUBY_ENGINE.to_sym rescue :jruby   # JRuby 1.4.x/1.5.x
+        else
+          begin                              # Ruby with `readline`
+            Readline.emacs_editing_mode
+            :readline
+          rescue NotImplementedError         # Ruby with `libedit` (Mac OS X)
+            :libedit
+          end
+      end
+    end
+
+    ##
     # Returns an input completion proc for use with Readline.
     #
     # @param  [Trith::Cache] cache
