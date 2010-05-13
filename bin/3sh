@@ -3,7 +3,8 @@ $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'trith'
 
 begin
-  $cache = Trith::Cache.load_core
+  $machine = Trith::Machine.new
+  $cache   = Trith::Cache.load_core
   Trith::Shell.setup!($cache)
   Trith::Shell::History.load!
 
@@ -16,8 +17,8 @@ begin
           end
         else
           Trith::Shell::History.push(line)
-          tokens = Trith::Reader.read_all(line)
-          $stdout.puts "=> #{Trith::Shell.inspect(tokens)}" # TODO
+          $machine.execute(Trith::Reader.read_all(line))
+          $stdout.puts "=> #{Trith::Shell.inspect($machine.to_a)}"
       end
     end
   end
