@@ -1,0 +1,24 @@
+module Trith
+  ##
+  # Supporting code for `3sh`.
+  module Shell
+    ##
+    # Returns an input completion proc for use with Readline.
+    #
+    # @param  [Trith::Cache] cache
+    # @return [Proc]
+    # @see    http://bogojoker.com/readline/
+    def self.completion_proc(cache)
+      # TODO: optimize this once RDF::Queryable supports #query([s, p, /o/])
+      proc do |s|
+        candidates = []
+        cache.each_function do |function|
+          function.labels.each do |label|
+            candidates << label.to_s if label.to_s.start_with?(s)
+          end
+        end
+        candidates.uniq
+      end
+    end
+  end # module Shell
+end # module Trith
