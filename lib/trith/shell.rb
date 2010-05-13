@@ -83,6 +83,25 @@ module Trith
       end
     end
 
+    ##
+    # Returns `true` if the shell's terminal supports ANSI color escapes.
+    #
+    # @return [Boolean]
+    def self.has_color?
+      @has_color ||= case
+        when !$stdout.isatty        then false
+        when ENV['TERM'] =~ /color/ then true  # e.g. "xterm-color"
+        else
+          begin
+            # @see http://rubygems.org/gems/ruby-terminfo
+            require 'terminfo' unless defined?(TermInfo)
+            TermInfo.default_object.tigetnum('colors').to_i > 1
+          rescue LoadError
+            false # the only safe default
+          end
+      end
+    end
+
     protected
 
     ##
