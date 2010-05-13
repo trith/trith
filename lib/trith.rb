@@ -7,6 +7,7 @@ require 'sxp'
 module Trith
   autoload :Cache,    'trith/cache'
   autoload :Function, 'trith/function'
+  autoload :Reader,   'trith/reader'
   autoload :Shell,    'trith/shell'
   autoload :VERSION,  'trith/version'
 end
