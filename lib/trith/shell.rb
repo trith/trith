@@ -1,8 +1,19 @@
 module Trith
   ##
-  # Supporting code for `3sh`.
+  # Supporting code for the `3sh` shell.
   module Shell
     autoload :History, 'trith/shell/history'
+
+    ##
+    # Initializes shell functionality and the Readline library.
+    #
+    # @param  [Trith::Cache] cache
+    # @return [void]
+    def self.setup!(cache)
+      require 'readline' unless defined?(Readline)
+      Readline.completion_append_character = ' '
+      Readline.completion_proc = completion_proc(cache)
+    end
 
     ##
     # Reads and returns a line of input from the terminal.
