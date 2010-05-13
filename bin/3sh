@@ -16,7 +16,7 @@ begin
           end
         else
           Trith::Shell::History.push(line)
-          tokens = line.split(/\s+/)
+          tokens = Trith::Reader.read_all(line)
           $stdout.puts "=> #{tokens.inspect}" # TODO
       end
     end
