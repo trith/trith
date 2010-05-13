@@ -31,6 +31,18 @@ module Trith
     end
 
     ##
+    # @return [Symbol]
+    def label
+      @label ||= id.to_s.sub(/^(.*)\/([^\/]+)$/, '\2').to_sym # FIXME
+    end
+
+    ##
+    # @return [Enumerable<Symbol>]
+    def labels
+      [label] # FIXME
+    end
+
+    ##
     # Returns `true` if this is a primitive function.
     #
     # Primitive functions are implemented directly in the Trith interpreter
