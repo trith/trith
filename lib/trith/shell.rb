@@ -2,6 +2,8 @@ module Trith
   ##
   # Supporting code for `3sh`.
   module Shell
+    autoload :History, 'trith/shell/history'
+
     ##
     # Reads and returns a line of input from the terminal.
     #
