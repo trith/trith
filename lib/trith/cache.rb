@@ -5,6 +5,14 @@ module Trith
     include RDF::Repository::Implementation rescue nil
 
     ##
+    # Returns a cache containing all core functions.
+    #
+    # @return [Trith::Cache]
+    def self.load_core
+      load(*Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'etc', '*.nt'))))
+    end
+
+    ##
     # @param  [Array<String>] filenames
     # @return [Trith::Cache]
     def self.load(*filenames)
