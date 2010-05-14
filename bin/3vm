@@ -14,3 +14,25 @@ case
   when ARGV.empty?
     abort BANNER
 end
+
+begin
+  $machine = Trith::Machine.new
+  $cache   = Trith::Cache.load_core
+  $machine.import!(Trith::Core)
+
+  begin
+    ARGV.each do |file|
+      $machine.execute(Trith::Reader.read_file(file))
+    end
+  rescue Trith::Machine::InvalidOperatorError => e
+    $stderr.puts Trith::Shell.format_error(e)
+  rescue Trith::Machine::InvalidOperandError => e
+    $stderr.puts Trith::Shell.format_error(e)
+  rescue Trith::Machine::StackUnderflowError => e
+    $stderr.puts Trith::Shell.format_error("stack underflow")
+  end
+
+  exit([255, $machine.stack.size].min)
+rescue Interrupt
+  abort '' # abort due to ^C (SIGINT)
+end

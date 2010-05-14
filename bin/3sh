@@ -50,9 +50,8 @@ begin
     $stdout.puts
   end
 
+  $stdout.puts
   Trith::Shell::History.dump!
 rescue Interrupt
-  # abort due to ^C (SIGINT)
+  abort '' # abort due to ^C (SIGINT)
 end
-
-$stdout.puts
