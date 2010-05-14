@@ -1,3 +1,4 @@
+require 'rational'
 require 'digest/sha1'
 require 'rdf'
 require 'rdf/ntriples'
