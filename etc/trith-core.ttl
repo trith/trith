@@ -7,16 +7,172 @@
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix doap:  <http://usefulinc.com/ns/doap#> .
 
-<booleanp> a trith:Function ;
-  rdfs:label         "booleanp", "boolean?" ;
+<abs> a trith:Function ;
+  rdfs:label         "abs" ;
+  rdfs:comment       "" .
+
+<add> a trith:Function ;
+  rdfs:label         "add", "+" ;
+  rdfs:comment       "" .
+
+<and> a trith:Function ;
+  rdfs:label         "and" ;
+  rdfs:comment       "" .
+
+<boolp> a trith:Function ;
+  rdfs:label         "boolp", "bool?" ;
+  rdfs:comment       "" .
+
+<branch> a trith:Function ;
+  rdfs:label         "branch" ;
+  rdfs:comment       "" .
+
+<call> a trith:Function ;
+  rdfs:label         "call" ;
+  rdfs:comment       "" .
+
+<char> a trith:Function ;
+  rdfs:label         "char" ;
+  rdfs:comment       "" .
+
+<charp> a trith:Function ;
+  rdfs:label         "charp", "char?" ;
+  rdfs:comment       "" .
+
+<cmp> a trith:Function ;
+  rdfs:label         "cmp", "<=>" ;
+  rdfs:comment       "" .
+
+<cons> a trith:Function ;
+  rdfs:label         "cons" ;
+  rdfs:comment       "" .
+
+<dec> a trith:Function ;
+  rdfs:label         "dec" ;
+  rdfs:comment       "" .
+
+<dip> a trith:Function ;
+  rdfs:label         "dip" ;
+  rdfs:comment       "" .
+
+<div> a trith:Function ;
+  rdfs:label         "div", "/" ;
+  rdfs:comment       "" .
+
+<drop> a trith:Function ;
+  rdfs:label         "drop" ;
   rdfs:comment       "" .
 
 <dup> a trith:Function ;
   rdfs:label         "dup" ;
   rdfs:comment       "" .
 
+<eighth> a trith:Function ;
+  rdfs:label         "eighth" ;
+  rdfs:comment       "" .
+
+<emptyp> a trith:Function ;
+  rdfs:label         "emptyp", "empty?" ;
+  rdfs:comment       "" .
+
+<eq> a trith:Function ;
+  rdfs:label         "eq", "=" ;
+  rdfs:comment       "" .
+
+<evenp> a trith:Function ;
+  rdfs:label         "evenp", "even?" ;
+  rdfs:comment       "" .
+
+<exactp> a trith:Function ;
+  rdfs:label         "exactp", "exact?" ;
+  rdfs:comment       "" .
+
+<false> a trith:Function ;
+  rdfs:label         "false" ;
+  rdfs:comment       "" .
+
 <falsep> a trith:Function ;
   rdfs:label         "falsep", "false?" ;
+  rdfs:comment       "" .
+
+<fifth> a trith:Function ;
+  rdfs:label         "fifth" ;
+  rdfs:comment       "" .
+
+<first> a trith:Function ;
+  rdfs:label         "first" ;
+  rdfs:comment       "" .
+
+<fourth> a trith:Function ;
+  rdfs:label         "fourth" ;
+  rdfs:comment       "" .
+
+<ge> a trith:Function ;
+  rdfs:label         "ge", ">=" ;
+  rdfs:comment       "" .
+
+<gt> a trith:Function ;
+  rdfs:label         "gt", ">" ;
+  rdfs:comment       "" .
+
+<halt> a trith:Function ;
+  rdfs:label         "halt" ;
+  rdfs:comment       "" .
+
+<inc> a trith:Function ;
+  rdfs:label         "inc" ;
+  rdfs:comment       "" .
+
+<inexactp> a trith:Function ;
+  rdfs:label         "inexactp", "inexact?" ;
+  rdfs:comment       "" .
+
+<integerp> a trith:Function ;
+  rdfs:label         "integerp", "integer?" ;
+  rdfs:comment       "" .
+
+<last> a trith:Function ;
+  rdfs:label         "last" ;
+  rdfs:comment       "" .
+
+<le> a trith:Function ;
+  rdfs:label         "le", "<=" ;
+  rdfs:comment       "" .
+
+<length> a trith:Function ;
+  rdfs:label         "length" ;
+  rdfs:comment       "" .
+
+<loop> a trith:Function ;
+  rdfs:label         "loop" ;
+  rdfs:comment       "" .
+
+<lt> a trith:Function ;
+  rdfs:label         "lt", "<" ;
+  rdfs:comment       "" .
+
+<max> a trith:Function ;
+  rdfs:label         "max" ;
+  rdfs:comment       "" .
+
+<min> a trith:Function ;
+  rdfs:label         "min" ;
+  rdfs:comment       "" .
+
+<mod> a trith:Function ;
+  rdfs:label         "mod" ;
+  rdfs:comment       "" .
+
+<mul> a trith:Function ;
+  rdfs:label         "mul", "*" ;
+  rdfs:comment       "" .
+
+<ne> a trith:Function ;
+  rdfs:label         "ne", "!=" ;
+  rdfs:comment       "" .
+
+<neg> a trith:Function ;
+  rdfs:label         "neg" ;
   rdfs:comment       "" .
 
 <nil> a trith:Function ;
@@ -27,16 +183,124 @@
   rdfs:label         "nilp", "nil?" ;
   rdfs:comment       "" .
 
+<ninth> a trith:Function ;
+  rdfs:label         "ninth" ;
+  rdfs:comment       "" .
+
+<nop> a trith:Function ;
+  rdfs:label         "nop" ;
+  rdfs:comment       "" .
+
+<not> a trith:Function ;
+  rdfs:label         "not" ;
+  rdfs:comment       "" .
+
+<nth> a trith:Function ;
+  rdfs:label         "nth" ;
+  rdfs:comment       "" .
+
+<number> a trith:Function ;
+  rdfs:label         "number" ;
+  rdfs:comment       "" .
+
 <numberp> a trith:Function ;
   rdfs:label         "numberp", "number?" ;
   rdfs:comment       "" .
 
-<stringp> a trith:Function ;
-  rdfs:label         "stringp", "string?" ;
+<oddp> a trith:Function ;
+  rdfs:label         "oddp", "odd?" ;
+  rdfs:comment       "" .
+
+<or> a trith:Function ;
+  rdfs:label         "or" ;
+  rdfs:comment       "" .
+
+<pow> a trith:Function ;
+  rdfs:label         "pow" ;
+  rdfs:comment       "" .
+
+<rem> a trith:Function ;
+  rdfs:label         "rem" ;
+  rdfs:comment       "" .
+
+<reset> a trith:Function ;
+  rdfs:label         "reset" ;
+  rdfs:comment       "" .
+
+<rest> a trith:Function ;
+  rdfs:label         "rest" ;
+  rdfs:comment       "" .
+
+<reverse> a trith:Function ;
+  rdfs:label         "reverse" ;
+  rdfs:comment       "" .
+
+<second> a trith:Function ;
+  rdfs:label         "second" ;
+  rdfs:comment       "" .
+
+<seq> a trith:Function ;
+  rdfs:label         "seq" ;
+  rdfs:comment       "" .
+
+<seqp> a trith:Function ;
+  rdfs:label         "seqp", "seq?" ;
+  rdfs:comment       "" .
+
+<seventh> a trith:Function ;
+  rdfs:label         "seventh" ;
+  rdfs:comment       "" .
+
+<shl> a trith:Function ;
+  rdfs:label         "shl" ;
+  rdfs:comment       "" .
+
+<shr> a trith:Function ;
+  rdfs:label         "shr" ;
+  rdfs:comment       "" .
+
+<sixth> a trith:Function ;
+  rdfs:label         "sixth" ;
+  rdfs:comment       "" .
+
+<size> a trith:Function ;
+  rdfs:label         "size" ;
+  rdfs:comment       "" .
+
+<sub> a trith:Function ;
+  rdfs:label         "sub", "-" ;
+  rdfs:comment       "" .
+
+<swap> a trith:Function ;
+  rdfs:label         "swap" ;
+  rdfs:comment       "" .
+
+<tenth> a trith:Function ;
+  rdfs:label         "tenth" ;
+  rdfs:comment       "" .
+
+<text> a trith:Function ;
+  rdfs:label         "text" ;
+  rdfs:comment       "" .
+
+<textp> a trith:Function ;
+  rdfs:label         "textp", "text?" ;
+  rdfs:comment       "" .
+
+<third> a trith:Function ;
+  rdfs:label         "third" ;
+  rdfs:comment       "" .
+
+<true> a trith:Function ;
+  rdfs:label         "true" ;
   rdfs:comment       "" .
 
 <truep> a trith:Function ;
   rdfs:label         "truep", "true?" ;
+  rdfs:comment       "" .
+
+<xor> a trith:Function ;
+  rdfs:label         "xor" ;
   rdfs:comment       "" .
 
 <zerop> a trith:Function ;
