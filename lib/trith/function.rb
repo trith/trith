@@ -80,5 +80,5 @@ module Trith
     def each_statement(&block)
       to_rdf.each_statement(&block)
     end
-  end
-end
+  end # class Function
+end # module Trith

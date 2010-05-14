@@ -93,5 +93,5 @@ module Trith
         end
       end
     end
-  end
-end
+  end # class Cache
+end # module Trith
