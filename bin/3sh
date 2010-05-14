@@ -5,6 +5,7 @@ require 'trith'
 begin
   $machine = Trith::Machine.new
   $cache   = Trith::Cache.load_core
+  $machine.import!(Trith::Core)
   Trith::Shell.setup!($cache)
   Trith::Shell::History.load!
 
@@ -24,6 +25,8 @@ begin
             $stderr.puts Trith::Shell.format_error(e)
           rescue Trith::Machine::StackUnderflowError => e
             $stderr.puts Trith::Shell.format_error("stack underflow")
+          rescue => e
+            $stderr.puts Trith::Shell.format_error(e.inspect)
           end
       end
     end
