@@ -18,7 +18,7 @@ module Trith
     #   @param  [Array] code
     #   @return [Object]
     #
-    # @overload self.execute(code) { |machine| ... }
+    # @overload self.execute(code)
     #   @param  [Array] code
     #   @yield  [machine]
     #   @yieldparam [Machine] machine
@@ -187,7 +187,7 @@ module Trith
     #   @param  [Array] code
     #   @return [Machine]
     #
-    # @overload execute(code) { |machine| ... }
+    # @overload execute(code)
     #   @param  [Array] code
     #   @yield  [machine]
     #   @yieldparam [Machine] machine
