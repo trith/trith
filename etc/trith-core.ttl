@@ -361,6 +361,12 @@
   trith:arity        2 ;
   trith:code         (<dup2> <drop>) .
 
+<pick> a trith:Function ;
+  rdfs:label         "pick" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         (<dup3> <drop2>) .
+
 <pow> a trith:Function ;
   rdfs:label         "pow" ;
   rdfs:comment       "" ;

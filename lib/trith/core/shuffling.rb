@@ -79,6 +79,12 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def pick
+      push(*((ops = pop(3)) + [ops.first]))
+    end
+
+    ##
+    # @return [Machine]
     def dip
       # TODO
     end
