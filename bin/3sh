@@ -16,7 +16,6 @@ end
 begin
   $machine = Trith::Machine.new
   $cache   = Trith::Cache.load_core
-  $machine.import!(Trith::Core)
   Trith::Shell.setup!($cache)
   Trith::Shell::History.load!
 

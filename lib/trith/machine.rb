@@ -40,6 +40,7 @@ module Trith
     # @yieldparam [Machine] machine
     def initialize(stack = [], queue = [], env = {}, &block)
       @stack, @queue, @env = stack, queue, env
+      import!(Trith::Core)
       execute(&block) if block_given?
     end
 
