@@ -18,19 +18,26 @@ module Trith; module Core
     ##
     # @return [Machine]
     def call
-      # TODO
+      case value = pop
+        when Array
+          unshift(*value)
+        when Symbol
+          # TODO
+        else # TODO: error
+      end
+      self
     end
 
     ##
     # @return [Machine]
     def loop
-      # TODO
+      self # TODO
     end
 
     ##
     # @return [Machine]
     def branch
-      # TODO
+      self # TODO
     end
   end # module Execution
 end; end # module Trith::Core
