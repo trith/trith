@@ -21,6 +21,8 @@ begin
             $machine.execute(Trith::Reader.read_all(line))
           rescue Trith::Machine::InvalidOperatorError => e
             $stderr.puts Trith::Shell.format_error(e)
+          rescue Trith::Machine::StackUnderflowError => e
+            $stderr.puts Trith::Shell.format_error("stack underflow")
           end
           $stdout.puts "=> #{Trith::Shell.inspect($machine.to_a)}"
       end
