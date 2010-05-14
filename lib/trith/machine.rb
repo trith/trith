@@ -59,8 +59,10 @@ module Trith
       mod.public_instance_methods(true).map(&:to_sym).each do |method|
         if (op = mod.instance_method(method)).arity > 0
           op = op.bind(self)
-          this.send(:define_method, method) do
-            push(op.call(*pop(op.arity)))
+          this.send(:define_method, method) do |*args|
+            result = op.call(*(args.empty? ? pop(op.arity) : args))
+            push(result) unless result.equal?(self)
+            return self
           end
         end
       end
