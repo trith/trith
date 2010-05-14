@@ -325,6 +325,12 @@
   trith:arity        2 ;
   trith:code         () .
 
+<quote> a trith:Function ;
+  rdfs:label         "quote", "\\", "'" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # primitive
+
 <rem> a trith:Function ;
   rdfs:label         "rem" ;
   rdfs:comment       "" ;

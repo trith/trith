@@ -17,6 +17,15 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def quote
+      push(shift)
+      self
+    end
+    alias_method :'\\', :quote
+    alias_method :"'", :quote
+
+    ##
+    # @return [Machine]
     def call
       case value = pop
         when Array
