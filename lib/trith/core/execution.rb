@@ -31,7 +31,15 @@ module Trith; module Core
     ##
     # @return [Machine]
     def loop
-      self # TODO
+      case value = pop
+        when Array
+          unshift(value, :loop)
+          unshift(*value)
+        when Symbol
+          # TODO
+        else # TODO: error
+      end
+      self
     end
 
     ##
