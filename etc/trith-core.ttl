@@ -439,6 +439,12 @@
   trith:arity        1 ;
   trith:code         (2 <nth>) .
 
+<times> a trith:Function ;
+  rdfs:label         "times" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # primitive
+
 <true> a trith:Function ;
   rdfs:label         "true" ;
   rdfs:comment       "" ;

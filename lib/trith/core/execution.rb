@@ -27,11 +27,28 @@ module Trith; module Core
     ##
     # @return [Machine]
     def call
-      case value = pop
+      case quot = pop
         when Array
-          unshift(*value)
+          unshift(*quot)
         when Symbol
-          # TODO
+          unshift(quot)
+        else # TODO: error
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def times
+      case quot = pop
+        when Array
+          pop.to_i.times do
+            unshift(*quot)
+          end
+        when Symbol
+          pop.to_i.times do
+            unshift(quot)
+          end
         else # TODO: error
       end
       self
@@ -40,12 +57,12 @@ module Trith; module Core
     ##
     # @return [Machine]
     def loop
-      case value = pop
+      case quot = pop
         when Array
-          unshift(value, :loop)
-          unshift(*value)
+          unshift(quot, :loop)
+          unshift(*quot)
         when Symbol
-          # TODO
+          unshift(quot, :quote, quot, :loop)
         else # TODO: error
       end
       self
