@@ -331,6 +331,12 @@
   trith:arity        2 ;
   trith:code         () .
 
+<over> a trith:Function ;
+  rdfs:label         "over" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         (<dup2> <drop>) .
+
 <pow> a trith:Function ;
   rdfs:label         "pow" ;
   rdfs:comment       "" ;
