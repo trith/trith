@@ -15,6 +15,7 @@ begin
           $cache.each_function do |function|
             puts "%-24s%s" % [function.label, function.comment]
           end
+          next # skip inspecting the stack
         else
           Trith::Shell::History.push(line)
           begin
@@ -24,9 +25,9 @@ begin
           rescue Trith::Machine::StackUnderflowError => e
             $stderr.puts Trith::Shell.format_error("stack underflow")
           end
-          $stdout.puts "=> #{Trith::Shell.inspect($machine.to_a)}"
       end
     end
+    $stdout.puts "=> #{Trith::Shell.inspect($machine.to_a)}"
   end
 
   Trith::Shell::History.dump!
