@@ -289,6 +289,18 @@
   trith:arity        1 ;
   trith:code         (8 <nth>) .
 
+<nip> a trith:Function ;
+  rdfs:label         "nip" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         (<swap> <drop>) .
+
+<nip2> a trith:Function ;
+  rdfs:label         "nip2", "2nip" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         (<swap> <drop> <swap> <drop>) .
+
 <nop> a trith:Function ;
   rdfs:label         "nop" ;
   rdfs:comment       "" ;

@@ -18,6 +18,19 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def nip
+      push(pop(2).last)
+    end
+
+    ##
+    # @return [Machine]
+    def nip2
+      push(pop(3).last)
+    end
+    alias_method :'2nip', :nip2
+
+    ##
+    # @return [Machine]
     def dup
       push(*(pop(1) * 2))
     end
