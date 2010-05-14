@@ -12,7 +12,7 @@ module Trith
     # Executes `code` in a new virtual machine instance.
     #
     # The machine will halt when the queue is exhausted, when encountering
-    # a `halt` instruction, or when encountering an error condition.
+    # a `halt` operator, or when encountering an error condition.
     #
     # @overload self.execute(code)
     #   @param  [Array] code
@@ -54,16 +54,18 @@ module Trith
       this = class << self; self; end
       this.send(:include, mod)
 
-      # If any operators need their arguments and result marshalled from and
-      # to the virtual machine stack, create wrapper methods to do that:
       mod.public_instance_methods(true).map(&:to_sym).each do |method|
-        if (op = mod.instance_method(method)).arity > 0
-          op = op.bind(self)
-          this.send(:define_method, method) do |*args|
+        op = mod.instance_method(method).bind(self)
+        if op.arity > 0
+          # If the operator needs its arguments and result marshalled from
+          # and to the virtual machine stack, create a wrapper method:
+          @env[method] = this.send(:define_method, method) do |*args|
             result = op.call(*(args.empty? ? pop(op.arity) : args))
             push(result) unless result.equal?(self)
             return self
           end
+        else
+          @env[method] = op
         end
       end
 
@@ -133,8 +135,8 @@ module Trith
     ##
     # Shifts and returns one or more operands off the front of the queue.
     #
-    # If the queue doesn't have sufficient operands, returns the `halt`
-    # operator.
+    # If the queue doesn't have sufficient operands, throws a `:halt`
+    # symbol.
     #
     # @overload shift
     #   @return [Object]
@@ -145,7 +147,11 @@ module Trith
     #
     # @return [Object]
     def shift(n = nil)
-      n ? queue.shift(n) : (!queue.empty? ? queue.shift : :halt)
+      if queue.size < (n || 1)
+        throw(:halt) # caught in `#execute`
+      else
+        n ? queue.shift(n) : queue.shift
+      end
     end
 
     ##
@@ -170,7 +176,7 @@ module Trith
     # Executes the virtual machine until it halts.
     #
     # The machine will halt when the queue is exhausted, when encountering
-    # a `halt` instruction, or when encountering an error condition.
+    # a `halt` operator, or when encountering an error condition.
     #
     # @overload execute(code)
     #   @param  [Array] code
@@ -184,12 +190,24 @@ module Trith
     #
     # @return [Machine]
     def execute(code = [], &block)
-      queue.push(*code) unless code.empty?
+      queue.unshift(*code) unless code.empty?
 
-      until (op = shift) == :halt
-        case
-          when operator?(op) then __send__(op)
-          when operand?(op)  then push(op)
+      catch(:halt) do # thrown in `#shift`
+        while true
+          op = shift
+          case
+            when operator?(op)
+              if fn = @env[op]
+                fn.call
+              else
+                unshift(op)
+                raise InvalidOperatorError.new(op)
+              end
+            when operand?(op)
+              push(op)
+            else
+              raise InvalidOperandError.new(op)
+          end
         end
       end
 
@@ -200,7 +218,7 @@ module Trith
         end
       end
 
-      self
+      return self
     end
 
     protected
@@ -238,13 +256,32 @@ module Trith
       begin
         super
       rescue NoMethodError => e
-        raise InvalidOperatorError.new("invalid operator `#{operator}'")
+        raise InvalidOperatorError.new(operator)
       end
     end
 
     ###
     # Invalid operator
-    class InvalidOperatorError < NoMethodError; end
+    class InvalidOperatorError < NoMethodError
+      attr_reader :operator
+
+      def initialize(operator)
+        @operator = operator
+        super("invalid operator `#{operator}'")
+      end
+    end
+
+    ###
+    # Invalid operand
+    class InvalidOperandError < ArgumentError
+      attr_reader :operand
+      attr_reader :operator
+
+      def initialize(operand, operator = nil)
+        @operand, @operator = operand, operator
+        super("invalid operand #{operand.inspect}")
+      end
+    end
 
     ###
     # Stack underflow
