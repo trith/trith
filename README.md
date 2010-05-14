@@ -15,10 +15,12 @@ Installation
 ------------
 
 The recommended installation method is via [RubyGems](http://rubygems.org/).
-To install the latest official release of the `trith` gem, do:
+To install the latest official release of the `trith` gem, do one of the
+following:
 
-    $ [sudo] gem install trith                  # Ruby 1.9.1+
-    $ [sudo] jruby --1.9 -S gem install trith   # JRuby 1.4.0+
+    $ [sudo] gem install trith                  # Ruby 1.9+
+    $ [sudo] gem1.9 install trith               # Ruby 1.9 with MacPorts
+    $ [sudo] jruby --1.9 -S gem install trith   # JRuby 1.4+
 
 Download
 --------
