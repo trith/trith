@@ -19,8 +19,22 @@ module Trith; module Core
     ##
     # @return [Machine]
     def dup
-      push(peek, pop)
+      push(*(pop(1) * 2))
     end
+
+    ##
+    # @return [Machine]
+    def dup2
+      push(*(pop(2) * 2))
+    end
+    alias_method :'2dup', :dup2
+
+    ##
+    # @return [Machine]
+    def dup3
+      push(*(pop(3) * 2))
+    end
+    alias_method :'3dup', :dup3
 
     ##
     # @return [Machine]

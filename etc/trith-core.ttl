@@ -97,6 +97,18 @@
   trith:arity        1 ;
   trith:code         () . # primitive
 
+<dup2> a trith:Function ;
+  rdfs:label         "dup2", "2dup" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # primitive
+
+<dup3> a trith:Function ;
+  rdfs:label         "dup3", "3dup" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         () . # primitive
+
 <eighth> a trith:Function ;
   rdfs:label         "eighth" ;
   rdfs:comment       "" ;
