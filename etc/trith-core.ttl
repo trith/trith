@@ -91,6 +91,18 @@
   trith:arity        1 ;
   trith:code         () . # primitive
 
+<drop2> a trith:Function ;
+  rdfs:label         "drop2", "2drop" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         (<drop> <drop>) .
+
+<drop3> a trith:Function ;
+  rdfs:label         "drop3", "3drop" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         (<drop> <drop> <drop>) .
+
 <dup> a trith:Function ;
   rdfs:label         "dup" ;
   rdfs:comment       "" ;

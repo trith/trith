@@ -18,6 +18,22 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def drop2
+      pop(2)
+      self
+    end
+    alias_method :'2drop', :drop2
+
+    ##
+    # @return [Machine]
+    def drop3
+      pop(3)
+      self
+    end
+    alias_method :'3drop', :drop3
+
+    ##
+    # @return [Machine]
     def nip
       push(pop(2).last)
     end
