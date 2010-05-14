@@ -2,6 +2,17 @@
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'trith'
 
+BANNER = "Usage: #{File.basename($0)} [options] [files...]"
+
+case
+  when %w(-V -v --version).any? { |opt| ARGV.include?(opt) }
+    $stdout.puts Trith::VERSION.to_s
+    exit
+  when %w(-? -h --help).any? { |opt| ARGV.include?(opt) }
+    $stdout.puts BANNER
+    exit
+end
+
 begin
   $machine = Trith::Machine.new
   $cache   = Trith::Cache.load_core
