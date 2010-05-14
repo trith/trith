@@ -18,7 +18,7 @@ end
 namespace :build do
   desc "Build all N-Triples distributables"
   task :rdf do
-    sh "rapper -i turtle -o ntriples etc/trith-core.ttl > etc/trith-core.nt"
+    sh "rapper -i turtle -o ntriples etc/trith-core.ttl | sort > etc/trith-core.nt"
   end
 
   desc "Compile all Java source files"
