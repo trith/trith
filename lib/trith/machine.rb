@@ -44,6 +44,34 @@ module Trith
     end
 
     ##
+    # Imports operators from the given `module` into the virtual machine's
+    # current environment.
+    #
+    # @param  [Module] module
+    # @return [Machine]
+    def import(mod)
+      # Include all instance methods from the module into `self`:
+      this = class << self; self; end
+      this.send(:include, mod)
+
+      # If any operators need their arguments and result marshalled from and
+      # to the virtual machine stack, create wrapper methods to do that:
+      mod.public_instance_methods(true).map(&:to_sym).each do |method|
+        if (op = mod.instance_method(method)).arity > 0
+          op = op.bind(self)
+          this.send(:define_method, method) do
+            unless (result = op.call(*pop(op.arity))).nil?
+              push(result)
+            end
+            self
+          end
+        end
+      end
+
+      self
+    end
+
+    ##
     # Returns the concatenation of the stack and queue.
     #
     # @return [Array]
