@@ -1,1 +1,2 @@
 require 'trith'
+include Trith

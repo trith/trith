@@ -1,8 +1,6 @@
-require 'trith'
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
-include  Trith
-
-describe Machine do
+describe Trith::Machine do
   context "Queue operators" do
     it "should support the :nop instruction" do
       Machine.new.should respond_to(:nop)
