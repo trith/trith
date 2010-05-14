@@ -10,374 +10,449 @@
 <abs> a trith:Function ;
   rdfs:label         "abs" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <add> a trith:Function ;
   rdfs:label         "add", "+" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <and> a trith:Function ;
   rdfs:label         "and" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <boolp> a trith:Function ;
   rdfs:label         "boolp", "bool?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <branch> a trith:Function ;
   rdfs:label         "branch" ;
   rdfs:comment       "" ;
-  trith:arity        3 .
+  trith:arity        3 ;
+  trith:code         () . # primitive
 
 <call> a trith:Function ;
   rdfs:label         "call" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () . # primitive
 
 <char> a trith:Function ;
   rdfs:label         "char" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <charp> a trith:Function ;
   rdfs:label         "charp", "char?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <cmp> a trith:Function ;
   rdfs:label         "cmp", "<=>" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <cons> a trith:Function ;
   rdfs:label         "cons" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <dec> a trith:Function ;
   rdfs:label         "dec" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (1 <sub>) .
 
 <dip> a trith:Function ;
   rdfs:label         "dip" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <div> a trith:Function ;
   rdfs:label         "div", "/" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <drop> a trith:Function ;
   rdfs:label         "drop" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () . # primitive
 
 <dup> a trith:Function ;
   rdfs:label         "dup" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () . # primitive
 
 <eighth> a trith:Function ;
   rdfs:label         "eighth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (7 <nth>) .
 
 <emptyp> a trith:Function ;
   rdfs:label         "emptyp", "empty?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<length> <zerop>) .
 
 <eq> a trith:Function ;
   rdfs:label         "eq", "=" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <evenp> a trith:Function ;
   rdfs:label         "evenp", "even?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (2 <mod> <zerop>) .
 
 <exactp> a trith:Function ;
   rdfs:label         "exactp", "exact?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <false> a trith:Function ;
   rdfs:label         "false" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () . # primitive
 
 <falsep> a trith:Function ;
   rdfs:label         "falsep", "false?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<false> <eq>) .
 
 <fifth> a trith:Function ;
   rdfs:label         "fifth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (4 <nth>) .
 
 <first> a trith:Function ;
   rdfs:label         "first" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (0 <nth>) .
 
 <fourth> a trith:Function ;
   rdfs:label         "fourth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (3 <nth>) .
 
 <ge> a trith:Function ;
   rdfs:label         "ge", ">=" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <gt> a trith:Function ;
   rdfs:label         "gt", ">" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <halt> a trith:Function ;
   rdfs:label         "halt" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () .
 
 <inc> a trith:Function ;
   rdfs:label         "inc" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (1 <add>) .
 
 <inexactp> a trith:Function ;
   rdfs:label         "inexactp", "inexact?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<exactp> <falsep>) .
 
 <integerp> a trith:Function ;
   rdfs:label         "integerp", "integer?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <last> a trith:Function ;
   rdfs:label         "last" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <le> a trith:Function ;
   rdfs:label         "le", "<=" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <length> a trith:Function ;
   rdfs:label         "length" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <loop> a trith:Function ;
   rdfs:label         "loop" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <lt> a trith:Function ;
   rdfs:label         "lt", "<" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <max> a trith:Function ;
   rdfs:label         "max" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <min> a trith:Function ;
   rdfs:label         "min" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <mod> a trith:Function ;
   rdfs:label         "mod" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <mul> a trith:Function ;
   rdfs:label         "mul", "*" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <ne> a trith:Function ;
   rdfs:label         "ne", "!=" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         (<eq> <falsep>) .
 
 <neg> a trith:Function ;
   rdfs:label         "neg" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (0 <swap> <sub>) .
 
 <nil> a trith:Function ;
   rdfs:label         "nil" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () . # primitive
 
 <nilp> a trith:Function ;
   rdfs:label         "nilp", "nil?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<nil> <eq>) .
 
 <ninth> a trith:Function ;
   rdfs:label         "ninth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (8 <nth>) .
 
 <nop> a trith:Function ;
   rdfs:label         "nop" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () .
 
 <not> a trith:Function ;
   rdfs:label         "not" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <nth> a trith:Function ;
   rdfs:label         "nth" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <number> a trith:Function ;
   rdfs:label         "number" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <numberp> a trith:Function ;
   rdfs:label         "numberp", "number?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <oddp> a trith:Function ;
   rdfs:label         "oddp", "odd?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<evenp> <falsep>) .
 
 <or> a trith:Function ;
   rdfs:label         "or" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <pow> a trith:Function ;
   rdfs:label         "pow" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <rem> a trith:Function ;
   rdfs:label         "rem" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <reset> a trith:Function ;
   rdfs:label         "reset" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () .
 
 <rest> a trith:Function ;
   rdfs:label         "rest" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <reverse> a trith:Function ;
   rdfs:label         "reverse" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <second> a trith:Function ;
   rdfs:label         "second" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (1 <nth>) .
 
 <seq> a trith:Function ;
   rdfs:label         "seq" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <seqp> a trith:Function ;
   rdfs:label         "seqp", "seq?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <seventh> a trith:Function ;
   rdfs:label         "seventh" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (6 <nth>) .
 
 <shl> a trith:Function ;
   rdfs:label         "shl" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <shr> a trith:Function ;
   rdfs:label         "shr" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <sixth> a trith:Function ;
   rdfs:label         "sixth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (5 <nth>) .
 
 <size> a trith:Function ;
   rdfs:label         "size" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <sub> a trith:Function ;
   rdfs:label         "sub", "-" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <swap> a trith:Function ;
   rdfs:label         "swap" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <tenth> a trith:Function ;
   rdfs:label         "tenth" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (9 <nth>) .
 
 <text> a trith:Function ;
   rdfs:label         "text" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <textp> a trith:Function ;
   rdfs:label         "textp", "text?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         () .
 
 <third> a trith:Function ;
   rdfs:label         "third" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (2 <nth>) .
 
 <true> a trith:Function ;
   rdfs:label         "true" ;
   rdfs:comment       "" ;
-  trith:arity        0 .
+  trith:arity        0 ;
+  trith:code         () . # primitive
 
 <truep> a trith:Function ;
   rdfs:label         "truep", "true?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (<true> <eq>) .
 
 <xor> a trith:Function ;
   rdfs:label         "xor" ;
   rdfs:comment       "" ;
-  trith:arity        2 .
+  trith:arity        2 ;
+  trith:code         () .
 
 <zerop> a trith:Function ;
   rdfs:label         "zerop", "zero?" ;
   rdfs:comment       "" ;
-  trith:arity        1 .
+  trith:arity        1 ;
+  trith:code         (0 <eq>) .
