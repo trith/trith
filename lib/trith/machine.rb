@@ -49,7 +49,7 @@ module Trith
     #
     # @param  [Module] module
     # @return [Machine]
-    def import(mod)
+    def import!(mod)
       # Include all instance methods from the module into `self`:
       this = class << self; self; end
       this.send(:include, mod)
