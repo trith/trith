@@ -45,6 +45,14 @@ module Trith
     end
 
     ##
+    # Returns a developer-friendly representation of this machine.
+    #
+    # @return [String]
+    def inspect
+      sprintf("#<%s:%#0x(%s : %s)>", self.class.name, __id__, stack.inspect, queue.inspect)
+    end
+
+    ##
     # Imports operators from the given `module` into the virtual machine's
     # current environment.
     #
