@@ -19,6 +19,12 @@ begin
   Trith::Shell.setup!($cache)
   Trith::Shell::History.load!
 
+  if %w(-d --debug).any? { |opt| ARGV.include?(opt) }
+    $machine.execute_hook = proc do
+      $stdout.puts Trith::Shell.inspect($machine, :prefix => '.. ')
+    end
+  end
+
   while line = Trith::Shell.readline('>> ')
     unless (line = line.strip).empty?
       case line
@@ -42,11 +48,7 @@ begin
           end
       end
     end
-    $stdout.write '=> '
-    $stdout.write Trith::Shell.inspect($machine.stack)
-    $stdout.write ' : '
-    $stdout.write Trith::Shell.inspect($machine.queue)
-    $stdout.puts
+    $stdout.puts Trith::Shell.inspect($machine, :prefix => '=> ')
   end
 
   $stdout.puts

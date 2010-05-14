@@ -8,6 +8,9 @@ module Trith
     # @return [Array]
     attr_reader :queue
 
+    # @return [Proc]
+    attr_accessor :execute_hook
+
     ##
     # Executes `code` in a new virtual machine instance.
     #
@@ -199,6 +202,8 @@ module Trith
 
       catch(:halt) do # thrown in `#shift`
         while true
+          execute_hook.call if execute_hook && !queue.empty?
+
           op = shift
           case
             when operator?(op)

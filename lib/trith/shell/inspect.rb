@@ -51,12 +51,24 @@ module Trith; module Shell
         when String     then inspect_string(value, options)
         when Array      then inspect_array(value, options)
         when RDF::URI   then inspect_reference(value, options)
+        when Machine    then inspect_machine(value, options)
         else value.inspect
       end
     end
 
     ##
-    # @param  [Array, #to_ary] array
+    # @param  [Machine]                machine
+    # @param  [Hash{Symbol => Object}] options
+    # @return [String]
+    def self.inspect_machine(machine, options = {})
+      (options[:prefix].to_s || '') +
+        inspect(machine.stack, options) + ' : ' +
+        inspect(machine.queue, options)
+    end
+
+    ##
+    # @param  [Array, #to_ary]         array
+    # @param  [Hash{Symbol => Object}] options
     # @return [String]
     def self.inspect_array(array, options = {})
       colorize('[', options[:color] ? :green : nil) <<
@@ -65,7 +77,8 @@ module Trith; module Shell
     end
 
     ##
-    # @param  [String, #to_str] string
+    # @param  [String, #to_str]        string
+    # @param  [Hash{Symbol => Object}] options
     # @return [String]
     def self.inspect_string(string, options = {})
       colorize('"', options[:color] ? :red : nil) <<
@@ -74,7 +87,8 @@ module Trith; module Shell
     end
 
     ##
-    # @param  [RDF::URI, #to_uri] uri
+    # @param  [RDF::URI, #to_uri]      uri
+    # @param  [Hash{Symbol => Object}] options
     # @return [String]
     def self.inspect_reference(uri, options = {})
       colorize('<', options[:color] ? :red : nil) <<

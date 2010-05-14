@@ -5,6 +5,7 @@ Trith is an experimental programming language founded on the [unholy][]
 trinity of [Forth][], [Lisp][] and [RDF][] triples.
 
 * <http://trith.org/>
+* <http://github.com/trith/trith>
 
 Description
 -----------
@@ -27,21 +28,22 @@ machine stack contains a single operand, the number 42. The `[]` on the
 right-hand side shows that the code queue is empty, which is generally the
 case after all input has been successfully evaluated.
 
-Let's run through the above example one step at a time, so that we can more
-clearly see what's going on:
+Let's run through the above example one step at a time by using the
+`--debug` option to `3sh`, enabling the tracing of each execution step in
+the virtual machine:
 
-    $ 3sh
-    >> 6
-    => [6] : []
-    >> 7
-    => [6 7] : []
-    >> *
+    $ 3sh --debug
+    >> 6 7 *
+    .. [] : [6 7 *]
+    .. [6] : [7 *]
+    .. [6 7] : [*]
     => [42] : []
 
-As you can see, input operands such as numbers are added to the data stack,
-which grows from left to right. When an operator such as the multiplication
-operator `*` is encountered and executed, it will pop operands from the
-stack and then push its result(s) onto the stack.
+As you can see, when input operands such as numbers are encountered, they
+are added to the data stack, which grows from left to right. When an
+operator such as the multiplication operator `*` is encountered and
+executed, it will pop operands from the stack and then push its result(s)
+onto the stack.
 
 When fooling around in the Trith shell, two useful operators to know are
 `reset`, which clears the data stack, and `halt`, which clears the code
