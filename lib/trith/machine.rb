@@ -60,10 +60,7 @@ module Trith
         if (op = mod.instance_method(method)).arity > 0
           op = op.bind(self)
           this.send(:define_method, method) do
-            unless (result = op.call(*pop(op.arity))).nil?
-              push(result)
-            end
-            self
+            push(op.call(*pop(op.arity)))
           end
         end
       end
