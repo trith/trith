@@ -54,18 +54,14 @@ module Trith
       this = class << self; self; end
       this.send(:include, mod)
 
+      # Create wrapper methods to support operators that need their
+      # arguments and result marshalled from/to the virtual machine stack:
       mod.public_instance_methods(true).map(&:to_sym).each do |method|
         op = mod.instance_method(method).bind(self)
-        if op.arity > 0
-          # If the operator needs its arguments and result marshalled from
-          # and to the virtual machine stack, create a wrapper method:
-          @env[method] = this.send(:define_method, method) do |*args|
-            result = op.call(*(args.empty? ? pop(op.arity) : args))
-            push(result) unless result.equal?(self)
-            return self
-          end
-        else
-          @env[method] = op
+        @env[method] = this.send(:define_method, method) do |*args|
+          result = op.call(*(!args.empty? ? args : (op.arity > 0 ? pop(op.arity) : [])))
+          push(result) unless result.equal?(self)
+          return self
         end
       end
 
