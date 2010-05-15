@@ -21,7 +21,7 @@ programming language with a simple and concise homoiconic syntax:
   functional terms as unary functions that map from one stack to another.
 * [Concatenative][concatenative] means that the concatenation of any two
   Trith functions also denotes the [composition][] of those functions.
-* [Dynamically-typed][type system] means that operands to Trith functions
+* [Dynamically typed][type system] means that operands to Trith functions
   are type-checked dynamically at runtime.
 * [Homoiconic][homoiconic] means that in Trith there is no difference
   between code and data. You can manipulate and construct code at runtime as
@@ -34,52 +34,59 @@ Trith is inspired and influenced by [Forth][], [Lisp][] and [Scheme][] in
 general, and the concatenative languages [Joy][], [XY][], [Factor][] and
 [Cat][] in particular.
 
-Status
-------
+Introduction
+------------
 
 The Trith implementation currently consists of a virtual machine,
 interpreter, and compiler toolchain written in Ruby and an in-the-works
 runtime targeting the [JVM][].
 
-At this stage, Trith is as yet little more than a glorified interactive
-calculator. Nonetheless, it can already answer the ultimate question of
-life, the universe, and everything:
+You can use the Trith shell `3sh` to explore Trith interactively:
 
-    $ 3sh 
-    >> 6 7 * 
-    => [42] : [] 
+    $ 3sh
+    >> "Hello, world!" print
+    Hello, world!
 
-In the above Trith shell (`3sh`) output, `>>` indicates lines that you type,
-and `=>` indicates the result from the shell. After each input line is
-evaluated, the shell will show you the current state of the Trith virtual
-machine's data stack and code queue.
+For example, here's how you would verify that Trith gives the correct answer
+to the ultimate question of life, the universe, and everything:
 
-Thus in our above example, the `[42]` on the left-hand side shows that the
-machine stack contains a single operand, the number 42. The `[]` on the
+    $ 3sh
+    >> 3 dup + 7 *
+    => [42] : []
+
+In the above `3sh` examples, `>>` indicates lines that you type, and `=>`
+indicates the result from the shell.  After each input line is evaluated,
+the shell will show you the current state of the Trith virtual machine's
+data stack and code queue.
+
+Thus in our previous example, the `[42]` on the left-hand side shows that
+the machine stack contains a single operand, the number 42. The `[]` on the
 right-hand side shows that the code queue is empty, which is generally the
 case after all input has been successfully evaluated.
 
-Let's run through the above example one step at a time by using the
-`--debug` option to `3sh`, enabling the tracing of each execution step in
-the virtual machine:
+Let's run through the above example one more time using the `--debug` option
+to `3sh`, which enables the tracing of each execution step in the virtual
+machine:
 
     $ 3sh --debug
-    >> 6 7 *
-    .. [] : [6 7 *]
-    .. [6] : [7 *]
+    >> 3 dup + 7 *
+    ..    [] : [3 dup + 7 *]
+    ..   [3] : [dup + 7 *]
+    .. [3 3] : [+ 7 *]
+    ..   [6] : [7 *]
     .. [6 7] : [*]
-    => [42] : []
+    =>  [42] : []
 
 As you can see, when input operands such as numbers are encountered, they
-are added to the data stack, which grows from left to right. When an
+are pushed onto the data stack, which grows from left to right. When an
 operator such as the multiplication operator `*` is encountered and
-executed, it will pop operands from the stack and then push its result(s)
+executed, it pops operands from the stack and then pushes its result(s) back
 onto the stack.
 
 When fooling around in the Trith shell, two useful operators to know are
 `clear`, which clears the data stack, and `halt`, which clears the code
-queue (thus halting execution). You can also use `reset` which does the
-equivalent of both.
+queue (thus halting execution). You can also use `reset` which does both in
+one step, returning you to a guaranteed clean slate.
 
 To get a listing of all operators supported in the current release, enter
 the `?` metacommand in the Trith shell.
