@@ -1,15 +1,45 @@
 Trith
 =====
 
-Trith is an experimental [concatenative][concat] programming language
-founded on the [unholy][] trinity of [Forth][], [Lisp][] and [RDF][]
-triples.
+Trith is an experimental [concatenative][concat.org] programming language
+founded on the [unholy][lispers.org] trinity of [Forth][], [Lisp][] and
+[RDF][] triples.
 
 * <http://trith.org/>
 * <http://github.com/trith/trith>
 
 Description
 -----------
+
+Trith is a stack-based, concatenative, dynamically-typed functional
+programming language with a simple and concise homoiconic syntax:
+
+* [Stack-based][stack-oriented] means that instead of having named
+  parameters, Trith functions operate on an implicit data structure called
+  the _operand stack_. Trith functions can be thought of in terms of popping
+  and pushing operands from and onto this stack, or equivalently in purely
+  functional terms as unary functions that map from one stack to another.
+* [Concatenative][concatenative] means that the concatenation of any two
+  Trith functions also denotes the [composition][] of those functions.
+* [Dynamically-typed][type system] means that operands to Trith functions
+  are type-checked dynamically at runtime.
+* [Homoiconic][homoiconic] means that in Trith there is no difference
+  between code and data. You can manipulate and construct code at runtime as
+  easily as you would manipulate any other data structure, enabling powerful
+  metaprogramming facilities. Trith programs are simply nested lists
+  of operators, operands and quotations, and can be represented externally
+  either as [S-expressions][S-expression] or as [RDF][] data.
+
+Trith is inspired and influenced by [Forth][], [Lisp][] and [Scheme][] in
+general, and the concatenative languages [Joy][], [XY][], [Factor][] and
+[Cat][] in particular.
+
+Status
+------
+
+The Trith implementation currently consists of a virtual machine,
+interpreter, and compiler toolchain written in Ruby and an in-the-works
+runtime targeting the [JVM][].
 
 At this stage, Trith is as yet little more than a glorified interactive
 calculator. Nonetheless, it can already answer the ultimate question of
@@ -105,8 +135,20 @@ License
 Trith is free and unencumbered public domain software. For more
 information, see <http://unlicense.org/> or the accompanying UNLICENSE file.
 
-[Forth]:  http://en.wikipedia.org/wiki/Forth_(programming_language)
-[Lisp]:   http://en.wikipedia.org/wiki/Lisp_(programming_language)
-[RDF]:    http://en.wikipedia.org/wiki/Resource_Description_Framework
-[concat]: http://en.wikipedia.org/wiki/Concatenative_programming_language
-[unholy]: http://lispers.org/
+[stack-oriented]: http://en.wikipedia.org/wiki/Stack-oriented_programming_language
+[concatenative]:  http://en.wikipedia.org/wiki/Concatenative_programming_language
+[composition]:    http://en.wikipedia.org/wiki/Function_composition
+[type system]:    http://en.wikipedia.org/wiki/Type_system#Dynamic_typing
+[homoiconic]:     http://en.wikipedia.org/wiki/Homoiconicity
+[S-expression]:   http://en.wikipedia.org/wiki/S-expression
+[RDF]:            http://en.wikipedia.org/wiki/Resource_Description_Framework
+[JVM]:            http://en.wikipedia.org/wiki/Java_Virtual_Machine
+[Lisp]:           http://en.wikipedia.org/wiki/Lisp_(programming_language)
+[Scheme]:         http://en.wikipedia.org/wiki/Scheme_(programming_language)
+[Forth]:          http://en.wikipedia.org/wiki/Forth_(programming_language)
+[Factor]:         http://en.wikipedia.org/wiki/Factor_(programming_language)
+[Joy]:            http://en.wikipedia.org/wiki/Joy_(programming_language)
+[Cat]:            http://en.wikipedia.org/wiki/Cat_(programming_language)
+[XY]:             http://www.nsl.com/k/xy/xy.htm
+[lispers.org]:    http://lispers.org/
+[concat.org]:     http://concatenative.org/wiki/view/Concatenative%20language
