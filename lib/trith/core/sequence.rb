@@ -271,5 +271,19 @@ module Trith; module Core
         end
       end
     end
+
+    ##
+    # @param  [#concat, #each] seq1
+    # @param  [#each]          seq2
+    # @return [Enumerable]
+    def concat(seq1, seq2)
+      case
+        when seq1.respond_to?(:concat)
+          seq1.dup.concat(seq2)
+        when seq1.respond_to?(:each)
+          p seq1.each.to_a.concat(seq2.each.to_a) # TODO: optimize
+        else # TODO: error
+      end
+    end
   end # module Sequence
 end; end # module Trith::Core
