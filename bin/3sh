@@ -28,9 +28,12 @@ begin
   while line = Trith::Shell.readline('>> ')
     unless (line = line.strip).empty?
       case line
-        when '?', 'help'
+        when /^\?\s*(\S*)/, 'help'
+          filter = ($1.to_s).empty? ? nil : /#{Regexp.quote($1)}/
           $cache.each_function do |function|
-            puts "%-24s%s" % [function.label, function.comment]
+            if !filter || filter =~ function.label
+              puts "%-24s%s" % [function.label, function.comment]
+            end
           end
           next # skip inspecting the stack
         else
