@@ -298,6 +298,41 @@ module Trith
       end
     end
 
+    ##
+    # Invokes the given block with an empty code queue, restoring the
+    # queue contents after the block returns.
+    #
+    # @yield
+    # @return [void]
+    def with_saved_continuation(&block)
+      cc = capture_continuation
+      block.call
+      queue.unshift(*cc)
+      self
+    end
+
+    ##
+    # Invokes the given block with an empty code queue, passing the previous
+    # queue contents as an argument.
+    #
+    # @yield
+    # @return [void]
+    def with_current_continuation(&block)
+      block.call(capture_continuation)
+      self
+    end
+
+    ##
+    # Captures the current contents of the code queue, returning them to the
+    # caller after first clearing the queue.
+    #
+    # @return [Array]
+    def capture_continuation(full = false)
+      continuation = queue.dup
+      queue.clear
+      continuation
+    end
+
     ###
     # Invalid operator
     class InvalidOperatorError < NoMethodError
