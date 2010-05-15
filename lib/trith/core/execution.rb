@@ -7,6 +7,8 @@ module Trith; module Core
     def nop
       self # do nothing
     end
+    alias_method :';', :nop
+    alias_method :',', :nop
 
     ##
     # @return [Machine]

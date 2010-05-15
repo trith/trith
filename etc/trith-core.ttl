@@ -314,7 +314,7 @@
   trith:code         (<swap> <drop> <swap> <drop>) .
 
 <nop> a trith:Function ;
-  rdfs:label         "nop" ;
+  rdfs:label         "nop", ";", "," ;
   rdfs:comment       "" ;
   trith:arity        0 ;
   trith:code         (<nil> <drop>) .
