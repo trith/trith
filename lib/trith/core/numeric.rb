@@ -84,6 +84,22 @@ module Trith; module Core
     alias_method :one?, :onep
 
     ##
+    # @param  [Numeric, #<=>] n
+    # @return [Boolean]
+    def negp(n)
+      n < 0
+    end
+    alias_method :neg?, :negp
+
+    ##
+    # @param  [Numeric, #<=>] n
+    # @return [Boolean]
+    def posp(n)
+      n > 0
+    end
+    alias_method :pos?, :posp
+
+    ##
     # @param  [Numeric, #odd?] n
     # @return [Boolean]
     def oddp(n)

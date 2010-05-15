@@ -295,6 +295,12 @@
   trith:arity        1 ;
   trith:code         (0 <swap> <sub>) .
 
+<negp> a trith:Function ;
+  rdfs:label         "negp", "neg?" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (0 <lt>) .
+
 <nil> a trith:Function ;
   rdfs:label         "nil" ;
   rdfs:comment       "" ;
@@ -384,6 +390,12 @@
   rdfs:comment       "" ;
   trith:arity        3 ;
   trith:code         (<dup3> <drop2>) .
+
+<posp> a trith:Function ;
+  rdfs:label         "posp", "pos?" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (0 <gt>) .
 
 <pow> a trith:Function ;
   rdfs:label         "pow" ;
