@@ -25,6 +25,12 @@
   trith:arity        2 ;
   trith:code         () . # primitive
 
+<bool> a trith:Function ;
+  rdfs:label         "bool" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         ((<true>) (<false>) <branch>) .
+
 <boolp> a trith:Function ;
   rdfs:label         "boolp", "bool?" ;
   rdfs:comment       "" ;

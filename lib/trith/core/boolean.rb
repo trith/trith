@@ -23,15 +23,14 @@ module Trith; module Core
     alias_method :nil?, :nilp
 
     ##
-    # @return [FalseClass]
-    def false
-      false
-    end
-
-    ##
-    # @return [TrueClass]
-    def true
-      true
+    # @param  [Object]  obj
+    # @return [Boolean]
+    def bool(obj)
+      case obj
+        when nil   then false
+        when false then false
+        else true
+      end
     end
 
     ##
@@ -43,12 +42,24 @@ module Trith; module Core
     alias_method :bool?, :boolp
 
     ##
+    # @return [FalseClass]
+    def false
+      false
+    end
+
+    ##
     # @param  [Object]  obj
     # @return [Boolean]
     def falsep(obj)
       obj.equal?(false)
     end
     alias_method :false?, :falsep
+
+    ##
+    # @return [TrueClass]
+    def true
+      true
+    end
 
     ##
     # @param  [Object]  obj
