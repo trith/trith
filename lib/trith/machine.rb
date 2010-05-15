@@ -206,7 +206,7 @@ module Trith
       queue.unshift(*code) unless code.empty?
 
       catch(:halt) do # thrown in `#shift`
-        while true
+        Kernel.loop do
           execute_hook.call if execute_hook && !queue.empty?
 
           op = shift
@@ -303,10 +303,14 @@ module Trith
     # queue contents after the block returns.
     #
     # @yield
+    # @param  [Symbol] name
     # @return [void]
-    def with_saved_continuation(&block)
+    def with_saved_continuation(name = nil, &block)
       cc = capture_continuation
-      block.call
+      case block.arity
+        when 1 then block.call(cc)
+        else block.call
+      end
       queue.unshift(*cc)
       self
     end

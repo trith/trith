@@ -94,6 +94,22 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def while(quot, pred)
+      with_saved_continuation(:while) do
+        Kernel.loop do
+          execute(pred)
+          case pop
+            when false, nil
+              break # exit the loop
+            else execute(quot)
+          end
+        end
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
     def branch
       self # TODO
     end
