@@ -62,6 +62,7 @@ module Trith; module Shell
     # @return [String]
     def self.inspect_machine(machine, options = {})
       (options[:prefix].to_s || '') +
+        (options[:align] ? ' ' * [20 - inspect(machine.stack, :color => false).size, 0].max : '') +
         inspect(machine.stack, options) + ' : ' +
         inspect(machine.queue, options)
     end
