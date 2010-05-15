@@ -99,9 +99,23 @@ module Trith; module Core
         Kernel.loop do
           execute(pred)
           case pop
-            when false, nil
-              break # exit the loop
+            when false, nil then break
             else execute(quot)
+          end
+        end
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def until(quot, pred)
+      with_saved_continuation(:until) do
+        Kernel.loop do
+          execute(pred)
+          case pop
+            when false, nil then execute(quot)
+            else break
           end
         end
       end

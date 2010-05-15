@@ -269,7 +269,7 @@
   rdfs:label         "mul", "*" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         (0 <swap> <abs> (<over> +) <swap> <times> <nip>) . # FIXME: negative operands
+  trith:code         (0 <swap> <abs> (<over> <add>) <swap> <times> <nip>) . # FIXME: negative operands
 
 <ne> a trith:Function ;
   rdfs:label         "ne", "!=" ;
@@ -503,7 +503,7 @@
   rdfs:label         "times" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         () . # TODO
+  trith:code         ((<dec> <over> <call>) (<dup> <zerop>) <until> <drop2>) .
 
 <true> a trith:Function ;
   rdfs:label         "true" ;
@@ -522,6 +522,12 @@
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         (2 <times>) .
+
+<until> a trith:Function ;
+  rdfs:label         "until" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # primitive
 
 <while> a trith:Function ;
   rdfs:label         "while" ;
