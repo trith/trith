@@ -26,12 +26,12 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def call
-      case quot = pop
+    def call(quot)
+      case quot
         when Array
           unshift(*quot)
         when Symbol
-          unshift(quot)
+          unshift(quot) # FIXME
         else # TODO: error
       end
       self
@@ -47,7 +47,7 @@ module Trith; module Core
           end
         when Symbol
           pop.to_i.times do
-            unshift(quot)
+            unshift(quot) # FIXME
           end
         else # TODO: error
       end
@@ -56,13 +56,13 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def loop
-      case quot = pop
+    def loop(quot)
+      case quot
         when Array
           unshift(quot, :loop)
           unshift(*quot)
         when Symbol
-          unshift(quot, :quote, quot, :loop)
+          unshift(quot, :quote, quot, :loop) # FIXME
         else # TODO: error
       end
       self
@@ -73,5 +73,13 @@ module Trith; module Core
     def branch
       self # TODO
     end
+
+    ##
+    # @return [Machine]
+    def print(obj)
+      $stdout.puts(obj) # FIXME
+      self
+    end
+    alias_method :'.', :print
   end # module Execution
 end; end # module Trith::Core

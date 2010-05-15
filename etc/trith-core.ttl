@@ -373,6 +373,12 @@
   trith:arity        2 ;
   trith:code         () . # TODO
 
+<print> a trith:Function ;
+  rdfs:label         "print", "." ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # primitive
+
 <quote> a trith:Function ;
   rdfs:label         "quote", "\\", "'" ;
   rdfs:comment       "" ;
