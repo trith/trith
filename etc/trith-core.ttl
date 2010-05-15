@@ -55,6 +55,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<clear> a trith:Function ;
+  rdfs:label         "clear" ;
+  rdfs:comment       "" ;
+  trith:arity        0 ;
+  trith:code         () . # primitive
+
 <cmp> a trith:Function ;
   rdfs:label         "cmp", "<=>" ;
   rdfs:comment       "" ;
@@ -395,7 +401,7 @@
   rdfs:label         "reset" ;
   rdfs:comment       "" ;
   trith:arity        0 ;
-  trith:code         () . # primitive
+  trith:code         (<clear> <halt>) .
 
 <rest> a trith:Function ;
   rdfs:label         "rest" ;

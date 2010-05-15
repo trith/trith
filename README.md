@@ -77,8 +77,9 @@ executed, it will pop operands from the stack and then push its result(s)
 onto the stack.
 
 When fooling around in the Trith shell, two useful operators to know are
-`reset`, which clears the data stack, and `halt`, which clears the code
-queue (thus halting execution).
+`clear`, which clears the data stack, and `halt`, which clears the code
+queue (thus halting execution). You can also use `reset` which does the
+equivalent of both.
 
 To get a listing of all operators supported in the current release, enter
 the `?` metacommand in the Trith shell.

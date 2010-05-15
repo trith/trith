@@ -19,6 +19,14 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def reset
+      stack.clear
+      queue.clear
+      self
+    end
+
+    ##
+    # @return [Machine]
     def quote
       push([shift])
       self

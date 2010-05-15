@@ -4,7 +4,7 @@ module Trith; module Core
   module Shuffling
     ##
     # @return [Machine]
-    def reset
+    def clear
       stack.clear
       self
     end
