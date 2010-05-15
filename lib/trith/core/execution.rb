@@ -39,16 +39,38 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def times
-      case quot = pop
+    def times(quot, count)
+      case quot
         when Array
-          pop.to_i.times do
-            unshift(*quot)
-          end
+          count.to_i.times { unshift(*quot) }
         when Symbol
-          pop.to_i.times do
-            unshift(quot) # FIXME
-          end
+          count.to_i.times { unshift(quot) } # FIXME
+        else # TODO: error
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def twice(quot)
+      case quot
+        when Array
+          2.times { unshift(*quot) }
+        when Symbol
+          2.times { unshift(quot) } # FIXME
+        else # TODO: error
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def thrice(quot)
+      case quot
+        when Array
+          3.times { unshift(*quot) }
+        when Symbol
+          3.times { unshift(quot) } # FIXME
         else # TODO: error
       end
       self
