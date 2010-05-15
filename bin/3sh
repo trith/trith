@@ -65,7 +65,8 @@ begin
   end
 
   $stdout.puts
-  Trith::Shell::History.dump!
 rescue Interrupt
   abort '' # abort due to ^C (SIGINT)
+ensure
+  Trith::Shell::History.dump!
 end
