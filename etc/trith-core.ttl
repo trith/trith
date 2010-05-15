@@ -203,7 +203,7 @@
   rdfs:label         "gt", ">" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         (<cmp> 1 <eq>) .
+  trith:code         (<cmp> <onep>) .
 
 <halt> a trith:Function ;
   rdfs:label         "halt" ;
@@ -360,6 +360,12 @@
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         (<evenp> <falsep>) .
+
+<onep> a trith:Function ;
+  rdfs:label         "onep", "one?" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (1 <eq>) .
 
 <or> a trith:Function ;
   rdfs:label         "or" ;
