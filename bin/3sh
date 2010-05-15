@@ -28,6 +28,7 @@ begin
   while line = Trith::Shell.readline('>> ')
     unless (line = line.strip).empty?
       case line
+        # Operator lookup
         when /^\?\s*(\S*)/, 'help'
           filter = ($1.to_s).empty? ? nil : /#{Regexp.quote($1)}/
           $cache.each_function do |function|
@@ -36,6 +37,14 @@ begin
             end
           end
           next # skip inspecting the stack
+
+        # Operator definition
+        when /^:\s*(\S*)\s+(.*)$/
+          name, code = $1.to_sym, Trith::Reader.read_all($2)
+          $machine.define!(name, *code)
+          next # skip inspecting the stack
+
+        # Code execution
         else
           Trith::Shell::History.push(line)
           begin
