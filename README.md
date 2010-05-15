@@ -91,6 +91,26 @@ one step, returning you to a guaranteed clean slate.
 To get a listing of all operators supported in the current release, enter
 the `?` metacommand in the Trith shell.
 
+Linked Code
+-----------
+
+All Trith operators are identified by URIs, with the result that Trith code
+has a straightforward representation as [RDF][] data. Here's an example of
+the `abs` operand defined metacircularly using the Turtle serialization
+format for RDF data:
+
+    @base          <http://trith.org/core/> .
+    @prefix trith: <http://trith.org/lang/> .
+    @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+    <abs> a trith:Function ;
+      rdfs:label     "abs" ;
+      trith:arity    1 ;
+      trith:code     (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
+
+All but a handful of primitive operators have a metacircular definition. See
+`etc/trith-core.ttl` for the RDF definitions of the Trith core operators.
+
 Embedding
 ---------
 
