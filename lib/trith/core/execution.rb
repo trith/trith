@@ -94,10 +94,10 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def while(quot, pred)
+    def while(quot, cond)
       with_saved_continuation(:while) do
         Kernel.loop do
-          execute(pred)
+          execute(cond)
           case pop
             when false, nil then break
             else execute(quot)
@@ -109,10 +109,10 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def until(quot, pred)
+    def until(quot, cond)
       with_saved_continuation(:until) do
         Kernel.loop do
-          execute(pred)
+          execute(cond)
           case pop
             when false, nil then execute(quot)
             else break
@@ -124,8 +124,33 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def branch
-      self # TODO
+    def branch(cond, thenop, elseop)
+      case cond
+        when false, nil then execute(elseop)
+        else execute(thenop)
+      end
+      self
+    end
+    alias_method :if, :branch
+
+    ##
+    # @return [Machine]
+    def when(cond, quot)
+      case cond
+        when false, nil then # nop
+        else execute(quot)
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def unless(cond, quot)
+      case cond
+        when false, nil then execute(quot)
+        else # nop
+      end
+      self
     end
 
     ##

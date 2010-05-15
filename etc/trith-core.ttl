@@ -32,7 +32,7 @@
   trith:code         () . # TODO
 
 <branch> a trith:Function ;
-  rdfs:label         "branch" ;
+  rdfs:label         "branch", "if" ;
   rdfs:comment       "" ;
   trith:arity        3 ;
   trith:code         () . # primitive
@@ -523,11 +523,23 @@
   trith:arity        1 ;
   trith:code         (2 <times>) .
 
+<unless> a trith:Function ;
+  rdfs:label         "unless" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         ((<nop>) <swap> <branch>) .
+
 <until> a trith:Function ;
   rdfs:label         "until" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
   trith:code         () . # primitive
+
+<when> a trith:Function ;
+  rdfs:label         "when" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         ((<nop>) <branch>) .
 
 <while> a trith:Function ;
   rdfs:label         "while" ;
