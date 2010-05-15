@@ -21,9 +21,15 @@
 
 <and> a trith:Function ;
   rdfs:label         "and" ;
-  rdfs:comment       "" ;
+  rdfs:comment       "Bitwise AND" ;
   trith:arity        2 ;
   trith:code         () . # primitive
+
+<andp> a trith:Function ;
+  rdfs:label         "andp", "and?" ;
+  rdfs:comment       "Logical AND" ;
+  trith:arity        2 ;
+  trith:code         (<swap> <dup> (<swap> <dup> (<swap> <drop>) (<drop2> <false>) <branch>) (<drop2> <false>) <branch>) .
 
 <bool> a trith:Function ;
   rdfs:label         "bool" ;
@@ -167,7 +173,7 @@
   rdfs:label         "exactp", "exact?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         (<inexactp> <falsep>) .
+  trith:code         (<inexactp> <notp>) .
 
 <false> a trith:Function ;
   rdfs:label         "false" ;
@@ -227,7 +233,7 @@
   rdfs:label         "inexactp", "inexact?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         (<exactp> <falsep>) .
+  trith:code         (<exactp> <notp>) .
 
 <intp> a trith:Function ;
   rdfs:label         "intp", "int?" ;
@@ -293,7 +299,7 @@
   rdfs:label         "ne", "!=" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         (<eq> <falsep>) .
+  trith:code         (<eq> <notp>) .
 
 <neg> a trith:Function ;
   rdfs:label         "neg" ;
@@ -345,9 +351,15 @@
 
 <not> a trith:Function ;
   rdfs:label         "not" ;
-  rdfs:comment       "" ;
+  rdfs:comment       "Bitwise NOT" ;
   trith:arity        1 ;
-  trith:code         () .
+  trith:code         (<neg> <dec>) .
+
+<notp> a trith:Function ;
+  rdfs:label         "notp, "not?" ;
+  rdfs:comment       "Logical NOT" ;
+  trith:arity        1 ;
+  trith:code         ((<false>) (<true>) <branch>) .
 
 <nth> a trith:Function ;
   rdfs:label         "nth" ;
@@ -371,7 +383,7 @@
   rdfs:label         "oddp", "odd?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         (<evenp> <falsep>) .
+  trith:code         (<evenp> <notp>) .
 
 <onep> a trith:Function ;
   rdfs:label         "onep", "one?" ;
@@ -381,9 +393,15 @@
 
 <or> a trith:Function ;
   rdfs:label         "or" ;
-  rdfs:comment       "" ;
+  rdfs:comment       "Bitwise OR" ;
   trith:arity        2 ;
   trith:code         () .
+
+<orp> a trith:Function ;
+  rdfs:label         "orp", "or?" ;
+  rdfs:comment       "Logical OR" ;
+  trith:arity        2 ;
+  trith:code         (<swap> <dup> (<swap> <drop>) (<drop>) <branch>) .
 
 <over> a trith:Function ;
   rdfs:label         "over" ;
@@ -575,7 +593,7 @@
   rdfs:label         "until" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         ((<falsep>) <concat> <while>) .
+  trith:code         ((<notp>) <concat> <while>) .
 
 <when> a trith:Function ;
   rdfs:label         "when" ;
@@ -591,9 +609,15 @@
 
 <xor> a trith:Function ;
   rdfs:label         "xor" ;
-  rdfs:comment       "" ;
+  rdfs:comment       "Bitwise XOR" ;
   trith:arity        2 ;
   trith:code         () .
+
+<xorp> a trith:Function ;
+  rdfs:label         "xorp", "xor?" ;
+  rdfs:comment       "Logical XOR" ;
+  trith:arity        2 ;
+  trith:code         (<swap> <dup> (<swap> (<drop> <false>) (<nop>) <branch>) (<drop> <dup> (<nop>) (<drop> <false>) <branch>) <branch>) .
 
 <zerop> a trith:Function ;
   rdfs:label         "zerop", "zero?" ;

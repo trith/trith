@@ -26,11 +26,7 @@ module Trith; module Core
     # @param  [Object]  obj
     # @return [Boolean]
     def bool(obj)
-      case obj
-        when nil   then false
-        when false then false
-        else true
-      end
+      !!obj
     end
 
     ##
@@ -69,6 +65,39 @@ module Trith; module Core
     end
     alias_method :true?, :truep
 
-    # TODO: logical NOT, AND, OR, and XOR
+    ##
+    # @param  [Object] a
+    # @return [Object]
+    def notp(a)
+      !a
+    end
+    alias_method :not?, :notp
+
+    ##
+    # @param  [Object] a
+    # @param  [Object] b
+    # @return [Object]
+    def andp(a, b)
+      a && b
+    end
+    alias_method :and?, :andp
+
+    ##
+    # @param  [Object] a
+    # @param  [Object] b
+    # @return [Object]
+    def orp(a, b)
+      a || b
+    end
+    alias_method :or?, :orp
+
+    ##
+    # @param  [Object] a
+    # @param  [Object] b
+    # @return [Object]
+    def xorp(a, b)
+      a ^ b
+    end
+    alias_method :xor?, :xorp
   end # module Boolean
 end; end # module Trith::Core
