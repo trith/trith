@@ -62,21 +62,11 @@ module Trith
     # @param  [Module] module
     # @return [Machine]
     def import!(mod)
-      # Include all instance methods from the module into `self`:
-      this = class << self; self; end
-      this.send(:include, mod)
-
-      # Create wrapper methods to support operators that need their
-      # arguments and result marshalled from/to the virtual machine stack:
-      mod.public_instance_methods(true).map(&:to_sym).each do |method|
-        op = mod.instance_method(method).bind(self)
-        @env[method] = this.send(:define_method, method) do |*args|
-          result = op.call(*(!args.empty? ? args : (op.arity > 0 ? pop(op.arity) : [])))
-          push(result) unless result.equal?(self)
-          return self
-        end
+      case mod
+        when Module   then import_module!(mod)
+        when Function then # TODO
+        else # TODO: error
       end
-
       self
     end
 
@@ -267,6 +257,29 @@ module Trith
         super
       rescue NoMethodError => e
         raise InvalidOperatorError.new(operator)
+      end
+    end
+
+    ##
+    # Imports operators from the given `module` into the virtual machine's
+    # current environment.
+    #
+    # @param  [Module] module
+    # @return [void]
+    def import_module!(mod)
+      # Include all instance methods from the module into `self`:
+      this = class << self; self; end
+      this.send(:include, mod)
+
+      # Create wrapper methods to support operators that need their
+      # arguments and result marshalled from/to the virtual machine stack:
+      mod.public_instance_methods(true).map(&:to_sym).each do |method|
+        op = mod.instance_method(method).bind(self)
+        @env[method] = this.send(:define_method, method) do |*args|
+          result = op.call(*(!args.empty? ? args : (op.arity > 0 ? pop(op.arity) : [])))
+          push(result) unless result.equal?(self)
+          return self
+        end
       end
     end
 
