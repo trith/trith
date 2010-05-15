@@ -20,7 +20,7 @@ module Trith; module Core
     ##
     # @return [Machine]
     def quote
-      push(shift)
+      push([shift])
       self
     end
     alias_method :'\\', :quote
