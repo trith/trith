@@ -223,8 +223,8 @@
   trith:arity        1 ;
   trith:code         (<exactp> <falsep>) .
 
-<integerp> a trith:Function ;
-  rdfs:label         "integerp", "integer?" ;
+<intp> a trith:Function ;
+  rdfs:label         "intp", "int?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .

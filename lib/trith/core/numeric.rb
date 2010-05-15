@@ -26,12 +26,12 @@ module Trith; module Core
     alias_method :number?, :numberp
 
     ##
-    # @param  [Object]  obj
+    # @param  [Object, #integer?] obj
     # @return [Boolean]
-    def integerp(obj)
-      obj.is_a?(Integer)
+    def intp(obj)
+      obj.respond_to?(:integer?) && obj.integer?
     end
-    alias_method :integer?, :integerp
+    alias_method :int?, :intp
 
     ##
     # @param  [Numeric, #exact?] n
