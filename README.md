@@ -1,8 +1,9 @@
 Trith
 =====
 
-Trith is an experimental programming language founded on the [unholy][]
-trinity of [Forth][], [Lisp][] and [RDF][] triples.
+Trith is an experimental [concatenative][concat] programming language
+founded on the [unholy][] trinity of [Forth][], [Lisp][] and [RDF][]
+triples.
 
 * <http://trith.org/>
 * <http://github.com/trith/trith>

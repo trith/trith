@@ -8,8 +8,8 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.name               = 'trith'
   gem.homepage           = 'http://trith.org/'
   gem.license            = 'Public Domain' if gem.respond_to?(:license=)
-  gem.summary            = 'An experimental programming language.'
-  gem.description        = gem.summary
+  gem.summary            = 'An experimental concatenative programming language.'
+  gem.description        = 'An experimental concatenative programming language founded on the unholy trinity of Forth, Lisp and RDF triples.'
   gem.rubyforge_project  = 'trith'
 
   gem.authors            = ['Arto Bendiken']
