@@ -11,7 +11,7 @@
   rdfs:label         "abs" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () . # TODO
+  trith:code         (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
 
 <add> a trith:Function ;
   rdfs:label         "add", "+" ;
@@ -107,13 +107,13 @@
   rdfs:label         "drop2", "2drop" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         (<drop> <drop>) .
+  trith:code         ((<drop>) <twice>) .
 
 <drop3> a trith:Function ;
   rdfs:label         "drop3", "3drop" ;
   rdfs:comment       "" ;
   trith:arity        3 ;
-  trith:code         (<drop> <drop> <drop>) .
+  trith:code         ((<drop>) <thrice>) .
 
 <dup> a trith:Function ;
   rdfs:label         "dup" ;
@@ -161,7 +161,7 @@
   rdfs:label         "exactp", "exact?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () .
+  trith:code         (<inexactp> <falsep>) .
 
 <false> a trith:Function ;
   rdfs:label         "false" ;
@@ -233,7 +233,7 @@
   rdfs:label         "last" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () .
+  trith:code         () . # TODO
 
 <le> a trith:Function ;
   rdfs:label         "le", "<=" ;
@@ -245,13 +245,13 @@
   rdfs:label         "length" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () . # TODO
+  trith:code         (0 (<rest> <swap> <inc>) (<swap> <dup> <emptyp>) <until> <drop>) .
 
 <loop> a trith:Function ;
   rdfs:label         "loop" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () . # TODO
+  trith:code         (<dup> <call> (<loop>) <call>) .
 
 <lt> a trith:Function ;
   rdfs:label         "lt", "<" ;
@@ -263,13 +263,13 @@
   rdfs:label         "max" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         () . # TODO
+  trith:code         (<dup2> <gt> (<drop>) (<swap> <drop>) <branch>) .
 
 <min> a trith:Function ;
   rdfs:label         "min" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         () . # TODO
+  trith:code         (<dup2> <lt> (<drop>) (<swap> <drop>) <branch>) .
 
 <mod> a trith:Function ;
   rdfs:label         "mod" ;
@@ -341,7 +341,7 @@
   rdfs:label         "nth" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         () . # TODO
+  trith:code         ((<rest>) <swap> <times> <first>) .
 
 <number> a trith:Function ;
   rdfs:label         "number" ;
@@ -413,13 +413,13 @@
   rdfs:label         "rest" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () .
+  trith:code         () . # primitive
 
 <reverse> a trith:Function ;
   rdfs:label         "reverse" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
-  trith:code         () .
+  trith:code         () . # TODO
 
 <rot> a trith:Function ;
   rdfs:label         "rot" ;
@@ -551,7 +551,7 @@
   rdfs:label         "until" ;
   rdfs:comment       "" ;
   trith:arity        2 ;
-  trith:code         () . # primitive
+  trith:code         ((<falsep>) <concat> <while>) .
 
 <when> a trith:Function ;
   rdfs:label         "when" ;
