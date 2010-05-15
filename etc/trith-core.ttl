@@ -415,6 +415,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<rot> a trith:Function ;
+  rdfs:label         "rot" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         () . # primitive
+
 <second> a trith:Function ;
   rdfs:label         "second" ;
   rdfs:comment       "" ;

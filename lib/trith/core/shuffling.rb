@@ -85,6 +85,12 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def rot(a, b, c)
+      push(b, c, a)
+    end
+
+    ##
+    # @return [Machine]
     def dip
       # TODO
     end
