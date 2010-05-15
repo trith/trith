@@ -17,7 +17,7 @@ programming language with a simple and concise homoiconic syntax:
 * [Stack-based][stack-oriented] means that instead of having named
   parameters, Trith functions operate on an implicit data structure called
   the _operand stack_. Trith functions can be thought of in terms of popping
-  and pushing operands from and onto this stack, or equivalently in purely
+  and pushing operands from/onto this stack, or equivalently in purely
   functional terms as unary functions that map from one stack to another.
 * [Concatenative][concatenative] means that the concatenation of any two
   Trith functions also denotes the [composition][] of those functions.
@@ -83,6 +83,42 @@ equivalent of both.
 
 To get a listing of all operators supported in the current release, enter
 the `?` metacommand in the Trith shell.
+
+Embedding
+---------
+
+### Embedding Trith in Ruby
+
+    require 'trith'
+
+    # Let's start with the obligatory  "Hello, world!" example:
+
+    Trith::Machine.execute do
+      push "Hello, world!"
+      print
+    end
+
+    # There are several equivalent ways to execute Trith code:
+
+    Trith::Machine.execute { push(6, 7).mul }            #=> 42
+    Trith::Machine.execute([6, 7]) { mul }               #=> 42
+    Trith::Machine.execute([6, 7, :mul])                 #=> 42
+
+    # Operators in Ruby blocks can be chained together:
+
+    Trith::Machine.execute { push(2).dup.dup.mul.pow }   #=> 16
+
+    # If you require more control, instantiate a machine manually:
+
+    vm = Trith::Machine.new
+    vm.define!(:square) { dup.mul }
+    vm.push(10).square.peek                              #=> 100
+
+    # You can also define operators when constructing a machine:
+
+    vm = Trith::Machine.new(data = [], code = [], {
+      :hello => proc { push("Hello, world!").print },
+    })
 
 Dependencies
 ------------

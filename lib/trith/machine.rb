@@ -42,8 +42,15 @@ module Trith
     # @yield  [machine]
     # @yieldparam [Machine] machine
     def initialize(stack = [], queue = [], env = {}, &block)
-      @stack, @queue, @env = stack, queue, env
+      @stack, @queue, @env = stack, queue, {}
       import!(Trith::Core)
+      env.each do |name, operator|
+        if operator.is_a?(Proc)
+          define!(name, &operator)
+        else
+          define!(name, operator)
+        end
+      end
       execute(&block) if block_given?
     end
 
