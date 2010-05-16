@@ -1,7 +1,5 @@
-require 'trith'
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
-include  Trith
-
-describe Compiler do
+describe Trith::Compiler do
   # TODO
 end

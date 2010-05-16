@@ -9,6 +9,7 @@ module Trith
   include RDF
 
   autoload :Cache,    'trith/cache'
+  autoload :Compiler, 'trith/compiler'
   autoload :Core,     'trith/core'
   autoload :Function, 'trith/function'
   autoload :Machine,  'trith/machine'
