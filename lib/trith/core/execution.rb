@@ -39,9 +39,9 @@ module Trith; module Core
     def call(quot)
       case quot
         when Array
-          unshift(*quot)
+          execute(quot)
         when Symbol
-          unshift(quot) # FIXME
+          execute([quot]) # FIXME
         else # TODO: error
       end
       self
@@ -52,9 +52,9 @@ module Trith; module Core
     def times(quot, count)
       case quot
         when Array
-          count.to_i.times { unshift(*quot) }
+          count.to_i.times { execute(quot) }
         when Symbol
-          count.to_i.times { unshift(quot) } # FIXME
+          count.to_i.times { execute([quot]) } # FIXME
         else # TODO: error
       end
       self
@@ -65,9 +65,9 @@ module Trith; module Core
     def twice(quot)
       case quot
         when Array
-          2.times { unshift(*quot) }
+          2.times { execute(quot) }
         when Symbol
-          2.times { unshift(quot) } # FIXME
+          2.times { execute([quot]) } # FIXME
         else # TODO: error
       end
       self
@@ -78,9 +78,9 @@ module Trith; module Core
     def thrice(quot)
       case quot
         when Array
-          3.times { unshift(*quot) }
+          3.times { execute(quot) }
         when Symbol
-          3.times { unshift(quot) } # FIXME
+          3.times { execute([quot]) } # FIXME
         else # TODO: error
       end
       self
@@ -91,10 +91,10 @@ module Trith; module Core
     def loop(quot)
       case quot
         when Array
-          unshift(quot, :loop)
-          unshift(*quot)
+          execute([quot, :loop])
+          execute(quot)
         when Symbol
-          unshift(quot, :quote, quot, :loop) # FIXME
+          execute([quot, :quote, quot, :loop]) # FIXME
         else # TODO: error
       end
       self
