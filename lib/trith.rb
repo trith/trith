@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require 'rational'
 require 'digest/sha1'
 require 'rdf'
