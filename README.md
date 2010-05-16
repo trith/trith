@@ -12,7 +12,7 @@ Description
 -----------
 
 Trith is a stack-based, concatenative, dynamically-typed functional
-programming language with a simple and concise homoiconic syntax:
+programming language with a homoiconic program representation.
 
 * [Stack-based][stack-oriented] means that instead of having named
   parameters, Trith functions operate on an implicit data structure called
@@ -129,8 +129,8 @@ Embedding
     # There are several equivalent ways to execute Trith code:
 
     Trith::Machine.execute { push(6, 7).mul }            #=> 42
-    Trith::Machine.execute([6, 7]) { mul }               #=> 42
-    Trith::Machine.execute([6, 7, :mul])                 #=> 42
+    Trith::Machine.execute [6, 7] { mul }                #=> 42
+    Trith::Machine.execute [6, 7, :mul]                  #=> 42
 
     # Operators in Ruby blocks can be chained together:
 
@@ -147,6 +147,15 @@ Embedding
     vm = Trith::Machine.new(data = [], code = [], {
       :hello => proc { push("Hello, world!").print },
     })
+
+    # Should you want to use any Trith functions from Ruby, it's easy enough
+    # to encapsulate a virtual machine inside a Ruby method:
+
+    def square(n)
+      Trith::Machine.execute [n] { dup.mul }
+    end
+
+    square(10)                                           #=> 100
 
 ### Embedding Trith in JVM-based languages
 
