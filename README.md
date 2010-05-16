@@ -27,8 +27,8 @@ programming language with a simple and concise homoiconic syntax:
   between code and data. You can manipulate and construct code at runtime as
   easily as you would manipulate any other data structure, enabling powerful
   metaprogramming facilities. Trith programs are simply nested lists
-  of operators, operands and quotations, and can be represented externally
-  either as [S-expressions][S-expression] or as [RDF][] data.
+  of operators and operands, and can be represented externally either as
+  [S-expressions][S-expression] or as [RDF][] data.
 
 Trith is inspired and influenced by [Forth][], [Lisp][] and [Scheme][] in
 general, and the concatenative languages [Joy][], [XY][], [Factor][] and
@@ -94,10 +94,10 @@ the `?` metacommand in the Trith shell.
 Linked Code
 -----------
 
-All Trith operators are identified by URIs, with the result that Trith code
-has a straightforward representation as [RDF][] data. Here's an example of
-the `abs` operand defined metacircularly using the Turtle serialization
-format for RDF data:
+All Trith operators are identified by URIs, meaning that Trith code can be
+straightforwardly represented as [Linked Data][]. Here's an example of the
+`abs` operator defined metacircularly using the Turtle serialization format
+for RDF data:
 
     @base          <http://trith.org/core/> .
     @prefix trith: <http://trith.org/lang/> .
@@ -108,8 +108,9 @@ format for RDF data:
       trith:arity    1 ;
       trith:code     (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
 
-All but a handful of primitive operators have a metacircular definition. See
-`etc/trith-core.ttl` for the RDF definitions of the Trith core operators.
+All but a handful of primitive (irreducible) operators have a metacircular
+definition. See `etc/trith-core.ttl` for the RDF definitions of the Trith
+core operators.
 
 Embedding
 ---------
@@ -147,6 +148,11 @@ Embedding
       :hello => proc { push("Hello, world!").print },
     })
 
+### Embedding Trith in JVM-based languages
+
+The [JVM][] runtime for Trith is a work in progress. See `src/java` for the
+runtime's source code and current status.
+
 Dependencies
 ------------
 
@@ -175,6 +181,16 @@ Once Trith is installed, you will have four new programs available:
 
 Note that as of the current release, only the first two do anything much as
 yet.
+
+Environment
+-----------
+
+The following are the default settings for environment variables that let
+you customize how Trith works:
+
+    $ export TRITH_HOME=~/.trith
+    $ export TRITH_CACHE=$TRITH_HOME/cache
+    $ export TRITH_TERM=$TERM
 
 Download
 --------
@@ -214,5 +230,6 @@ information, see <http://unlicense.org/> or the accompanying UNLICENSE file.
 [Joy]:            http://en.wikipedia.org/wiki/Joy_(programming_language)
 [Cat]:            http://en.wikipedia.org/wiki/Cat_(programming_language)
 [XY]:             http://www.nsl.com/k/xy/xy.htm
+[Linked Data]:    http://linkeddata.org/
 [lispers.org]:    http://lispers.org/
 [concat.org]:     http://concatenative.org/wiki/view/Concatenative%20language
