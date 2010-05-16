@@ -6,6 +6,8 @@ require 'rdf/nquads'
 require 'sxp'
 
 module Trith
+  include RDF
+
   autoload :Cache,    'trith/cache'
   autoload :Core,     'trith/core'
   autoload :Function, 'trith/function'
