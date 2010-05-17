@@ -30,9 +30,9 @@ programming language with a homoiconic program representation.
   of operators and operands, and can be represented externally either as
   [S-expressions][S-expression] or as [RDF][] data.
 
-Trith is inspired and influenced by [Forth][], [Lisp][] and [Scheme][] in
-general, and the concatenative languages [Joy][], [XY][], [Factor][] and
-[Cat][] in particular.
+Trith is inspired and influenced by experience with [Forth][], [Lisp][] and
+[Scheme][] in general, and the concatenative languages [Joy][], [XY][],
+[Factor][] and [Cat][] in particular.
 
 Introduction
 ------------
@@ -47,11 +47,12 @@ You can use the Trith shell `3sh` to explore Trith interactively:
     >> "Hello, world!" print
     Hello, world!
 
-For example, here's how you would verify that Trith gives the correct answer
-to the ultimate question of life, the universe, and everything:
+For example, here's how you would start with two prime numbers and end up
+with the correct answer to the ultimate question of life, the universe, and
+everything:
 
     $ 3sh
-    >> 3 dup + 7 *
+    >> 3 7 swap dup + *
     => [42] : []
 
 In the above `3sh` examples, `>>` indicates lines that you type, and `=>`
@@ -60,33 +61,36 @@ the shell will show you the current state of the Trith virtual machine's
 data stack and code queue.
 
 Thus in our previous example, the `[42]` on the left-hand side shows that
-the machine stack contains a single operand, the number 42. The `[]` on the
-right-hand side shows that the code queue is empty, which is generally the
-case after all input has been successfully evaluated.
+the machine's stack contains a single operand, the number 42. The `[]` on
+the right-hand side shows that the machine's code queue is empty, which is
+generally the case after all input has been successfully evaluated.
 
 Let's run through the above example one more time using the `--debug` option
-to `3sh`, which enables the tracing of each execution step in the virtual
-machine:
+to `3sh`, which enables the tracing of each queue reduction step in the
+virtual machine:
 
     $ 3sh --debug
-    >> 3 dup + 7 *
-    ..    [] : [3 dup + 7 *]
-    ..   [3] : [dup + 7 *]
-    .. [3 3] : [+ 7 *]
-    ..   [6] : [7 *]
-    .. [6 7] : [*]
-    =>  [42] : []
+    >> 3 7 swap dup + *
+    ..      [] : [3 7 swap dup + *]
+    ..     [3] : [7 swap dup + *]
+    ..   [3 7] : [swap dup + *]
+    ..   [7 3] : [dup + *]
+    .. [7 3 3] : [+ *]
+    ..   [7 6] : [*]
+    =>    [42] : []
 
-As you can see, when input operands such as numbers are encountered, they
-are pushed onto the data stack, which grows from left to right. When an
-operator such as the multiplication operator `*` is encountered and
-executed, it pops operands from the stack and then pushes its result(s) back
-onto the stack.
+As you can see, the virtual machine starts execution with an empty operand
+stack on the left-hand side and with all input placed onto the operator
+queue on the right-hand side. When input operands such as numbers are
+encountered on the queue, they are simply pushed onto the stack, which grows
+from left to right. When an operator such as the multiplication operator
+`*` is encountered on the queue, it is executed. Operators pop operands
+from the stack and then push their result(s) back onto the stack.
 
 When fooling around in the Trith shell, two useful operators to know are
-`clear`, which clears the data stack, and `halt`, which clears the code
-queue (thus halting execution). You can also use `reset` which does both in
-one step, returning you to a guaranteed clean slate.
+`clear`, which clears the stack, and `halt`, which clears the queue (thus
+halting execution). You can also use `reset` which does both in one step,
+returning you to a guaranteed clean slate.
 
 To get a listing of all operators supported in the current release, enter
 the `?` metacommand in the Trith shell.
@@ -105,12 +109,13 @@ for RDF data:
 
     <abs> a trith:Function ;
       rdfs:label     "abs" ;
+      rdfs:comment   "Returns the absolute value of a number."@en ;
       trith:arity    1 ;
       trith:code     (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
 
 All but a handful of primitive (irreducible) operators have a metacircular
-definition. See `etc/trith-core.ttl` for the RDF definitions of the Trith
-core operators.
+definition. See `etc/trith-core.ttl` for the RDF definitions of Trith core
+operators.
 
 Embedding
 ---------
