@@ -272,6 +272,12 @@
   trith:arity        2 ;
   trith:code         (<cmp> -1 <eq>) .
 
+<map> a trith:Function ;
+  rdfs:label         "map" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # TODO
+
 <max> a trith:Function ;
   rdfs:label         "max" ;
   rdfs:comment       "" ;

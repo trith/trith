@@ -34,7 +34,8 @@ module Trith; module Core
             obj.each
           when obj.respond_to?(:to_enum)
             obj.to_enum
-          else # TODO: error
+          else
+            raise Machine::InvalidOperandError.new(obj, :seq)
         end
       end
     end
@@ -76,7 +77,8 @@ module Trith; module Core
           seq.size.zero?
         when seq.respond_to?(:each)
           seq.each.to_a.empty? # TODO: optimize
-        else # TODO: error
+        else
+          raise Machine::InvalidOperandError.new(seq, :emptyp)
       end
     end
     alias_method :empty?, :emptyp
@@ -92,7 +94,8 @@ module Trith; module Core
           seq.size
         when seq.respond_to?(:each)
           seq.each.to_a.size # TODO: optimize
-        else # TODO: error
+        else
+          raise Machine::InvalidOperandError.new(seq, :length)
       end
     end
 
@@ -108,7 +111,8 @@ module Trith; module Core
           seq[1..-1]
         when seq.respond_to?(:each)
           seq.each.to_a[1..-1] # TODO: optimize
-        else # TODO: error
+        else
+          raise Machine::InvalidOperandError.new(seq, :rest)
       end
     end
 
@@ -231,7 +235,8 @@ module Trith; module Core
             seq[n.to_i]
           when seq.respond_to?(:each)
             seq.each.to_a[n.to_i] # TODO: optimize
-          else # TODO: error
+          else
+            raise Machine::InvalidOperandError.new(seq, :nth)
         end
       end
     end
@@ -250,7 +255,8 @@ module Trith; module Core
             seq[-1]
           when seq.respond_to?(:each)
             seq.each.to_a.last # TODO: optimize
-          else # TODO: error
+          else
+            raise Machine::InvalidOperandError.new(seq, :last)
         end
       end
     end
@@ -267,7 +273,8 @@ module Trith; module Core
             seq.last
           when seq.respond_to?(:each)
             seq.each.to_a.reverse # TODO: optimize
-          else # TODO: error
+          else
+            raise Machine::InvalidOperandError.new(seq, :reverse)
         end
       end
     end
@@ -281,8 +288,27 @@ module Trith; module Core
         when seq1.respond_to?(:concat)
           seq1.dup.concat(seq2)
         when seq1.respond_to?(:each)
-          p seq1.each.to_a.concat(seq2.each.to_a) # TODO: optimize
-        else # TODO: error
+          seq1.each.to_a.concat(seq2.each.to_a) # TODO: optimize
+        else
+          raise Machine::InvalidOperandError.new(seq1, :concat)
+      end
+    end
+
+    ##
+    # @param  [#map, #each] seq
+    # @param  [Array]       quot
+    # @return [Enumerable]
+    def map(seq, quot)
+      seq = case seq
+        when String then seq.each_char
+        else case
+          when seq.respond_to?(:map)  then seq
+          when seq.respond_to?(:each) then seq.each
+          else raise Machine::InvalidOperandError.new(seq, :map)
+        end
+      end
+      with_saved_continuation(:map) do
+        push(seq.map { |elem| push(elem).execute(quot).pop })
       end
     end
   end # module Sequence

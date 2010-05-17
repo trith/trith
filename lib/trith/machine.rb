@@ -351,7 +351,7 @@ module Trith
 
       def initialize(operator)
         @operator = operator
-        super("invalid operator `#{operator}'")
+        super("invalid operator: #{operator}")
       end
     end
 
@@ -363,7 +363,7 @@ module Trith
 
       def initialize(operand, operator = nil)
         @operand, @operator = operand, operator
-        super("invalid operand #{operand.inspect}")
+        super("invalid operand: #{operand.inspect}")
       end
     end
 
