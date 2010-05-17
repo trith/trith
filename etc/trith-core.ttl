@@ -146,6 +146,12 @@
   trith:arity        3 ;
   trith:code         () .
 
+<each> a trith:Function ;
+  rdfs:label         "each" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # TODO
+
 <eighth> a trith:Function ;
   rdfs:label         "eighth" ;
   rdfs:comment       "" ;

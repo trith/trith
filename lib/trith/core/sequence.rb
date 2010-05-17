@@ -295,6 +295,23 @@ module Trith; module Core
     end
 
     ##
+    # @param  [#each] seq
+    # @param  [Array] quot
+    # @return [Enumerable]
+    def each(seq, quot)
+      seq = case seq
+        when String then seq.each_char
+        else case
+          when seq.respond_to?(:each) then seq.each
+          else raise Machine::InvalidOperandError.new(seq, :each)
+        end
+      end
+      with_saved_continuation(:each) do
+        seq.each { |elem| push(elem).execute(quot) }
+      end
+    end
+
+    ##
     # @param  [#map, #each] seq
     # @param  [Array]       quot
     # @return [Enumerable]
