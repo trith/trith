@@ -248,6 +248,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<iota> a trith:Function ;
+  rdfs:label         "iota" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # TODO
+
 <last> a trith:Function ;
   rdfs:label         "last" ;
   rdfs:comment       "" ;

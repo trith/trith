@@ -41,6 +41,14 @@ module Trith; module Core
     end
 
     ##
+    # @param  [Integer, #to_i] n
+    # @return [Enumerable]
+    def iota(n)
+      # TODO: should support negative ranges as well.
+      (0...(n.to_i))
+    end
+
+    ##
     # @overload cons(obj, seq)
     #   @param  [#to_s]        obj
     #   @param  [String]       seq
@@ -297,7 +305,7 @@ module Trith; module Core
     ##
     # @param  [#each] seq
     # @param  [Array] quot
-    # @return [Enumerable]
+    # @return [Machine]
     def each(seq, quot)
       seq = case seq
         when String then seq.each_char
@@ -314,7 +322,7 @@ module Trith; module Core
     ##
     # @param  [#map, #each] seq
     # @param  [Array]       quot
-    # @return [Enumerable]
+    # @return [Machine]
     def map(seq, quot)
       seq = case seq
         when String then seq.each_char
