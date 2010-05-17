@@ -2,6 +2,8 @@ module Trith; module Shell
   ##
   # Supporting code for the `3sh` shell's input line history.
   module History
+    require 'readline' unless defined?(Readline)
+
     FILE = File.join(ENV['TRITH_HOME'] || '~', '.trith', '3sh.log').freeze unless const_defined?(:FILE)
     MODE = 0640
 
