@@ -536,6 +536,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<stack> a trith:Function, trith:Primitive ;
+  rdfs:label         "stack" ;
+  rdfs:comment       "" ;
+  trith:arity        0 ;
+  trith:code         () .
+
 <sub> a trith:Function, trith:Primitive ;
   rdfs:label         "sub", "-" ;
   rdfs:comment       "" ;
@@ -607,6 +613,12 @@
   rdfs:comment       "" ;
   trith:arity        2 ;
   trith:code         ((<nop>) <swap> <branch>) .
+
+<unstack> a trith:Function, trith:Primitive ;
+  rdfs:label         "unstack" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () .
 
 <until> a trith:Function ;
   rdfs:label         "until" ;

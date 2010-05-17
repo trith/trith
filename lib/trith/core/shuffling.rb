@@ -5,7 +5,7 @@ module Trith; module Core
     ##
     # @return [Machine]
     def clear
-      stack.clear
+      @stack.clear
       self
     end
 

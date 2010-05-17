@@ -13,15 +13,15 @@ module Trith; module Core
     ##
     # @return [Machine]
     def halt
-      queue.clear
+      @queue.clear
       self
     end
 
     ##
     # @return [Machine]
     def reset
-      stack.clear
-      queue.clear
+      @stack.clear
+      @queue.clear
       self
     end
 
@@ -29,7 +29,6 @@ module Trith; module Core
     # @return [Machine]
     def quote
       push([shift])
-      self
     end
     alias_method :'\\', :quote
     alias_method :"'", :quote
@@ -43,6 +42,29 @@ module Trith; module Core
         when Symbol
           execute([quot]) # FIXME
         else # TODO: error
+      end
+      self
+    end
+
+    ##
+    # @return [Machine]
+    def stack_
+      @stack = [@stack]
+      self
+    end
+
+    ##
+    # @param  [#to_a, #each]
+    # @return [Machine]
+    def unstack(seq)
+      @stack = case seq
+        when String then seq.each_char.to_a
+        when Array  then seq
+        else case
+          when seq.respond_to?(:to_a) then seq.to_a
+          when seq.respond_to?(:each) then seq.each.to_a
+          else raise Machine::InvalidOperandError.new(seq, :unstack)
+        end
       end
       self
     end

@@ -59,7 +59,7 @@ module Trith
     #
     # @return [String]
     def inspect
-      sprintf("#<%s:%#0x(%s : %s)>", self.class.name, __id__, stack.inspect, queue.inspect)
+      sprintf("#<%s:%#0x(%s : %s)>", self.class.name, __id__, @stack.inspect, @queue.inspect)
     end
 
     ##
@@ -97,7 +97,7 @@ module Trith
     #
     # @return [Array]
     def to_a
-      (stack + queue).to_a
+      (@stack + @queue).to_a
     end
 
     ##
@@ -107,7 +107,7 @@ module Trith
     #
     # @return [Object]
     def peek
-      stack.last
+      @stack.last
     end
 
     ##
@@ -126,10 +126,10 @@ module Trith
     # @return [Object]
     # @raise  [StackUnderflowError]
     def pop(n = nil)
-      if stack.size < (n || 1)
+      if @stack.size < (n || 1)
         raise StackUnderflowError.new
       else
-        n ? stack.pop(n) : stack.pop
+        n ? @stack.pop(n) : @stack.pop
       end
     end
 
@@ -148,7 +148,7 @@ module Trith
     #
     # @return [Machine]
     def push(*ops)
-      stack.push(*(ops.empty? ? [shift] : ops))
+      @stack.push(*(ops.empty? ? [shift] : ops))
       self
     end
 
@@ -167,10 +167,10 @@ module Trith
     #
     # @return [Object]
     def shift(n = nil)
-      if queue.size < (n || 1)
+      if @queue.size < (n || 1)
         throw(:halt) # caught in `#execute`
       else
-        n ? queue.shift(n) : queue.shift
+        n ? @queue.shift(n) : @queue.shift
       end
     end
 
@@ -188,7 +188,7 @@ module Trith
     #
     # @return [Machine]
     def unshift(*ops)
-      queue.unshift(*(ops.empty? ? [pop] : ops))
+      @queue.unshift(*(ops.empty? ? [pop] : ops))
       self
     end
 
@@ -210,11 +210,11 @@ module Trith
     #
     # @return [Machine]
     def execute(code = [], &block)
-      queue.unshift(*code) unless code.empty?
+      @queue.unshift(*code) unless code.empty?
 
       catch(:halt) do # thrown in `#shift`
         Kernel.loop do
-          execute_hook.call if execute_hook && !queue.empty?
+          execute_hook.call if execute_hook && !@queue.empty?
 
           op = shift
           case
@@ -297,10 +297,15 @@ module Trith
       # arguments and result marshalled from/to the virtual machine stack:
       mod.public_instance_methods(true).map(&:to_sym).each do |method|
         op = mod.instance_method(method).bind(self)
-        @env[method] = this.send(:define_method, method) do |*args|
-          result = op.call(*(!args.empty? ? args : (op.arity > 0 ? pop(op.arity) : [])))
-          push(result) unless result.equal?(self)
-          return self
+        case method
+          when :stack_ # FIXME
+            @env[:stack] = op
+          else
+            @env[method] = this.send(:define_method, method) do |*args|
+              result = op.call(*(!args.empty? ? args : (op.arity > 0 ? pop(op.arity) : [])))
+              push(result) unless result.equal?(self)
+              return self
+            end
         end
       end
     end
@@ -318,7 +323,7 @@ module Trith
         when 1 then block.call(cc)
         else block.call
       end
-      queue.unshift(*cc)
+      @queue.unshift(*cc)
       self
     end
 
@@ -339,8 +344,8 @@ module Trith
     #
     # @return [Array]
     def capture_continuation(full = false)
-      continuation = queue.dup
-      queue.clear
+      continuation = @queue.dup
+      @queue.clear
       continuation
     end
 
