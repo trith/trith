@@ -28,7 +28,7 @@ programming language with a homoiconic program representation.
   easily as you would manipulate any other data structure, enabling powerful
   metaprogramming facilities. Trith programs are simply nested lists
   of operators and operands, and can be represented externally either as
-  [S-expressions][S-expression] or as [RDF][] data.
+  [S-expressions][S-expression] or as [RDF][] triples.
 
 Trith is inspired and influenced by experience with [Forth][], [Lisp][] and
 [Scheme][] in general, and the concatenative languages [Joy][], [XY][],
@@ -113,9 +113,69 @@ for RDF data:
       trith:arity    1 ;
       trith:code     (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
 
-All but a handful of primitive (irreducible) operators have a metacircular
+This function description comprises a total of 21 triples. The entire Trith
+core library currently weighs in at about a kilotriple (1,000 triples), and
+all but a handful of primitive (irreducible) operators have a metacircular
 definition. See `etc/trith-core.ttl` for the RDF definitions of Trith core
 operators.
+
+Reference
+---------
+
+### Sequences
+
+Trith has a rich set of sequence operators that will be instantly familiar
+to programmers coming from functional programming languages such as Scheme,
+Clojure or Haskell:
+
+    >> 10 iota
+    => [[0 1 2 3 4 5 6 7 8 9]] : []
+    >> dup seq? .
+    true
+    >> dup empty? .
+    false
+    >> dup length .
+    10
+    >> [dup mul] map
+    => [[0 1 4 9 16 25 36 49 64 81]] : []
+    >> dup first .
+    0
+    >> dup fifth .
+    16
+    >> dup 7 nth .
+    49
+    >> dup last .
+    81
+    >> dup 0 [+] reduce .
+    285
+    >> rest
+    => [[1 4 9 16 25 36 49 64 81]] : []
+    >> dup 1 [*] reduce .
+    131681894400
+    >> reverse
+    => [[81 64 49 36 25 16 9 4 1]] : []
+
+### Strings
+
+Strings are simply sequences of characters (Unicode code points), meaning
+that you can make use of any of the normal sequence operators on strings as
+well:
+
+    >> : hello "Hello," " world!" concat ;
+    >> hello seq? .
+    true
+    >> hello text? .
+    true
+    >> hello empty? .
+    false
+    >> hello length .
+    13
+    >> hello first .
+    H
+    >> hello rest .
+    ello, world!
+    >> hello reverse .
+    !dlrow ,olleH
 
 Embedding
 ---------
@@ -217,6 +277,11 @@ Alternatively, you can download the latest development version as a tarball
 as follows:
 
     $ wget http://github.com/trith/trith/tarball/master
+
+Mailing List
+------------
+
+* <http://groups.google.com/group/trith>
 
 Authors
 -------
