@@ -7,6 +7,8 @@ module Trith; module Core
   # @see http://ruby-doc.org/core-1.9/classes/Rational.html
   # @see http://ruby-doc.org/core-1.9/classes/Float.html
   module Numeric
+    INF = (1.0 / 0.0).freeze
+
     ##
     # @param  [Object]  obj
     # @return [Numeric]
@@ -66,6 +68,24 @@ module Trith; module Core
       end
     end
     alias_method :inexact?, :inexactp
+
+    ##
+    # @return [Numeric]
+    def inf
+      INF
+    end
+
+    ##
+    # @param  [Numeric, #infinite?] n
+    # @return [Boolean]
+    def infp(n)
+      case
+        when n.respond_to?(:infinite?)
+          !!n.infinite?
+        else false
+      end
+    end
+    alias_method :inf?, :infp
 
     ##
     # @param  [Numeric, #zero?] n

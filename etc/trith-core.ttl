@@ -260,6 +260,18 @@
   trith:arity        1 ;
   trith:code         (<exactp> <notp>) .
 
+<inf> a trith:Function ;
+  rdfs:label         "inf" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (1.0 0.0 <div>) .
+
+<infp> a trith:Function ;
+  rdfs:label         "infp", "inf?" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (<abs> <inf> <eq>) .
+
 <intp> a trith:Function, trith:Primitive ;
   rdfs:label         "intp", "int?" ;
   rdfs:comment       "" ;
