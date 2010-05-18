@@ -336,5 +336,24 @@ module Trith; module Core
         push(seq.map { |elem| push(elem).execute(quot).pop })
       end
     end
+
+    ##
+    # @param  [#reduce, #each] seq
+    # @param  [Object]         identity
+    # @param  [Array]          quot
+    # @return [Machine]
+    def reduce(seq, identity, quot)
+      seq = case seq
+        when String then seq.each_char
+        else case
+          when seq.respond_to?(:reduce) then seq
+          when seq.respond_to?(:each)   then seq.each
+          else raise Machine::InvalidOperandError.new(seq, :reduce)
+        end
+      end
+      with_saved_continuation(:reduce) do
+        push(seq.reduce(identity) { |prev, elem| push(prev, elem).execute(quot).pop })
+      end
+    end
   end # module Sequence
 end; end # module Trith::Core

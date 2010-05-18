@@ -458,6 +458,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<reduce> a trith:Function ;
+  rdfs:label         "reduce" ;
+  rdfs:comment       "" ;
+  trith:arity        3 ;
+  trith:code         () . # TODO
+
 <rem> a trith:Function ;
   rdfs:label         "rem" ;
   rdfs:comment       "" ;
