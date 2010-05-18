@@ -114,5 +114,19 @@ module Trith; module Core
       n.even?
     end
     alias_method :even?, :evenp
+
+    ##
+    # @param  [Numeric, #ceil] n
+    # @return [Integer]
+    def ceil(n)
+      n.ceil
+    end
+
+    ##
+    # @param  [Numeric, #floor] n
+    # @return [Integer]
+    def floor(n)
+      n.floor
+    end
   end # module Numeric
 end; end # module Trith::Core

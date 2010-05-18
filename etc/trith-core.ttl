@@ -56,6 +56,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<ceil> a trith:Function ;
+  rdfs:label         "ceil" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # TODO
+
 <char> a trith:Function, trith:Primitive ;
   rdfs:label         "char" ;
   rdfs:comment       "" ;
@@ -205,6 +211,12 @@
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .
+
+<floor> a trith:Function ;
+  rdfs:label         "floor" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # TODO
 
 <fourth> a trith:Function ;
   rdfs:label         "fourth" ;
