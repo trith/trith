@@ -212,6 +212,12 @@
   trith:arity        1 ;
   trith:code         () .
 
+<flatten> a trith:Function ;
+  rdfs:label         "flatten" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         () . # TODO
+
 <floor> a trith:Function ;
   rdfs:label         "floor" ;
   rdfs:comment       "" ;

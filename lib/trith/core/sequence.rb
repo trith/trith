@@ -278,11 +278,29 @@ module Trith; module Core
         when Array  then seq.reverse
         else case
           when seq.respond_to?(:reverse)
-            seq.last
+            seq.reverse
           when seq.respond_to?(:each)
             seq.each.to_a.reverse # TODO: optimize
           else
             raise Machine::InvalidOperandError.new(seq, :reverse)
+        end
+      end
+    end
+
+    ##
+    # @param  [#flatten, #each] seq
+    # @return [Enumerable]
+    def flatten(seq)
+      case seq
+        when String then seq
+        when Array  then seq.flatten
+        else case
+          when seq.respond_to?(:flatten)
+            seq.flatten
+          when seq.respond_to?(:each)
+            seq.each.to_a.flatten # TODO: optimize
+          else
+            raise Machine::InvalidOperandError.new(seq, :flatten)
         end
       end
     end
