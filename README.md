@@ -1,5 +1,5 @@
-Trith
-=====
+Trith: Recombinant Programming
+==============================
 
 Trith is an experimental [concatenative][concat.org] programming language
 founded on the [unholy][lispers.org] trinity of [Forth][], [Lisp][] and
