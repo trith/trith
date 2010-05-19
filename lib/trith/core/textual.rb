@@ -5,55 +5,70 @@ module Trith; module Core
   # @see http://ruby-doc.org/core-1.9/classes/String.html
   module Textual
     ##
-    # @param  [Object]  obj
-    # @return [String]
-    def char(obj)
-      case obj # FIXME
-        when String then obj.chr
-        else obj.to_s.chr
+    # Textual predicates.
+    module Predicates
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def charp(obj)
+        case obj
+          when String then obj.size == 1
+          else false
+        end
       end
+      alias_method :char?, :charp
+
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def textp(obj)
+        case obj
+          when String then true
+          else false
+        end
+      end
+      alias_method :text?, :textp
     end
 
     ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def charp(obj)
-      case obj
-        when String then obj.size == 1
-        else false
+    # Textual constructors.
+    module Constructors
+      ##
+      # @param  [Object]  obj
+      # @return [String]
+      def char(obj)
+        case obj # FIXME
+          when String then obj.chr
+          else obj.to_s.chr
+        end
       end
-    end
-    alias_method :char?, :charp
+
+      ##
+      # @param  [Object]  obj
+      # @return [String]
+      def text(obj)
+        case obj
+          when String then obj
+          else obj.to_s # FIXME
+        end
+      end
+    end # module Constructors
 
     ##
-    # @param  [Object]  obj
-    # @return [String]
-    def text(obj)
-      case obj
-        when String then obj
-        else obj.to_s # FIXME
+    # Textual operators.
+    module Operators
+      ##
+      # @param  [String]  str
+      # @return [Integer]
+      def size(str)
+        case str
+          when String then str.bytesize
+          else -1 # TODO: error
+        end
       end
-    end
+    end # module Operators
 
-    ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def textp(obj)
-      case obj
-        when String then true
-        else false
-      end
-    end
-    alias_method :text?, :textp
-
-    ##
-    # @param  [String]  str
-    # @return [Integer]
-    def size(str)
-      case str
-        when String then str.bytesize
-        else -1 # TODO: error
-      end
-    end
+    # Include all submodule methods directly into Trith::Core::Textual:
+    constants.each { |mod| include(const_get(mod)) }
   end # module Textual
 end; end # module Trith::Core

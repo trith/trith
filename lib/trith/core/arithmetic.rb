@@ -1,6 +1,8 @@
 module Trith; module Core
   ##
   # Arithmetic operators.
+  #
+  # @see http://www.math.bas.bg/bantchev/articles/divmod.pdf
   module Arithmetic
     ##
     # @param  [Numeric] n
@@ -81,6 +83,7 @@ module Trith; module Core
     def mod(a, b)
       a.modulo(b)
     end
+    #alias_method :'%', :mod
 
     ##
     # @param  [Numeric] a
@@ -89,5 +92,6 @@ module Trith; module Core
     def pow(a, b)
       a ** b
     end
+    #alias_method :'^', :pow
   end # module Arithmetic
 end; end # module Trith::Core

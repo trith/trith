@@ -9,95 +9,106 @@ module Trith; module Core
   # @see http://en.wikipedia.org/wiki/Boolean_data_type
   module Boolean
     ##
-    # @return [NilClass]
-    def nil
-      nil
-    end
+    # Boolean predicates.
+    module Predicates
+      ##
+      # @param  [Object, #nil?] obj
+      # @return [Boolean]
+      def nilp(obj)
+        obj.nil?
+      end
+      alias_method :nil?, :nilp
+
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def boolp(obj)
+        obj.equal?(false) || obj.equal?(true)
+      end
+      alias_method :bool?, :boolp
+
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def falsep(obj)
+        obj.equal?(false)
+      end
+      alias_method :false?, :falsep
+
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def truep(obj)
+        obj.equal?(true)
+      end
+      alias_method :true?, :truep
+
+      ##
+      # @param  [Object] a
+      # @return [Object]
+      def notp(a)
+        !a
+      end
+      alias_method :not?, :notp
+
+      ##
+      # @param  [Object] a
+      # @param  [Object] b
+      # @return [Object]
+      def andp(a, b)
+        a && b
+      end
+      alias_method :and?, :andp
+
+      ##
+      # @param  [Object] a
+      # @param  [Object] b
+      # @return [Object]
+      def orp(a, b)
+        a || b
+      end
+      alias_method :or?, :orp
+
+      ##
+      # @param  [Object] a
+      # @param  [Object] b
+      # @return [Object]
+      def xorp(a, b)
+        a ^ b
+      end
+      alias_method :xor?, :xorp
+    end # module Predicates
 
     ##
-    # @param  [Object, #nil?] obj
-    # @return [Boolean]
-    def nilp(obj)
-      obj.nil?
-    end
-    alias_method :nil?, :nilp
+    # Boolean constructors.
+    module Constructors
+      ##
+      # @return [NilClass]
+      def nil
+        nil
+      end
 
-    ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def bool(obj)
-      !!obj
-    end
+      ##
+      # @param  [Object]  obj
+      # @return [Boolean]
+      def bool(obj)
+        !!obj
+      end
 
-    ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def boolp(obj)
-      obj.equal?(false) || obj.equal?(true)
-    end
-    alias_method :bool?, :boolp
+      ##
+      # @return [FalseClass]
+      def false
+        false
+      end
 
-    ##
-    # @return [FalseClass]
-    def false
-      false
-    end
+      ##
+      # @return [TrueClass]
+      def true
+        true
+      end
+    end # module Constructors
 
-    ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def falsep(obj)
-      obj.equal?(false)
-    end
-    alias_method :false?, :falsep
-
-    ##
-    # @return [TrueClass]
-    def true
-      true
-    end
-
-    ##
-    # @param  [Object]  obj
-    # @return [Boolean]
-    def truep(obj)
-      obj.equal?(true)
-    end
-    alias_method :true?, :truep
-
-    ##
-    # @param  [Object] a
-    # @return [Object]
-    def notp(a)
-      !a
-    end
-    alias_method :not?, :notp
-
-    ##
-    # @param  [Object] a
-    # @param  [Object] b
-    # @return [Object]
-    def andp(a, b)
-      a && b
-    end
-    alias_method :and?, :andp
-
-    ##
-    # @param  [Object] a
-    # @param  [Object] b
-    # @return [Object]
-    def orp(a, b)
-      a || b
-    end
-    alias_method :or?, :orp
-
-    ##
-    # @param  [Object] a
-    # @param  [Object] b
-    # @return [Object]
-    def xorp(a, b)
-      a ^ b
-    end
-    alias_method :xor?, :xorp
+    # Include all submodule methods directly into Trith::Core::Boolean:
+    constants.each { |mod| include(const_get(mod)) }
   end # module Boolean
 end; end # module Trith::Core
