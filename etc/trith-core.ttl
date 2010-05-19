@@ -65,6 +65,7 @@
 <chr> a trith:Function, trith:Primitive ;
   rdfs:label         "chr" ;
   rdfs:comment       "" ;
+  rdfs:seeAlso       <ord> ;
   trith:arity        1 ;
   trith:code         () .
 
@@ -456,6 +457,13 @@
   rdfs:label         "or" ;
   rdfs:comment       "Bitwise OR" ;
   trith:arity        2 ;
+  trith:code         () .
+
+<ord> a trith:Function, trith:Primitive ;
+  rdfs:label         "ord" ;
+  rdfs:comment       "" ;
+  rdfs:seeAlso       <chr> ;
+  trith:arity        1 ;
   trith:code         () .
 
 <orp> a trith:Function ;

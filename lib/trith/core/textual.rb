@@ -59,6 +59,17 @@ module Trith; module Core
     # Textual operators.
     module Operators
       ##
+      # @param  [Integer, String] obj
+      # @return [Integer]
+      def ord(obj)
+        case obj
+          when Integer then obj
+          when String  then obj.ord
+          else raise Machine::InvalidOperandError.new(obj, :ord)
+        end
+      end
+
+      ##
       # @param  [String]  str
       # @return [Integer]
       def size(str)
