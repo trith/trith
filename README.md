@@ -114,8 +114,8 @@ for RDF data:
       trith:code     (<dup> 0 <lt> (<neg>) (<nop>) <branch>) .
 
 This function description comprises a total of 21 triples. The entire Trith
-core library currently weighs in at about a kilotriple (1,000 triples), and
-all but a handful of primitive (irreducible) operators have a metacircular
+core library currently weighs in at about a kilotriple (1,000 triples), with
+all but a handful of primitive (irreducible) operators having a metacircular
 definition. See `etc/trith-core.ttl` for the RDF definitions of Trith core
 operators.
 
@@ -146,11 +146,11 @@ Clojure or Haskell:
     49
     >> dup last .
     81
-    >> dup 0 [+] reduce .
+    >> dup 0 [+] foldl .
     285
     >> rest
     => [[1 4 9 16 25 36 49 64 81]] : []
-    >> dup 1 [*] reduce .
+    >> dup 1 [*] foldl .
     131681894400
     >> reverse
     => [[81 64 49 36 25 16 9 4 1]] : []

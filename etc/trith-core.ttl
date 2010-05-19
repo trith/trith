@@ -500,8 +500,8 @@
   trith:arity        1 ;
   trith:code         () .
 
-<reduce> a trith:Function ;
-  rdfs:label         "reduce" ;
+<foldl> a trith:Function ;
+  rdfs:label         "foldl" ;
   rdfs:comment       "" ;
   trith:arity        3 ;
   trith:code         () . # TODO

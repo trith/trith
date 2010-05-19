@@ -386,16 +386,16 @@ module Trith; module Core
       # @param  [Object]         identity
       # @param  [Array]          quot
       # @return [Machine]
-      def reduce(seq, identity, quot)
+      def foldl(seq, identity, quot)
         seq = case seq
           when String then seq.each_char
           else case
             when seq.respond_to?(:reduce) then seq
             when seq.respond_to?(:each)   then seq.each
-            else raise Machine::InvalidOperandError.new(seq, :reduce)
+            else raise Machine::InvalidOperandError.new(seq, :foldl)
           end
         end
-        with_saved_continuation(:reduce) do
+        with_saved_continuation(:foldl) do
           push(seq.reduce(identity) { |prev, elem| push(prev, elem).execute(quot).pop })
         end
       end
