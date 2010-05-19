@@ -62,14 +62,14 @@
   trith:arity        1 ;
   trith:code         () . # TODO
 
-<char> a trith:Function, trith:Primitive ;
-  rdfs:label         "char" ;
+<chr> a trith:Function, trith:Primitive ;
+  rdfs:label         "chr" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .
 
-<charp> a trith:Function, trith:Primitive ;
-  rdfs:label         "charp", "char?" ;
+<chrp> a trith:Function, trith:Primitive ;
+  rdfs:label         "chrp", "chr?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .

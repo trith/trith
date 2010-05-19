@@ -10,13 +10,13 @@ module Trith; module Core
       ##
       # @param  [Object]  obj
       # @return [Boolean]
-      def charp(obj)
+      def chrp(obj)
         case obj
           when String then obj.size == 1
           else false
         end
       end
-      alias_method :char?, :charp
+      alias_method :chr?, :chrp
 
       ##
       # @param  [Object]  obj
@@ -34,12 +34,13 @@ module Trith; module Core
     # Textual constructors.
     module Constructors
       ##
-      # @param  [Object]  obj
+      # @param  [Integer, String] obj
       # @return [String]
-      def char(obj)
-        case obj # FIXME
-          when String then obj.chr
-          else obj.to_s.chr
+      def chr(obj)
+        case obj
+          when Integer then obj.chr(Encoding::UTF_8)
+          when String  then obj.chr
+          else raise Machine::InvalidOperandError.new(obj, :chr)
         end
       end
 

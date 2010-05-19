@@ -820,8 +820,8 @@ describe Trith::Machine do
   end
 
   context "Textual predicates" do
-    it "should implement the :textp operator" do
-      Machine.new.should respond_to(:textp)
+    it "should implement the :chrp operator" do
+      Machine.new.should respond_to(:chrp, :chr?)
       # TODO
     end
 
@@ -829,6 +829,12 @@ describe Trith::Machine do
   end
 
   context "Textual constructors" do
+    it "should implement the :chr operator" do
+      Machine.new.should respond_to(:chr)
+      Machine.run([97])  { chr }.should == "a"
+      Machine.run([960]) { chr }.should == "\u03c0" # PI
+    end
+
     # TODO
   end
 
