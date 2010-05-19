@@ -405,7 +405,7 @@
   trith:code         (<swap> <drop> <swap> <drop>) .
 
 <nop> a trith:Function ;
-  rdfs:label         "nop", ";", "," ;
+  rdfs:label         "nop", ",", ";" ;
   rdfs:comment       "" ;
   trith:arity        0 ;
   trith:code         (<nil> <drop>) .
@@ -627,7 +627,7 @@
   trith:code         (2 <nth>) .
 
 <thrice> a trith:Function ;
-  rdfs:label         "thrice" ;
+  rdfs:label         "thrice", "3x" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         (3 <times>) .
@@ -651,7 +651,7 @@
   trith:code         (<true> <eq>) .
 
 <twice> a trith:Function ;
-  rdfs:label         "twice" ;
+  rdfs:label         "twice", "2x" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         (2 <times>) .

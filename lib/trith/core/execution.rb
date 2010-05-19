@@ -4,11 +4,11 @@ module Trith; module Core
   module Execution
     ##
     # @return [Machine]
-    def nop
-      self # do nothing
+    def reset
+      @stack.clear
+      @queue.clear
+      self
     end
-    alias_method :';', :nop
-    alias_method :',', :nop
 
     ##
     # @return [Machine]
@@ -19,11 +19,11 @@ module Trith; module Core
 
     ##
     # @return [Machine]
-    def reset
-      @stack.clear
-      @queue.clear
-      self
+    def nop
+      self # do nothing
     end
+    alias_method :',', :nop
+    alias_method :';', :nop
 
     ##
     # @return [Machine]
@@ -42,35 +42,6 @@ module Trith; module Core
         when Symbol
           execute([quot]) # FIXME
         else # TODO: error
-      end
-      self
-    end
-
-    ##
-    # @return [Machine]
-    def depth
-      push(@stack.size)
-    end
-
-    ##
-    # @return [Machine]
-    def stack_
-      @stack = [@stack]
-      self
-    end
-
-    ##
-    # @param  [#to_a, #each]
-    # @return [Machine]
-    def unstack(seq)
-      @stack = case seq
-        when String then seq.each_char.to_a
-        when Array  then seq
-        else case
-          when seq.respond_to?(:to_a) then seq.to_a
-          when seq.respond_to?(:each) then seq.each.to_a
-          else raise Machine::InvalidOperandError.new(seq, :unstack)
-        end
       end
       self
     end
@@ -100,6 +71,7 @@ module Trith; module Core
       end
       self
     end
+    alias_method :'2x', :twice
 
     ##
     # @return [Machine]
@@ -113,6 +85,7 @@ module Trith; module Core
       end
       self
     end
+    alias_method :'3x', :thrice
 
     ##
     # @return [Machine]
@@ -188,13 +161,5 @@ module Trith; module Core
       end
       self
     end
-
-    ##
-    # @return [Machine]
-    def print(obj)
-      $stdout.puts(obj) # FIXME
-      self
-    end
-    alias_method :'.', :print
   end # module Execution
 end; end # module Trith::Core
