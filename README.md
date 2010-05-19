@@ -186,26 +186,26 @@ Embedding
 
     # Let's start with the obligatory  "Hello, world!" example:
 
-    Trith::Machine.execute do
+    Trith::Machine.run do
       push "Hello, world!"
       print
     end
 
     # There are several equivalent ways to execute Trith code:
 
-    Trith::Machine.execute { push(6, 7).mul }            #=> 42
-    Trith::Machine.execute [6, 7] { mul }                #=> 42
-    Trith::Machine.execute [6, 7, :mul]                  #=> 42
+    Trith::Machine.run { push(6, 7).mul }            #=> 42
+    Trith::Machine.run [6, 7] { mul }                #=> 42
+    Trith::Machine.run [6, 7, :mul]                  #=> 42
 
     # Operators in Ruby blocks can be chained together:
 
-    Trith::Machine.execute { push(2).dup.dup.mul.pow }   #=> 16
+    Trith::Machine.run { push(2).dup.dup.mul.pow }   #=> 16
 
     # If you require more control, instantiate a machine manually:
 
     vm = Trith::Machine.new
     vm.define!(:square) { dup.mul }
-    vm.push(10).square.peek                              #=> 100
+    vm.push(10).square.peek                          #=> 100
 
     # You can also define operators when constructing a machine:
 
@@ -217,10 +217,10 @@ Embedding
     # to encapsulate a virtual machine inside a Ruby method:
 
     def square(n)
-      Trith::Machine.execute [n] { dup.mul }
+      Trith::Machine.run [n] { dup.mul }
     end
 
-    square(10)                                           #=> 100
+    square(10)                                       #=> 100
 
 ### Embedding Trith in JVM-based languages
 

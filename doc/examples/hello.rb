@@ -1,7 +1,7 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby -rubygems
 require 'trith'
 
-Trith::Machine.execute do
+Trith::Machine.run do
   push("Hello, world!")
   print
 end

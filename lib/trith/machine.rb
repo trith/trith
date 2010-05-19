@@ -17,18 +17,18 @@ module Trith
     # The machine will halt when the queue is exhausted, when encountering
     # a `halt` operator, or when encountering an error condition.
     #
-    # @overload self.execute(code)
+    # @overload self.run(code)
     #   @param  [Array] code
     #   @return [Object]
     #
-    # @overload self.execute(code)
+    # @overload self.run(code)
     #   @param  [Array] code
     #   @yield  [machine]
     #   @yieldparam [Machine] machine
     #   @return [Object]
     #
     # @return [Object]
-    def self.execute(code = [], &block)
+    def self.run(code = [], &block)
       self.new([], code).execute(&block).peek
     end
 
