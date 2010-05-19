@@ -426,6 +426,25 @@ module Trith; module Core
       end
       alias_method :fold,   :foldl
       alias_method :reduce, :foldl
+
+      ##
+      # @param  [#reduce, #each] seq
+      # @param  [Array]          quot
+      # @return [Machine]
+      def foldl1(seq, quot)
+        raise Machine::InvalidOperandError.new(seq, :foldl1) if seq.empty?
+        seq = case seq
+          when String then seq.each_char.to_a
+          else case
+            when seq.respond_to?(:reduce) then seq.dup
+            when seq.respond_to?(:each)   then seq.each.to_a
+            else raise Machine::InvalidOperandError.new(seq, :foldl1)
+          end
+        end
+        with_saved_continuation(:foldl1) do
+          push(seq.reduce(seq.pop) { |prev, elem| push(prev, elem).execute(quot).pop })
+        end
+      end
     end # module Combinators
 
     # Include all submodule methods directly into Trith::Core::Sequence:

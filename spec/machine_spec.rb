@@ -818,6 +818,10 @@ describe Trith::Machine do
       Machine.new([[2, 5, 3], 0, [:dup, :mul, :add]]).execute { foldl }.stack.should == [38]
     end
 
+    it "should implement the :foldl1 operator" do
+      Machine.new.should respond_to(:foldl1)
+    end
+
     it "should implement the :foldr operator" do
       Machine.new.should respond_to(:foldr)
       # TODO

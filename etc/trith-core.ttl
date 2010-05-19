@@ -520,6 +520,12 @@
   trith:arity        3 ;
   trith:code         () . # TODO
 
+<foldl1> a trith:Function ;
+  rdfs:label         "foldl1" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         (<swap> <dup> <emptyp> (<drop2> <nil>) (<dup> <rest> <swap> <first> <rot> <foldl>) <branch>) .
+
 <range> a trith:Function ;
   rdfs:label         "range" ;
   rdfs:comment       "" ;
