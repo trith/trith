@@ -3,10 +3,10 @@ import  trith.lang.*;
 
 /**
  * @author Arto Bendiken
- * @see    http://trith.org/core/numberp
+ * @see    http://trith.org/core/nump
  */
-public class numberp extends UnaryOperator<Boolean, Object> {
-  public static final String URL = "http://trith.org/core/numberp";
+public class nump extends UnaryOperator<Boolean, Object> {
+  public static final String URL = "http://trith.org/core/nump";
 
   public Boolean execute(Object n) {
     return Boolean.valueOf(n instanceof java.lang.Number);

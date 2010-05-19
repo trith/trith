@@ -428,14 +428,14 @@
   trith:arity        2 ;
   trith:code         ((<rest>) <swap> <times> <first>) .
 
-<number> a trith:Function, trith:Primitive ;
-  rdfs:label         "number" ;
+<num> a trith:Function, trith:Primitive ;
+  rdfs:label         "num" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .
 
-<numberp> a trith:Function, trith:Primitive ;
-  rdfs:label         "numberp", "number?" ;
+<nump> a trith:Function, trith:Primitive ;
+  rdfs:label         "nump", "num?" ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () .

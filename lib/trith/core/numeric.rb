@@ -12,7 +12,7 @@ module Trith; module Core
     ##
     # @param  [Object]  obj
     # @return [Numeric]
-    def number(obj)
+    def num(obj)
       case obj
         when Numeric then obj
         else obj.to_i # FIXME
@@ -22,10 +22,10 @@ module Trith; module Core
     ##
     # @param  [Object]  obj
     # @return [Boolean]
-    def numberp(obj)
+    def nump(obj)
       obj.is_a?(Numeric)
     end
-    alias_method :number?, :numberp
+    alias_method :num?, :nump
 
     ##
     # @param  [Object, #integer?] obj
@@ -34,40 +34,6 @@ module Trith; module Core
       obj.respond_to?(:integer?) && obj.integer?
     end
     alias_method :int?, :intp
-
-    ##
-    # @param  [Numeric, #exact?] n
-    # @return [Boolean]
-    def exactp(n)
-      case n
-        when Integer  then true
-        when Rational then true
-        when Float    then false
-        else case
-          when n.respond_to?(:exact?)
-            n.exact?
-          else nil
-        end
-      end
-    end
-    alias_method :exact?, :exactp
-
-    ##
-    # @param  [Numeric, #inexact?] n
-    # @return [Boolean]
-    def inexactp(n)
-      case n
-        when Integer  then false
-        when Rational then false
-        when Float    then true
-        else case
-          when n.respond_to?(:inexact?)
-            n.inexact?
-          else nil
-        end
-      end
-    end
-    alias_method :inexact?, :inexactp
 
     ##
     # @return [Numeric]
@@ -148,5 +114,39 @@ module Trith; module Core
     def floor(n)
       n.floor
     end
+
+    ##
+    # @param  [Numeric, #exact?] n
+    # @return [Boolean]
+    def exactp(n)
+      case n
+        when Integer  then true
+        when Rational then true
+        when Float    then false
+        else case
+          when n.respond_to?(:exact?)
+            n.exact?
+          else nil
+        end
+      end
+    end
+    alias_method :exact?, :exactp
+
+    ##
+    # @param  [Numeric, #inexact?] n
+    # @return [Boolean]
+    def inexactp(n)
+      case n
+        when Integer  then false
+        when Rational then false
+        when Float    then true
+        else case
+          when n.respond_to?(:inexact?)
+            n.inexact?
+          else nil
+        end
+      end
+    end
+    alias_method :inexact?, :inexactp
   end # module Numeric
 end; end # module Trith::Core

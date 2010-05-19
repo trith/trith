@@ -94,10 +94,10 @@ public class StandardMachine extends AbstractMachine {
   }
 
   /**
-   * @see trith.core.numberp
+   * @see trith.core.nump
    */
-  public void numberp() {
-    execute(new trith.core.numberp());
+  public void nump() {
+    execute(new trith.core.nump());
   }
 
   /**
