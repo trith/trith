@@ -324,7 +324,7 @@ module Trith
         when 1 then block.call(cc)
         else block.call
       end
-      @queue.unshift(*cc)
+      @queue.push(*cc) unless cc.empty?
       self
     end
 

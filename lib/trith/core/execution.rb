@@ -38,9 +38,9 @@ module Trith; module Core
     def call(quot)
       case quot
         when Array
-          execute(quot)
+          unshift(*quot)
         when Symbol
-          execute([quot]) # FIXME
+          unshift(quot) # FIXME
         else # TODO: error
       end
       self
@@ -49,41 +49,44 @@ module Trith; module Core
     ##
     # @return [Machine]
     def times(quot, count)
-      case quot
-        when Array
-          count.to_i.times { execute(quot) }
-        when Symbol
-          count.to_i.times { execute([quot]) } # FIXME
-        else # TODO: error
+      with_saved_continuation(:times) do
+        case quot
+          when Array
+            count.to_i.times { unshift(quot, :call) }
+          when Symbol
+            count.to_i.times { unshift([quot], :call) } # FIXME
+          else # TODO: error
+        end
       end
-      self
     end
 
     ##
     # @return [Machine]
     def twice(quot)
-      case quot
-        when Array
-          2.times { execute(quot) }
-        when Symbol
-          2.times { execute([quot]) } # FIXME
-        else # TODO: error
+      with_saved_continuation(:twice) do
+        case quot
+          when Array
+            2.times { unshift(quot, :call) }
+          when Symbol
+            2.times { unshift([quot], :call) } # FIXME
+          else # TODO: error
+        end
       end
-      self
     end
     alias_method :'2x', :twice
 
     ##
     # @return [Machine]
     def thrice(quot)
-      case quot
-        when Array
-          3.times { execute(quot) }
-        when Symbol
-          3.times { execute([quot]) } # FIXME
-        else # TODO: error
+      with_saved_continuation(:thrice) do
+        case quot
+          when Array
+            3.times { unshift(quot, :call) }
+          when Symbol
+            3.times { unshift([quot], :call) } # FIXME
+          else # TODO: error
+        end
       end
-      self
     end
     alias_method :'3x', :thrice
 
@@ -92,10 +95,9 @@ module Trith; module Core
     def loop(quot)
       case quot
         when Array
-          execute([quot, :loop])
-          execute(quot)
+          unshift(quot, :call, quot, :loop)
         when Symbol
-          execute([quot, :quote, quot, :loop]) # FIXME
+          unshift(quot, [quot], :loop) # FIXME
         else # TODO: error
       end
       self
@@ -105,7 +107,7 @@ module Trith; module Core
     # @return [Machine]
     def while(quot, cond)
       with_saved_continuation(:while) do
-        Kernel.loop do
+        Kernel.loop do # FIXME
           execute(cond)
           case pop
             when false, nil then break
@@ -113,14 +115,13 @@ module Trith; module Core
           end
         end
       end
-      self
     end
 
     ##
     # @return [Machine]
     def until(quot, cond)
       with_saved_continuation(:until) do
-        Kernel.loop do
+        Kernel.loop do # FIXME
           execute(cond)
           case pop
             when false, nil then execute(quot)
@@ -128,15 +129,14 @@ module Trith; module Core
           end
         end
       end
-      self
     end
 
     ##
     # @return [Machine]
     def branch(cond, thenop, elseop)
       case cond
-        when false, nil then execute(elseop)
-        else execute(thenop)
+        when false, nil then unshift(elseop, :call)
+        else unshift(thenop, :call)
       end
       self
     end
@@ -147,7 +147,7 @@ module Trith; module Core
     def when(cond, quot)
       case cond
         when false, nil then # nop
-        else execute(quot)
+        else unshift(quot, :call)
       end
       self
     end
@@ -156,7 +156,7 @@ module Trith; module Core
     # @return [Machine]
     def unless(cond, quot)
       case cond
-        when false, nil then execute(quot)
+        when false, nil then unshift(quot, :call)
         else # nop
       end
       self
