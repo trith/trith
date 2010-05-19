@@ -80,14 +80,15 @@ module Trith
     ##
     # Defines a new operator `name` that will execute the given `code`.
     #
-    # @param  [Symbol, #to_sym]  name
-    # @param  [Array]            code
+    # @param  [Symbol, #to_sym]        name
+    # @param  [Array]                  code
+    # @param  [Hash{Symbol => Object}] options
     # @return [Machine]
-    def define!(name, *code, &block)
-      name = name.to_sym
-      this = class << self; self; end
-      @env[name] = this.send(:define_method, name) do
-        execute(code, &block)
+    def define!(name, code = [], options = {}, &block)
+      @env[name = name.to_sym] = lambda { execute(code, &block) }
+      unless options[:method] == false
+        this = class << self; self; end
+        this.send(:define_method, name, &@env[name])
       end
       self
     end

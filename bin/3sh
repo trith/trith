@@ -42,7 +42,7 @@ begin
         when /^:\s*(\S*)\s+(.*)$/
           Trith::Shell::History.push(": #{$1} #{$2}")
           name, code = $1.to_sym, Trith::Reader.read_all($2)
-          $machine.define!(name, *code)
+          $machine.define!(name, code, :method => false)
           next # skip inspecting the stack
 
         # Code execution
