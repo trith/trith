@@ -45,7 +45,7 @@ module Trith; module Core
     # @return [Enumerable]
     def iota(n)
       # TODO: should support negative ranges as well.
-      (0...(n.to_i))
+      (0...(n.to_i)).to_a
     end
 
     ##
@@ -72,6 +72,13 @@ module Trith; module Core
           else # TODO: support for `#each`
         end
       end
+    end
+
+    ##
+    # @param  [Integer, #to_i] n
+    # @return [Enumerable]
+    def list(n)
+      stack.pop(n.to_i)
     end
 
     ##

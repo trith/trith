@@ -302,6 +302,12 @@
   trith:arity        1 ;
   trith:code         (0 (<rest> <swap> <inc>) (<swap> <dup> <emptyp>) <until> <drop>) .
 
+<list> a trith:Function ;
+  rdfs:label         "list" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (() <swap> (<cons>) <swap> <times> <reverse>) .
+
 <loop> a trith:Function ;
   rdfs:label         "loop" ;
   rdfs:comment       "" ;
