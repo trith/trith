@@ -811,7 +811,7 @@ describe Trith::Machine do
     end
 
     it "should implement the :foldl operator" do
-      Machine.new.should respond_to(:foldl)
+      Machine.new.should respond_to(:foldl, :fold, :reduce)
       Machine.new([[1, 2, 3, 4, 5], 0, [:add]]).execute { foldl }.stack.should == [15]
       Machine.new([[], -1, [:add]]).execute { foldl }.stack.should == [-1]
       Machine.new([[2, 5, 3], 0, [:add]]).execute { foldl }.stack.should == [10]
@@ -852,7 +852,7 @@ describe Trith::Machine do
 
   context "Output operators" do
     it "should implement the :print operator" do
-      Machine.new.should respond_to(:print)
+      Machine.new.should respond_to(:print, :print!, :'.')
       # TODO
     end
   end

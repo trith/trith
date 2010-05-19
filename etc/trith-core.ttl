@@ -503,7 +503,7 @@
   trith:code         () . # TODO
 
 <print> a trith:Function ;
-  rdfs:label         "print", "." ;
+  rdfs:label         "print", "print!", "." ;
   rdfs:comment       "" ;
   trith:arity        1 ;
   trith:code         () . # TODO
@@ -515,7 +515,7 @@
   trith:code         () .
 
 <foldl> a trith:Function ;
-  rdfs:label         "foldl" ;
+  rdfs:label         "foldl", "fold", "reduce" ;
   rdfs:comment       "" ;
   trith:arity        3 ;
   trith:code         () . # TODO

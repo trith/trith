@@ -424,6 +424,8 @@ module Trith; module Core
           push(seq.reduce(identity) { |prev, elem| push(prev, elem).execute(quot).pop })
         end
       end
+      alias_method :fold,   :foldl
+      alias_method :reduce, :foldl
     end # module Combinators
 
     # Include all submodule methods directly into Trith::Core::Sequence:

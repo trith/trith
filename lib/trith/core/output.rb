@@ -8,6 +8,7 @@ module Trith; module Core
       $stdout.puts(obj) # FIXME
       self
     end
-    alias_method :'.', :print
+    alias_method :print!, :print
+    alias_method :'.',    :print
   end # module Output
 end; end # module Trith::Core
