@@ -114,24 +114,6 @@ module Trith; module Core
     end # module Constructors
 
     ##
-    # Numeric operators.
-    module Operators
-      ##
-      # @param  [Numeric, #ceil] n
-      # @return [Integer]
-      def ceil(n)
-        n.ceil
-      end
-
-      ##
-      # @param  [Numeric, #floor] n
-      # @return [Integer]
-      def floor(n)
-        n.floor
-      end
-    end # module Operators
-
-    ##
     # @private
     module Experimental
       ##

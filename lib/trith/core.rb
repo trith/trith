@@ -9,6 +9,7 @@ module Trith
     require 'trith/core/boolean'
     require 'trith/core/comparison'
     require 'trith/core/numeric'
+    require 'trith/core/math'
     require 'trith/core/sequence'
     require 'trith/core/textual'
     require 'trith/core/output'

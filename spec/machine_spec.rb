@@ -427,7 +427,14 @@ describe Trith::Machine do
     end
   end
 
-  context "Numeric operators" do
+  context "Math constants" do
+    it "should implement the :pi operator" do
+      Machine.new.should respond_to(:pi)
+      # TODO
+    end
+  end
+
+  context "Math operators" do
     it "should implement the :ceil operator" do
       Machine.new.should respond_to(:ceil)
       # TODO
@@ -442,14 +449,116 @@ describe Trith::Machine do
       Machine.new.should respond_to(:round)
       # TODO
     end
-  end
 
-  context "Math constants" do
-    # TODO
-  end
+    it "should implement the :sq operator" do
+      Machine.new.should respond_to(:sq)
+      # TODO
+    end
 
-  context "Math operators" do
-    # TODO
+    it "should implement the :sqrt operator" do
+      Machine.new.should respond_to(:sqrt)
+      # TODO
+    end
+
+    it "should implement the :cb operator" do
+      Machine.new.should respond_to(:cb)
+      # TODO
+    end
+
+    it "should implement the :cbrt operator" do
+      Machine.new.should respond_to(:cbrt)
+      # TODO
+    end
+
+    it "should implement the :exp operator" do
+      Machine.new.should respond_to(:exp)
+      # TODO
+    end
+
+    it "should implement the :log operator" do
+      Machine.new.should respond_to(:log)
+      # TODO
+    end
+
+    it "should implement the :log2 operator" do
+      Machine.new.should respond_to(:log2)
+      # TODO
+    end
+
+    it "should implement the :log10 operator" do
+      Machine.new.should respond_to(:log10)
+      # TODO
+    end
+
+    it "should implement the :hypot operator" do
+      Machine.new.should respond_to(:hypot)
+      # TODO
+    end
+
+    it "should implement the :cos operator" do
+      Machine.new.should respond_to(:cos)
+      # TODO
+    end
+
+    it "should implement the :cosh operator" do
+      Machine.new.should respond_to(:cosh)
+      # TODO
+    end
+
+    it "should implement the :sin operator" do
+      Machine.new.should respond_to(:sin)
+      # TODO
+    end
+
+    it "should implement the :sinh operator" do
+      Machine.new.should respond_to(:sinh)
+      # TODO
+    end
+
+    it "should implement the :tan operator" do
+      Machine.new.should respond_to(:tan)
+      # TODO
+    end
+
+    it "should implement the :tanh operator" do
+      Machine.new.should respond_to(:tanh)
+      # TODO
+    end
+
+    it "should implement the :acos operator" do
+      Machine.new.should respond_to(:acos)
+      # TODO
+    end
+
+    it "should implement the :acosh operator" do
+      Machine.new.should respond_to(:acosh)
+      # TODO
+    end
+
+    it "should implement the :asin operator" do
+      Machine.new.should respond_to(:asin)
+      # TODO
+    end
+
+    it "should implement the :asinh operator" do
+      Machine.new.should respond_to(:asinh)
+      # TODO
+    end
+
+    it "should implement the :atan operator" do
+      Machine.new.should respond_to(:atan)
+      # TODO
+    end
+
+    it "should implement the :atan2 operator" do
+      Machine.new.should respond_to(:atan2)
+      # TODO
+    end
+
+    it "should implement the :atanh operator" do
+      Machine.new.should respond_to(:atanh)
+      # TODO
+    end
   end
 
   context "Sequence predicates" do
