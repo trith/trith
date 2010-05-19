@@ -102,7 +102,16 @@ module Trith; module Core
       # @return [Enumerable]
       def iota(n)
         # TODO: should support negative ranges as well.
-        (0...(n.to_i)).to_a
+        (0...(n.to_i)).to_a # FIXME
+      end
+
+      ##
+      # @param  [Integer, #to_i] a
+      # @param  [Integer, #to_i] b
+      # @return [Enumerable]
+      def range(a, b)
+        # TODO: should support negative ranges as well.
+        ((a.to_i)..(b.to_i)).to_a # FIXME
       end
     end # module Constructors
 
