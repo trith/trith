@@ -572,6 +572,11 @@ describe Trith::Machine do
       # TODO
     end
 
+    it "should implement the :memberp operator" do
+      Machine.new.should respond_to(:memberp)
+      # TODO
+    end
+
     it "should implement the :anyp operator" do
       Machine.new.should respond_to(:anyp)
       # TODO

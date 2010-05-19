@@ -41,6 +41,22 @@ module Trith; module Core
         end
       end
       alias_method :empty?, :emptyp
+
+      ##
+      # @param  [Object]          elt
+      # @param  [#member?, #each] seq
+      # @return [Boolean]
+      def memberp(elt, seq)
+        case
+          when seq.respond_to?(:member?)
+            seq.member?(elt)
+          when seq.respond_to?(:each)
+            seq.each.member?(elt)
+          else
+            raise Machine::InvalidOperandError.new(seq, :memberp)
+        end
+      end
+      alias_method :member?, :memberp
     end # module Predicates
 
     ##

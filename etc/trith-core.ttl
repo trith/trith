@@ -339,6 +339,12 @@
   trith:arity        2 ;
   trith:code         (<dup2> <gt> (<drop>) (<swap> <drop>) <branch>) .
 
+<memberp> a trith:Function ;
+  rdfs:label         "memberp", "member?" ;
+  rdfs:comment       "" ;
+  trith:arity        2 ;
+  trith:code         () . # TODO
+
 <min> a trith:Function ;
   rdfs:label         "min" ;
   rdfs:comment       "" ;
