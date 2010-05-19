@@ -48,6 +48,12 @@ module Trith; module Core
 
     ##
     # @return [Machine]
+    def depth
+      push(@stack.size)
+    end
+
+    ##
+    # @return [Machine]
     def stack_
       @stack = [@stack]
       self

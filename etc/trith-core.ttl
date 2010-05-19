@@ -98,6 +98,12 @@
   trith:arity        2 ;
   trith:code         () .
 
+<depth> a trith:Function ;
+  rdfs:label         "depth" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (<stack> <dup> <length> () <cons> <concat> <unstack>) .
+
 <dec> a trith:Function ;
   rdfs:label         "dec" ;
   rdfs:comment       "" ;
@@ -578,11 +584,11 @@
   trith:arity        1 ;
   trith:code         () .
 
-<stack> a trith:Function, trith:Primitive ;
+<stack> a trith:Function ;
   rdfs:label         "stack" ;
   rdfs:comment       "" ;
   trith:arity        0 ;
-  trith:code         () .
+  trith:code         (<depth> <list>) .
 
 <sub> a trith:Function, trith:Primitive ;
   rdfs:label         "sub", "-" ;
