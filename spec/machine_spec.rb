@@ -599,6 +599,11 @@ describe Trith::Machine do
       # TODO
     end
 
+    it "should implement the :uncons operator" do
+      Machine.new.should respond_to(:uncons)
+      # TODO
+    end
+
     it "should implement the :list operator" do
       Machine.new.should respond_to(:list)
       # TODO

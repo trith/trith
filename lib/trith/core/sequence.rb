@@ -107,6 +107,25 @@ module Trith; module Core
       end
 
       ##
+      # @param  [Array, #[], #each] seq
+      # @return [Machine]
+      def uncons(seq)
+        case
+          when seq.respond_to?(:[])
+            case
+              when seq.empty?
+                raise Machine::InvalidOperandError.new(seq, :uncons)
+              else
+                push(seq[0], seq[1..-1]) # FIXME
+            end
+          when seq.respond_to?(:each)
+            uncons(seq.each.to_a)
+          else
+            raise Machine::InvalidOperandError.new(seq, :uncons)
+        end
+      end
+
+      ##
       # @param  [Integer, #to_i] n
       # @return [Enumerable]
       def list(n)

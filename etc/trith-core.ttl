@@ -682,6 +682,12 @@
   trith:arity        1 ;
   trith:code         (2 <times>) .
 
+<uncons> a trith:Operator ;
+  rdfs:label         "uncons" ;
+  rdfs:comment       "" ;
+  trith:arity        1 ;
+  trith:code         (<dup> <first> <swap> <rest>) .
+
 <unless> a trith:Function ;
   rdfs:label         "unless" ;
   rdfs:comment       "" ;
