@@ -1,0 +1,49 @@
+@base          <http://trith.org/lang/> .
+@prefix trith: <http://trith.org/lang/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dc:    <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
+
+<> a owl:Ontology ;
+  rdfs:label         "Trith" ;
+  rdfs:comment       "Trith vocabulary."@en ;
+  rdfs:seeAlso       <http://datagraph.org/bendiken/foaf> ;
+  foaf:maker         <http://ar.to/#self> ;
+  dc:creator         "Arto Bendiken" ;
+  dc:modified        "2010-05-23" .
+
+trith:Operator a owl:Class, rdfs:Class ;
+  rdfs:isDefinedBy   <> ;
+  rdfs:subClassOf    rdfs:Resource ;
+  rdfs:label         "Operator" ;
+  rdfs:comment       ""@en .
+
+trith:Primitive a owl:Class, rdfs:Class ;
+  rdfs:isDefinedBy   <> ;
+  rdfs:subClassOf    trith:Operator ;
+  rdfs:label         "Primitive" ;
+  rdfs:comment       ""@en .
+
+trith:Function a owl:Class, rdfs:Class ;
+  rdfs:isDefinedBy   <> ;
+  rdfs:subClassOf    trith:Operator ;
+  rdfs:label         "Function" ;
+  rdfs:comment       ""@en .
+
+trith:arity a owl:DatatypeProperty, rdf:Property ;
+  rdfs:isDefinedBy   <> ;
+  rdfs:domain        trith:Operator ;
+  rdfs:range         xsd:integer ;
+  rdfs:label         "label" ;
+  rdfs:comment       ""@en .
+
+trith:code a owl:ObjectProperty, rdf:Property ;
+  rdfs:isDefinedBy   <> ;
+  rdfs:domain        trith:Operator ;
+  rdfs:range         rdf:List ;
+  rdfs:label         "code" ;
+  rdfs:comment       ""@en .
