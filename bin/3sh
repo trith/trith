@@ -5,10 +5,10 @@ require 'trith'
 BANNER = "Usage: #{File.basename($0)} [options] [files...]"
 
 case
-  when %w(-V -v --version).any? { |opt| ARGV.include?(opt) }
+  when %w(-V -v --version).any? { |opt| ARGV.delete(opt) }
     $stdout.puts Trith::VERSION.to_s
     exit
-  when %w(-? -h --help).any? { |opt| ARGV.include?(opt) }
+  when %w(-? -h --help).any? { |opt| ARGV.delete(opt) }
     $stdout.puts BANNER
     exit
 end
@@ -19,10 +19,14 @@ begin
   Trith::Shell.setup!($cache)
   Trith::Shell::History.load!
 
-  if %w(-d --debug).any? { |opt| ARGV.include?(opt) }
+  if %w(-d --debug).any? { |opt| ARGV.delete(opt) }
     $machine.execute_hook = proc do
       $stdout.puts Trith::Shell.inspect($machine, :prefix => '.. ', :align => true)
     end
+  end
+
+  ARGV.each do |file|
+    $machine.execute(Trith::Reader.read_file(file)) unless file =~ /^--/
   end
 
   while line = Trith::Shell.readline('>> ')
