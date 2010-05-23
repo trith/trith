@@ -188,6 +188,6 @@ module Trith
     end
 
     # Prevent the instantiation of this class:
-    private_class_method :new
+    #private_class_method :new
   end # class Compiler
 end # module Trith
