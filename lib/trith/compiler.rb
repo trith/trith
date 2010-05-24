@@ -4,6 +4,8 @@ module Trith
   #
   # @abstract
   class Compiler
+    autoload :Ruby, 'trith/compiler/ruby'
+
     # @return [Hash{Symbol => Object}]
     attr_reader :options
 
@@ -12,7 +14,10 @@ module Trith
     # @return [Class]
     def self.for(target = nil, &block)
       target = block.call if block_given?
-      self # TODO
+      case target.to_sym
+        when :ruby then Ruby
+        else nil
+      end
     end
 
     ##
@@ -35,7 +40,7 @@ module Trith
     ##
     # @param  [Hash{Symbol => Object}] options
     def initialize(options = {})
-      @options = options
+      @options = options.to_hash.dup
     end
 
     ##
@@ -188,6 +193,6 @@ module Trith
     end
 
     # Prevent the instantiation of this class:
-    #private_class_method :new
+    private_class_method :new
   end # class Compiler
 end # module Trith

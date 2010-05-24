@@ -16,23 +16,8 @@ case
 end
 
 begin
-  $compiler = Trith::Compiler.for(:ruby).new
-  code = Trith::Reader.read_files(*ARGV)
-  File.open('a.rb', 'w+', 0755) do |output|
-    output.puts "#!/usr/bin/env ruby -rubygems"
-    output.puts "require 'trith'"
-    output.puts
-    output.puts "Trith::Machine.run do"
-    code.each do |op|
-      case op
-        when Symbol
-          output.puts "  call(:#{op}).execute"
-        else
-          output.puts "  push(#{op.inspect})"
-      end
-    end
-    output.puts "end"
-  end
+  $compiler = Trith::Compiler.for(:ruby).compile_files(*ARGV)
+  File.open('a.rb', 'w+', 0755) { |output| output.write($compiler.to_s) }
 rescue SystemCallError => e
   abort "#{File.basename($0)}: #{e}" # abort due to e.g. Errno::ENOENT
 rescue Interrupt
