@@ -20,8 +20,11 @@ module Trith; class Compiler
       output.puts
       output.puts "public class #{@options[:class]} implements Operator {"
       output.puts "  public static void main(String[] args) {"
-      output.puts "    Operator self = new #{@options[:class]}();"
-      output.puts "    self.execute(new StandardMachine());"
+      output.puts "    Machine machine = new StandardMachine();"
+      output.puts "    for (String arg : args) {"
+      output.puts "      machine.push(arg);"
+      output.puts "    }"
+      output.puts "    machine.execute(new #{@options[:class]}());"
       output.puts "  }"
       output.puts
       output.puts "  public void execute(Machine machine) {"
@@ -37,7 +40,7 @@ module Trith; class Compiler
     # @see Trith::Compiler#compile_operator
     # @private
     def compile_operator(operator)
-      emit("machine.#{operator}();") # FIXME
+      emit("machine.execute(new trith.core.#{operator}());") # FIXME
     end
 
     ##

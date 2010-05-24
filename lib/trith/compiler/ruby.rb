@@ -20,7 +20,7 @@ module Trith; class Compiler
       output.puts "require 'rubygems'" if @options[:rubygems]
       output.puts "require 'trith'"
       output.puts
-      output.puts "Trith::Machine.run do"
+      output.puts "Trith::Machine.run(ARGV) do"
       output.write @output.string
       output.puts "end"
       output.string
