@@ -5,6 +5,7 @@ module Trith
   # @abstract
   class Compiler
     autoload :Ruby, 'trith/compiler/ruby'
+    autoload :Java, 'trith/compiler/java'
 
     # @return [Hash{Symbol => Object}]
     attr_reader :options
@@ -16,6 +17,7 @@ module Trith
       target = block.call if block_given?
       case target.to_sym
         when :ruby then Ruby
+        when :java then Java
         else nil
       end
     end
