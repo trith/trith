@@ -18,6 +18,7 @@ end
 namespace :build do
   desc "Build all N-Triples distributables"
   task :rdf do
+    sh "rapper -i turtle -o ntriples etc/trith-lang.ttl | sort > etc/trith-lang.nt"
     sh "rapper -i turtle -o ntriples etc/trith-core.ttl | sort > etc/trith-core.nt"
   end
 
