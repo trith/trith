@@ -1,8 +1,8 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe Trith::Cache do
-  before :each do
-    @cache = Trith::Cache.load(File.join(File.dirname(__FILE__), '..', 'etc', 'cache.nt'))
+  before :all do
+    @cache = Trith::Cache.load(File.join(File.dirname(__FILE__), '..', 'etc', 'trith-core.nt'))
   end
 
   it "should be an RDF repository" do
@@ -20,7 +20,7 @@ describe Trith::Cache do
 
   it "should know whether a function with a given label is cached" do
     @cache.should respond_to(:has_label?)
-    @cache.should have_label(:boolean?)
+    @cache.should have_label(:bool?)
     @cache.should_not have_label(:foobar)
   end
 
