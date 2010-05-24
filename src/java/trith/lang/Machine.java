@@ -20,4 +20,5 @@ public interface Machine {
   public <T> Future<T> pop();
   public void push(Future<?> value);
   public void push(Callable<?> callable);
+  public void push(Object value);
 }
