@@ -2,7 +2,7 @@ module Trith
   module VERSION
     MAJOR = 0
     MINOR = 0
-    TINY  = 2
+    TINY  = 3
     EXTRA = nil
 
     STRING = [MAJOR, MINOR, TINY].join('.')
