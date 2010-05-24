@@ -1,0 +1,2 @@
+#!/usr/bin/env 3vm
+stack [num] map 0 [+] foldl print

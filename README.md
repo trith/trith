@@ -177,6 +177,29 @@ well:
     >> hello reverse .
     !dlrow ,olleH
 
+Scripting
+---------
+
+The canonical "Hello, world!" script is found in `doc/examples/hello.3th`:
+
+    #!/usr/bin/env 3vm
+    "Hello, world!" print
+
+Any command-line arguments passed to 3VM scripts form the initial stack of
+the virtual machine. The arguments are placed on the stack in their original
+unparsed string form.
+
+You can print out the contents of the initial stack like so:
+
+    #!/usr/bin/env 3vm
+    stack print
+
+Here's an example of how you would interpret all given command-line
+arguments as numbers and then sum them up and print out the result:
+
+    #!/usr/bin/env 3vm
+    stack [num] map 0 [+] foldl print
+
 Embedding
 ---------
 
