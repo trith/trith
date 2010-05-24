@@ -2,7 +2,7 @@
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 require 'trith'
 
-BANNER = "Usage: #{File.basename($0)} [options] files..."
+BANNER = "Usage: #{File.basename($0)} [options] file [args...]"
 
 case
   when %w(-V -v --version).any? { |opt| ARGV.include?(opt) }
@@ -21,9 +21,14 @@ begin
   $machine.import!(Trith::Core)
 
   begin
-    ARGV.each do |file|
-      $machine.execute(Trith::Reader.read_file(file))
+    case
+      when split = ARGV.index('--')
+        ARGV.delete_at(split)
+        $machine.push(*ARGV.slice!(split, ARGV.size - split))
+      when ARGV.size > 1
+        $machine.push(*ARGV.slice!(1, ARGV.size - 1))
     end
+    $machine.execute(Trith::Reader.read_files(*ARGV))
   rescue Trith::Machine::InvalidOperatorError => e
     $stderr.puts Trith::Shell.format_error(e)
   rescue Trith::Machine::InvalidOperandError => e
