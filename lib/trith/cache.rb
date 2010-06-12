@@ -2,8 +2,6 @@ module Trith
   ##
   # The Trith code cache.
   class Cache < RDF::Repository
-    include RDF::Repository::Implementation rescue nil
-
     ##
     # Returns a cache containing all core functions.
     #
@@ -26,7 +24,7 @@ module Trith
     ##
     # @param  [Hash{Symbol => Object} options
     def initialize(options = {}, &block)
-      @data = []
+      extend Implementation
       super(options, &block)
     end
 
