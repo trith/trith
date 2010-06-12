@@ -1,5 +1,8 @@
 Some background reading materials for understanding Trith.
 
+General
+=======
+
 Books
 -----
 
@@ -44,3 +47,14 @@ Articles
 --------
 
 * [A Conversation with Manfred von Thun](http://www.nsl.com/papers/interview.htm)
+
+JVM
+===
+
+LLVM
+====
+
+Tutorials
+---------
+
+* [Stacker: An Example Of Using LLVM](http://llvm.org/releases/2.3/docs/Stacker.html)
