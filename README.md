@@ -256,8 +256,8 @@ Dependencies
 * [Ruby](http://ruby-lang.org/) (>= 1.9.1) or
   [JRuby](http://jruby.org/) (>= 1.4.0)
 * [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.1.10)
-* [SXP](http://rubygems.org/gems/sxp) (>= 0.0.3)
-* [Promise](http://rubygems.org/gems/promise) (>= 0.1.0)
+* [SXP](http://rubygems.org/gems/sxp) (>= 0.0.4)
+* [Promise](http://rubygems.org/gems/promise) (>= 0.1.1)
 
 Installation
 ------------
