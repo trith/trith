@@ -34,7 +34,7 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard' ,     '>= 0.5.6'
   gem.add_runtime_dependency     'backports', '>= 1.17.1'
   gem.add_runtime_dependency     'promise',   '~> 0.1.1'
-  gem.add_runtime_dependency     'rdf',       '~> 0.1.10'
+  gem.add_runtime_dependency     'rdf',       '~> 0.2.0'
   gem.add_runtime_dependency     'sxp',       '~> 0.0.4'
   gem.post_install_message       = nil
 end
