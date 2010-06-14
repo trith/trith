@@ -1,6 +1,8 @@
 require 'bigdecimal'
 require 'rational'
 require 'digest/sha1'
+require 'backports/1.9.1' if RUBY_VERSION < '1.9.1'
+
 require 'rdf'
 require 'rdf/ntriples'
 require 'rdf/nquads'

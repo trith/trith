@@ -254,7 +254,7 @@ Dependencies
 ------------
 
 * [Ruby](http://ruby-lang.org/) (>= 1.9.1) or
-  [JRuby](http://jruby.org/) (>= 1.4.0)
+  (>= 1.8.2 with [Backports](http://rubygems.org/gems/backports))
 * [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.1.10)
 * [SXP](http://rubygems.org/gems/sxp) (>= 0.0.4)
 * [Promise](http://rubygems.org/gems/promise) (>= 0.1.1)
@@ -266,9 +266,9 @@ The recommended installation method is via [RubyGems](http://rubygems.org/).
 To install the latest official release of the `trith` gem, do one of the
 following:
 
-    $ [sudo] gem install trith                  # Ruby 1.9+
+    $ [sudo] gem install trith                  # Ruby 1.8.x/1.9.x
     $ [sudo] gem1.9 install trith               # Ruby 1.9 with MacPorts
-    $ [sudo] jruby --1.9 -S gem install trith   # JRuby 1.4+
+    $ [sudo] jruby --1.9 -S gem install trith   # JRuby 1.5+
 
 Once Trith is installed, you will have four new programs available:
 
