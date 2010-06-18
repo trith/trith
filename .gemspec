@@ -12,8 +12,8 @@ GEMSPEC = Gem::Specification.new do |gem|
   gem.description        = 'An experimental concatenative programming language founded on the unholy trinity of Forth, Lisp and RDF triples.'
   gem.rubyforge_project  = 'trith'
 
-  gem.authors            = ['Arto Bendiken']
-  gem.email              = 'arto.bendiken@gmail.com'
+  gem.author             = 'Arto Bendiken'
+  gem.email              = 'trith@googlegroups.com'
 
   gem.platform           = Gem::Platform::RUBY
   gem.files              = %w(AUTHORS README UNLICENSE VERSION)
