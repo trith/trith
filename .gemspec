@@ -29,7 +29,7 @@ GEMSPEC = Gem::Specification.new do |gem|
 
   gem.required_ruby_version      = '>= 1.8.1'
   gem.requirements               = []
-  gem.add_runtime_dependency     'sxp',       '~> 0.0.4'
+  gem.add_runtime_dependency     'sxp',       '~> 0.0.5'
   gem.add_runtime_dependency     'rdf',       '~> 0.2.0'
   gem.add_runtime_dependency     'promise',   '>= 0.2.0'
   gem.add_runtime_dependency     'backports', '>= 1.18.0'
