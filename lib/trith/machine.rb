@@ -86,10 +86,7 @@ module Trith
     # @return [Machine]
     def define!(name, code = [], options = {}, &block)
       @env[name = name.to_sym] = lambda { execute(code, &block) }
-      unless options[:method] == false
-        this = class << self; self; end
-        this.send(:define_method, name, &@env[name])
-      end
+      define_singleton_method(name, &@env[name]) unless options[:method] == false
       self
     end
 
