@@ -20,6 +20,8 @@ namespace :build do
   task :rdf do
     sh "rapper -i turtle -o ntriples etc/trith-lang.ttl | sort > etc/trith-lang.nt"
     sh "rapper -i turtle -o ntriples etc/trith-core.ttl | sort > etc/trith-core.nt"
+    sh "rapper -i turtle -o ntriples etc/trith-math.ttl | sort > etc/trith-math.nt"
+    sh "rapper -i turtle -o ntriples etc/trith-seq.ttl  | sort > etc/trith-seq.nt"
   end
 
   desc "Compile all Java source files"
