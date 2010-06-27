@@ -1,4 +1,4 @@
-module Trith; module Core
+module Trith; module Math
   ##
   # Arithmetic operators.
   #
@@ -94,4 +94,4 @@ module Trith; module Core
     end
     #alias_method :'^', :pow
   end # module Arithmetic
-end; end # module Trith::Core
+end; end # module Trith::Math

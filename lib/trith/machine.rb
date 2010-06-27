@@ -44,6 +44,7 @@ module Trith
     def initialize(stack = [], queue = [], env = {}, &block)
       @stack, @queue, @env = stack, queue, {}
       import!(Trith::Core)
+      import!(Trith::Math)
       env.each do |name, operator|
         if operator.is_a?(Proc)
           define!(name, &operator)

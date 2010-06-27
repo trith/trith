@@ -19,13 +19,17 @@ require 'rdf/nquads'
 
 module Trith
   include RDF
+  autoload :VERSION,  'trith/version'
 
+  # Runtime
   autoload :Cache,    'trith/cache'
   autoload :Compiler, 'trith/compiler'
-  autoload :Core,     'trith/core'
   autoload :Function, 'trith/function'
   autoload :Machine,  'trith/machine'
   autoload :Reader,   'trith/reader'
   autoload :Shell,    'trith/shell'
-  autoload :VERSION,  'trith/version'
+
+  # Vocabularies
+  autoload :Core,     'trith/vocab/core'
+  autoload :Math,     'trith/vocab/math'
 end
