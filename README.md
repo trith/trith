@@ -254,7 +254,7 @@ Dependencies
 ------------
 
 * [Ruby](http://ruby-lang.org/) (>= 1.9.1) or
-  (>= 1.8.2 with [Backports](http://rubygems.org/gems/backports))
+  (>= 1.8.1 with [Backports](http://rubygems.org/gems/backports))
 * [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.2.0)
 * [SXP](http://rubygems.org/gems/sxp) (>= 0.0.5)
 * [Promise](http://rubygems.org/gems/promise) (>= 0.2.0)
