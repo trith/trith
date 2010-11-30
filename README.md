@@ -255,9 +255,10 @@ Dependencies
 
 * [Ruby](http://ruby-lang.org/) (>= 1.9.1) or
   (>= 1.8.1 with [Backports](http://rubygems.org/gems/backports))
-* [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.2.0)
-* [SXP](http://rubygems.org/gems/sxp) (>= 0.0.5)
+* [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.3.0)
+* [SXP](http://rubygems.org/gems/sxp) (>= 0.0.12)
 * [Promise](http://rubygems.org/gems/promise) (>= 0.3.0)
+* [FFI](http://rubygems.org/gems/ffi) (>= 0.6.3)
 
 Installation
 ------------
