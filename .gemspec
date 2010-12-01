@@ -16,9 +16,7 @@ Gem::Specification.new do |gem|
   gem.email              = 'trith@googlegroups.com'
 
   gem.platform           = Gem::Platform::RUBY
-  gem.files              = %w(AUTHORS README UNLICENSE VERSION)
-  gem.files             += Dir.glob('etc/*.{ttl,nt}')
-  gem.files             += Dir.glob('lib/**/*.rb')
+  gem.files              = %w(AUTHORS CREDITS README UNLICENSE VERSION) + Dir.glob('etc/*.{ttl,nt}') + Dir.glob('lib/**/*.rb')
   gem.bindir             = %q(bin)
   gem.executables        = %w(3th 3sh 3vm 3cc)
   gem.default_executable = gem.executables.first
