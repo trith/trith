@@ -11,4 +11,4 @@
 //////////////////////////////////////////////////////////////////////////////
 // Constants
 
-const char* const trith_version_string = "x.y.z"; // PACKAGE_VERSION;
+const char* const trith_version_string = PACKAGE_VERSION;
