@@ -17,8 +17,12 @@ require 'rdf'
 require 'rdf/ntriples'
 require 'rdf/nquads'
 
+# @see http://rubygems.org/gems/ffi
+require 'ffi'
+
 module Trith
   include RDF
+
   autoload :VERSION,  'trith/version'
 
   # Runtime

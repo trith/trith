@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version      = '>= 1.8.1'
   gem.requirements               = []
-  gem.add_runtime_dependency     'ffi',       '>= 0.6'
+  gem.add_runtime_dependency     'ffi',       '>= 1.0'
   gem.add_runtime_dependency     'backports', '>= 1.18'
   gem.add_runtime_dependency     'promise',   '>= 0.3'
   gem.add_runtime_dependency     'sxp',       '>= 0.0.12'

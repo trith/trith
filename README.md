@@ -258,7 +258,7 @@ Dependencies
 * [RDF.rb](http://rubygems.org/gems/rdf) (>= 0.3.0)
 * [SXP](http://rubygems.org/gems/sxp) (>= 0.0.12)
 * [Promise](http://rubygems.org/gems/promise) (>= 0.3.0)
-* [FFI](http://rubygems.org/gems/ffi) (>= 0.6.3)
+* [FFI](http://rubygems.org/gems/ffi) (>= 1.0.0)
 
 Installation
 ------------
