@@ -13,6 +13,8 @@ AC_CHECK_HEADERS(mpfr.h)
 AC_CHECK_LIB(mpfr, mpfr_init)
 AC_CHECK_HEADERS(ffi.h)
 AC_CHECK_LIB(ffi, ffi_call)
+AC_CHECK_HEADERS(raptor.h)
+AC_CHECK_LIB(raptor, raptor_init)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile doc/man/Makefile])
 AC_OUTPUT
