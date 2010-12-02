@@ -7,6 +7,10 @@ AM_SILENT_RULES([yes])
 LT_INIT
 AC_PROG_CC
 AM_PATH_GLIB_2_0([2.24.0], [], [], [gthread-2.0])
+AC_CHECK_HEADERS(gmp.h)
+AC_CHECK_LIB(gmp, __gmpz_init)
+AC_CHECK_HEADERS(mpfr.h)
+AC_CHECK_LIB(mpfr, mpfr_init)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile doc/man/Makefile])
 AC_OUTPUT
